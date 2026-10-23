@@ -6,6 +6,8 @@ MDPF first makes main positive prompts easier to read, then assists writing, and
 
 Use Node 18 or later for `npm test`; no dependency installation is needed. Python 3.9 or later runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. The clean repository candidate includes a self-contained neutral regression subset. The private development workspace has a larger suite with reference fixtures that are not distributed.
 
+Forge CI runs the neutral tests and packaging checks on Windows and Linux. A separate package job waits for every matrix check, then uploads the Forge ZIP and checksum. See docs/ci.md for download and failure instructions. A green run is automated regression evidence, not a resolution of known live issues.
+
 Change portable planning/scoring independently of host UI. `docs/portability.md` describes the boundaries and draft schema for a future ComfyUI adapter. Do not claim ComfyUI compatibility from portable-engine tests alone.
 
 Retain explicit ownership, BREAK/regional scopes, manual-label and opaque/weighted-group barriers, duplicate audits, composition guards, exact-source Apply/Revert checks and stale-preview invalidation. Unknown triggers are not evidence of LoRA ownership. Never synthesize absent tags or change generation settings to make a test pass.

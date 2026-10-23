@@ -74,6 +74,8 @@ The runtime contains 14 JavaScript modules and one stylesheet, with no extra run
 
 ## Development
 
+[Forge CI](https://github.com/chibi-mage/mdpf-editor/actions/workflows/forge-ci.yml) runs the repository tests and packaging checks on Windows and Linux. Successful runs provide a tested Forge ZIP and checksum under Artifacts; see the [download instructions](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/ci.md).
+
 This clean source candidate includes a self-contained neutral regression subset. Run `npm test` with Node 18+; no dependency installation is needed. Use Python 3.9+ for `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. See CONTRIBUTING.md for source boundaries and release expectations.
 
 The private workspace's larger evaluation suite, supplied PNG metadata, personal prompts, external vocabulary catalogs, outputs and backups are intentionally excluded. Runtime modules match the workspace baseline; README/package scripts are adjusted for this subset. The generated repository-candidate-manifest.json records exact file hashes. Source home: [chibi-mage/mdpf-editor](https://github.com/chibi-mage/mdpf-editor).
