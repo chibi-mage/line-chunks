@@ -2,7 +2,7 @@
 
 The **Forge CI** workflow runs for pushes to main, pull requests and manual runs from the Actions page. It tests the clean repository's self-contained regressions, not the private workspace's additional fixtures.
 
-Three checks cover Ubuntu with Node 18/Python 3.9 (the documented minimums), Ubuntu with Node 24/Python 3.13, and Windows with Node 24/Python 3.13. Each runs `npm test` and the thirteen packaging tests. No dependency installation is needed for the project tests. The official setup actions provide the requested runtimes.
+Three checks cover Ubuntu with Node 18/Python 3.9 (the documented minimums), Ubuntu with Node 24/Python 3.13, and Windows with Node 24/Python 3.13. Each runs `npm test` and the packaging tests, including fixed cross-platform ZIP metadata. No dependency installation is needed for the project tests. The official setup actions provide the requested runtimes.
 
 **Build tested Forge ZIP** waits for all three checks to pass. It invokes the existing allowlisted packager and uploads only the installable ZIP and its `.zip.sha256` file. Test-only fixtures, workflows, Git history, outputs and private source material are not added to the Forge package. Artifacts are kept for fourteen days.
 

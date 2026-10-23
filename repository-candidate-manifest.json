@@ -11,7 +11,7 @@
     "LICENSE": "15d9fa5711ebf8411f869a5157ba8455f660d7c7c05c5c495c978f0386628d4a",
     "README.md": "54e15122cc746a121dfb953fe1e499249bf37c6fbc92f7d43bf8fc03182386e8",
     "docs/baseline-acceptance.md": "609ec802fcca2728a8f4e4b8126246640d9559e2647c65612574e28104ab1fe8",
-    "docs/ci.md": "0069511bb42dca42b70ea3dadaa0b59b1106a77f074c9273d6c337077dc9448b",
+    "docs/ci.md": "170b4ec41faf116e618f82775f4e60f4b949b781f9039d7e16746f2dd736ece5",
     "docs/installation.md": "3b8c3977f425d74bf667ba09f806d9985a060638bbc2d7e2983a151cf8f2fe2d",
     "docs/known-issues.md": "647514d3f5790548c9615ef1ddcbc03312f69ec6de84e107d588dfa5e6017a8f",
     "docs/known-limitations.md": "06beae35a9ace23160cef90d2b2c6539fe1eb5d05b2b1dd006833965cdaefbba",
@@ -50,8 +50,8 @@
     "tests/template-context.test.mjs": "c2f597a2c12b83f752fee5d269082f4d8ab3c7e6d5313c8f11739c728944c291",
     "tests/template-writing.test.mjs": "cc5f3551365aaaa5eee7fe872785b53281355facd2715db25ed7048ede5fc0bb",
     "tests/templates.test.mjs": "05a19539af6b69dd86723ccbe24a541d6c57b0c1c88d503bdc602f5739127f4f",
-    "tools/package-alpha.py": "de151c93d37211e77ae68a5fa17646bf5c65dd1516c0e2a3b7fae3484cf3b34e",
-    "tools/test_package_alpha.py": "1613628f23ffca9261988dc5bdbbfeee38f91f91b6af04aad1d40b7ba0582ace"
+    "tools/package-alpha.py": "eedacddfb446cd46bb4c01e32d50829402701fefeeb9886e23298e859607cad9",
+    "tools/test_package_alpha.py": "ec57f784994ceb18ea2a22ae482d4dfb2978e72b83345d2bdfaac42a9ae12a6c"
   },
   "adjustedFiles": [
     "README.md",

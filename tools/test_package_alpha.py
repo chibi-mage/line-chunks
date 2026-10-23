@@ -3,6 +3,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest import mock
 import zipfile
 
 spec = importlib.util.spec_from_file_location('package_alpha', Path(__file__).with_name('package-alpha.py'))
@@ -50,6 +51,17 @@ class PackageTests(unittest.TestCase):
     def test_reproducible_build(self):
         second, _ = package.build(output=Path(self.temporary.name) / 'second.zip')
         self.assertEqual(self.path.read_bytes(), second.read_bytes())
+
+    def test_host_zip_platform_default_does_not_change_archive(self):
+        original = package.zipfile.ZipInfo.__init__
+        def windows_default(info, *args, **kwargs):
+            original(info, *args, **kwargs)
+            info.create_system = 0
+        with mock.patch.object(package.zipfile.ZipInfo, '__init__', windows_default):
+            other, _ = package.build(output=Path(self.temporary.name) / 'other-platform.zip')
+        self.assertEqual(self.path.read_bytes(), other.read_bytes())
+        with zipfile.ZipFile(other) as archive:
+            self.assertEqual({info.create_system for info in archive.infolist()}, {3})
 
     def test_quoted_import_scope_is_not_a_module_declaration(self):
         version, payload = package.archive_bytes()

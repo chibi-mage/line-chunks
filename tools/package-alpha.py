@@ -131,6 +131,7 @@ def build(root=ROOT, output=None):
     with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
         for name, data in sorted(payload.items()):
             info = zipfile.ZipInfo(PREFIX + name, date_time=(2026, 10, 22, 0, 0, 0))
+            info.create_system = 3  # Fixed Unix metadata, independent of the builder OS.
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, data)
