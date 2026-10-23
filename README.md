@@ -1,117 +1,85 @@
 # MDPF Editor for Forge Neo
 
-Private Forge alpha · **0.48.5-alpha.1** · packaged 2026-10-23
+**Readable, structured positive prompts in Forge's original textbox.**
 
-Review and organize positive prompts in Forge's original txt2img and img2img textboxes. MDPF adds colored section headings, manual line labels, scored suggestions, and an organization preview with explicit Apply/Revert. Typing, resizing, selection and Tag Autocomplete use the native textbox.
+MDPF adds colored section headings and character labels while keeping native typing, selection, resizing and Tag Autocomplete. Its main purpose is helping you understand and write structured prompts; automatic organization is a secondary convenience.
 
-This project targets Forge Neo. A1111 compatibility needs separate testing; ComfyUI is outside this project and would be a separate project if pursued.
+Private alpha **0.48.5-alpha.1** · [User guide](docs/user-guide.md) · [Installation](docs/installation.md) · [Report a bug](https://github.com/chibi-mage/mdpf-editor/issues/new?template=bug_report.yml)
 
-The primary goal is visual MDPF comprehension, followed by writing assistance. Automatic organization is a conservative convenience; tangled prompts can need manual rewriting or an LLM-assisted draft that the user reviews.
+![Solo prompt with seven colored MDPF sections in Forge](docs/screenshots/solo.jpg)
 
-Resizing and draft file saving are confirmed working by the owner. The earlier incomplete-save report is resolved by further owner testing; see the [verification status](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/known-issues.md).
+## Install
 
-**BREAK import · confirm blocks** adds a reviewed workflow for structured multi-character imports. Detect row-leading BREAK blocks, review every Shared/Character role, confirm, Preview and Apply. Shared text/references and BREAK delimiters stay locked; character blocks organize L3–L7. Two to eight owners, up to four shared blocks, explicit counts and existing size limits apply. Auto Fix ownership limits are unchanged. Bounded color/material/modifier phrases for 48 known outfit nouns now classify as L4 with existing body-area ranks; supported verb-object actions remain L2.
+1. Download a successful **Forge CI** build from [Actions](https://github.com/chibi-mage/mdpf-editor/actions). Repository access is required while it is private. Extract the artifact download to find the actual Forge ZIP and checksum.
+2. Close Forge and extract the inner `mdpf-editor-0.48.5-alpha.1-forge-private-alpha.zip` into `extensions`. The result should include `extensions/mdpf-editor/javascript/mdpf-forge.mjs`, with no extra nested folder.
+3. Start Forge and refresh its page with **Ctrl+F5**, after keeping a copy of any open prompt.
 
-**Auto Fix** organizes eligible solo prompts and configured Basic Forge Couple prompts in one click. Each editable character region needs one explicit `1girl`, `1boy` or `1other` tag. Couple mode requires enabled Basic assignment, exact standalone `---` separators and a readable Global Effect position. Shared text, region order and BREAK membership are preserved. Manual line labels take priority; unknown strings/standalone LoRAs may use provisional L7. Ambiguity or unsupported syntax blocks the whole write. **Revert Auto Fix** restores the exact original while its snapshot remains current. Couple settings are read only.
+No extra pip/npm dependencies or Forge core changes are needed. See [installation, updates and removal](docs/installation.md) for rollback instructions.
 
-After Auto Fix, a compact result row appears directly below the MDPF toolbar, above the original prompt. It shows organized item, removed duplicate and unknown-to-L7 counts. **Details** expands a read-only placement/duplicate audit; **Revert Auto Fix** uses the existing exact guarded undo. Blocked attempts show their reason and **Open review**. Changed prompt text marks the previous result as historical. Summary controls never become prompt text.
+## First use
 
-In **Organize → Select items**, select individual preview entries or **Select shown items**, choose **Move selected items to**, then **Set destination → Preview organization → Apply organization**. Use **All items** to correct recognized tags. Manual labels, verified bundles and removed repeats are protected. Choices are local to the current prompt/session; no classifier training or saved global overrides.
+1. Write or paste a positive prompt in **txt2img** or **img2img**, then choose **MDPF mode** or **Detect / View**.
+2. For a fresh structured prompt, open **Organize · prompt preview → Templates** below the prompt and insert a starter. Choose Solo, a two-character placement layout, or a multi-character Forge Couple layout.
+3. Keep typing in the original textbox. Use **Assign line** to correct a section label. A label describes structure; it does not prove every tag on the line belongs there.
 
-Templates below the prompt now emphasize **Start from a template** for an empty prompt, or **Add character** and **Save / load draft** for an existing draft. Full replacement remains collapsed and requires explicit confirmation. Section expansion choices and focused controls survive background updates.
+| Section | Purpose |
+| --- | --- |
+| L1 | Quality and medium |
+| L2 | Camera, pose and action |
+| L3 | Character, generally head to toe |
+| L4 | Outfit and accessories, generally top to bottom |
+| L5 | Gaze and expression |
+| L6 | Background, scenery and scene effects |
+| L7 | Style and LoRA references |
 
-## Start here
+[Five-minute starting guide](docs/user-guide.md#five-minute-starting-guide) · [Full user guide](docs/user-guide.md)
 
-Current phase: **normal-use stabilization** on 0.48.5. [Report a bug](https://github.com/chibi-mage/mdpf-editor/issues/new?template=bug_report.yml) when one occurs; no additional acceptance test session is required. See the [stabilization notes](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/stabilization.md).
+## Organize an imported prompt
 
-0.48.5 keeps continued template sections coherent after per-line relabeling or inserted control boundaries. Existing word/line deletion and history-navigation fixes are retained. Classification and organization rules are unchanged.
+**Organize & review** lets you inspect proposed destinations, correct individual items and keep intentional repeats before **Apply organization**. **Auto Fix** writes immediately for eligible solo or configured Basic Forge Couple prompts. Its result includes duplicate/unknown counts and Details.
 
-New to MDPF? Follow the [five-minute starting guide](docs/user-guide.md#five-minute-starting-guide).
+Exact plain duplicates are removed by default only within the same destination, character/region and BREAK segment. Revert is available while its exact result remains current; it is not permanent Undo history. Unknown triggers may use provisional L7, and ambiguous or unsupported prompts need review or manual rewriting. MDPF does not infer LoRA–trigger relationships.
 
-- [Installation, updates and removal](docs/installation.md)
-- [Using MDPF](docs/user-guide.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Known limitations](docs/known-limitations.md)
-- [Core and Forge adapter boundaries](docs/portability.md)
+<details>
+<summary>See a preview with exact comparison and duplicate review</summary>
 
-L1 Quality & medium; L2 Camera, pose & action; L3 Character; L4 Outfit; L5 Gaze & expression; L6 Background; L7 Style. Labels are visual metadata, not generation tags. Explicit compact formatting can add real blank heading rows. Organize writes after Apply; Auto Fix is a separate explicit one-click write.
+![Unchanged messy source above an organization preview, proposed text and duplicate Keep control](docs/screenshots/organization-preview.jpg)
 
-`newest` is a strong L1 quality tag. Bare `action` is deliberately ambiguous between L2 pose/action and L7 style: choose its intended placement in Assign line or Organize. It has no automatic or tentative destination.
+The screenshot shows a proposal only. The duplicate is marked for removal, and the source stays unchanged until Apply.
 
-Unknown strings and possible LoRA triggers may receive provisional L7 placement. This is a review fallback, not evidence that the classifier understands them. Review proposals before applying them.
+</details>
 
-Pony `score_1` through `score_9`, with or without `_up`, are recognized as L1 quality tags. Organize and Auto Fix put standalone scores first in descending numeric order, preserving spelling/suffixes and equal-score order. Protected weighted groups and verified bundles remain intact. Detection and typing do not reorder text.
+## Multiple characters
 
-Recognized head, face and neck accessories now default to **L4 Outfit**, including hats, crowns, helmets, veils, circlets, glasses, facial piercings, masks, earrings, collars, chokers and hair adornments. Common qualified forms such as `silver earrings`, `gold crown` and `round glasses` are included. This supersedes the earlier accessory ambiguity policy. Explicit line labels and verified bundles retain their chosen placement. Mixed weighted groups remain intact and require review.
+Keep characters in distinct blocks with their own outfit/expression sections. Starters support an ordinary two-character placement layout and **2–8 characters** in Forge Couple layouts. Reviewed organization also supports explicit character ranges and structured BREAK imports; see the [workflow guide](docs/user-guide.md#choose-a-workflow).
 
-Recognized `covered [body part]` tags default to **L4 Outfit**, including `covered face`, `covered neck`, `covered breasts`, `covered nipples` and `covered eyes`. `Covering [body part]` tags belong to **L2 Pose/action**, including `covering privates`, `covering own mouth` and `covering breasts`. The matching is limited to body-part phrases, rather than arbitrary words after “covered” or “covering.” Explicit hair occlusion and closed eyes keep their appearance/expression categories.
+<details>
+<summary>See two characters with a placement line and shared scene</summary>
 
-Simple and recognized color backgrounds belong to **L6**. Cinematic/volumetric/anime lighting, ray tracing, dramatic shadows, anime screencap and anime coloring belong to **L1**. Common pupil modifiers and hairstyles, including white pupils, antenna hair, Japanese ahoge and French braids, belong to **L3**. Organize/Auto Fix place plain automatic pupil modifiers after the last recognized eye-color tag within their L3 run, respecting manual labels, weighted groups, bundles, owner and BREAK boundaries. Hair precedes the eye/pupil group even without an eye-color anchor. Typing and detection do not reorder tags.
+![Two characters with separate L3–L5 blocks, a placement line, and shared L6/L7](docs/screenshots/multi-character.jpg)
 
-A reviewed 214-tag pool covers profession costumes and armor (**L4**), sitting/leaning poses (**L2**) and furniture/architecture/scenery (**L6**). Knight, nun, prisoner, breastplate, chainmail, gauntlets and bracers are L4; crossed legs and sitting on throne are L2; throne, pillar, stone wall and castle are L6. These are whole-tag conventions, with bounded color/material armor forms, rather than inference from arbitrary role or object words.
+This is an ordinary placement-line prompt, not a demonstration of regional conditioning. The example LoRA name is a placeholder; no model or LoRA was loaded for these screenshots.
 
-A fresh mixed-prompt audit corrected 31 semantic gaps, including actions such as `brushing hair`, `holding hat` and `pulling shirt` that previously inherited appearance/outfit suffix evidence. Blouse/nightgown/sundress and hood states are L4; long eyelashes/scar on face are L3; sleepy is L5; rain/tatami/gate/flower field are L6. Bounded action phrases take priority over generic hair/garment rules; complete garment prints and unknown triggers retain their existing behavior.
+</details>
 
-An audit of 16 user-supplied PNG positives adds 60 clear category mappings and two explicit ambiguities. Examples include hair buns/topknots and body freckles (L3), garment construction and worn accessories (L4), crossed arms/V gesture (L2), expression phrases (L5), colored scene effects (L6) and known painting/texture terms (L7). Sketch remains L1/L7; the earlier gold-bracelet ambiguity is superseded by the whole-body Outfit policy. Names, broad mood terms and unverified triggers remain provisional; differences from a manually fixed example do not silently become global rules or wording substitutions.
+MDPF never configures Forge Couple. Match its separator and shared-region settings yourself. Distinct expressions can bleed across characters; regional conditioning or later inpainting may help. Text labels alone do not isolate conditioning.
 
-Recognized worn accessories across the body belong to **L4 Outfit**, including bracelets, rings, cuffs, anklets, socks and body jewelry. Bare shoulders/arms/legs/back/midriff and reviewed clothing cutouts/holes also belong to L4. This supersedes earlier wrist/accessory/exposure ambiguities. Body features such as broad shoulders, cleavage and navel stay L3; dressing/adjusting/removal actions stay L2. Manual placements and verified bundles retain priority.
+## Compatibility and limits
 
-Organize/Auto Fix put an existing plain `1girl`, `1boy` or `1other` first, followed by existing `solo`, within each automatic unprotected L3 run. The remaining reviewed traits follow identity, hair, eyes/pupils, face, build/skin, torso, arms/hands, lower body and natural appendages. Equal categories retain source order. No count or solo tags are invented. Manual placements, verified bundles and weighted/opaque groups are ordering barriers; owner, BREAK and shared boundaries stay protected. Typing and detection do not reorder text.
+- Tested locally on **Forge Neo with Gradio 4.40.0**. Other Forge builds/themes and A1111 require validation. ComfyUI is outside this project.
+- Only the main positive prompts are supported. Negative and ADetailer prompts are outside scope. MDPF does not change models or generation settings.
+- Compact display may insert real blank heading rows when explicitly enabled/detected. Labels are editor metadata, but those blank rows are part of copied prompt text.
+- Organization is bounded to **20,000 source characters and 200 editable items**. Complex syntax or uncertain ownership can block the entire proposal.
+- Draft saving and native resizing are confirmed working by the owner. Save/load is optional; pending organization choices and Undo remain page-local.
 
-Body/skin marks, makeup, nails and natural claws/ears/horns/tails belong to **L3**. Explicit fake features and claw gloves belong to **L4**; claw/paw/rabbit poses belong to **L2**. Recognized L3 descriptors now follow the complete appearance order, respecting the same protection barriers. Generic marks join the build/skin group without guessing a specific body site; natural ears/horns/tails/wings form the final appendage group. Unranked L3 descriptors also stop sorting.
+The current phase is [normal-use stabilization](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/stabilization.md). The [verification status](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/known-issues.md) distinguishes live checks from automated evidence. These UI screenshots show neutral authored prompts, not generated-image results.
 
-L4 clothes and accessories now sort together from head to feet. General states (`nude`, `wet clothes`, `torn clothes`) lead, followed by unlocated details, head, face, neck/shoulders, torso, arms/wrists/hands, waist/hips, thighs/legs/ankles, feet and then weapons/carried accessories. Equal-area tags retain source order; manual, weighted, bundle, unranked and scope boundaries remain protected.
-
-The combined appearance audit adds exact L3 mappings for `cat paws`, `fluffy ears` and `demon girl`, and L4 mappings for `hair tie`, `fur collar`, `arm guards` and `knee guards`. Existing scope/size limits remain in place; detailed prompts can reach the 200 editable-item limit before eight owners.
-
-Body/subject focus tags such as `face focus`, `back focus`, `ass focus`, `male focus` and `female focus` are **L2**, as are `portrait` and reviewed framing formats. Emotions and facial eye/mouth actions belong to **L5**. Organize/Auto Fix put recognized gaze directions first within each automatic unprotected L5 run, retaining the order of multiple gazes and the remaining expressions.
-
-A targeted boundary audit adds 26 L2 interaction tags (including hand/arm eye shielding, wiping tears, face contact and head turns) and nine L5 facial states. `Hand over eyes` is L2, `closed eyes` L5, `covered eyes` L4 and hair occlusion L3. Exact overrides correct tested eye-suffix collisions without broadening generic patterns.
-
-Pair L2 interactions with object descriptions: `sitting on throne` in L2 plus `ornate throne` in L6; `holding chair` in L2 plus `wooden chair` in L6. Recognized weapons/carried accessories such as `silver sword` or `red umbrella` use the final L4 group after footwear, while their holding action uses L2. Explicit scene forms such as `beach umbrella` stay L6. No missing descriptions are automatically added.
-
-Ruleset 0.1.32 contains 1318 exact rules (including 231 historical curated mappings) and twenty-one anchored patterns. Recognized jewelry/wrist accessories and garment exposure/cutout states default to L4. Ambiguous eye states and unreviewed phrases can still need context. Existing scoring thresholds are unchanged. Historical review records and baseline fixtures remain frozen; current evaluations explicitly apply the author's accessory policy revision. Vocabulary popularity came from a local historical Danbooru snapshot, not a current popularity survey.
-
-## Compatibility and scope
-
-Validated on Forge Neo commit `cb3c1fc535482003156e1c00ffe9802eeea92e97`, Gradio 4.40.0. Other Forge builds and themes need testing. This is not yet an A1111 or ComfyUI release. Negative and ADetailer prompts are outside scope. MDPF does not load models, configure Forge Couple or change generation settings. No prompt telemetry or automatic training is included.
-
-The runtime contains 14 JavaScript modules and one stylesheet, with no extra runtime dependencies or bulk external tag dataset bundled. Original extension code is licensed under the [MIT License](LICENSE), as selected by the owner. Private alpha describes the testing stage, not an additional redistribution restriction. External datasets and private reference fixtures are excluded from the installable package; this license does not establish rights to separately sourced material.
+[Troubleshooting](docs/troubleshooting.md) · [Known limitations](docs/known-limitations.md) · [Core/Forge boundaries](docs/portability.md)
 
 ## Development
 
-[Forge CI](https://github.com/chibi-mage/mdpf-editor/actions/workflows/forge-ci.yml) runs the repository tests and packaging checks on Windows and Linux. Successful runs provide a tested Forge ZIP and checksum under Artifacts; see the [download instructions](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/ci.md).
+Run `npm test` with Node 18+; no dependency installation is needed. Python 3.9+ runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. The GitHub source contains neutral self-contained tests; the private workspace's additional fixtures and historical evaluations are excluded. See [contribution guidance](https://github.com/chibi-mage/mdpf-editor/blob/main/CONTRIBUTING.md) and [CI/download details](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/ci.md).
 
-This clean source candidate includes a self-contained neutral regression subset. Run `npm test` with Node 18+; no dependency installation is needed. Use Python 3.9+ for `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. See CONTRIBUTING.md for source boundaries and release expectations.
+## License
 
-The private workspace's larger evaluation suite, supplied PNG metadata, personal prompts, external vocabulary catalogs, outputs and backups are intentionally excluded. Runtime modules match the workspace baseline; README/package scripts are adjusted for this subset. The generated repository-candidate-manifest.json records exact file hashes. Source home: [chibi-mage/mdpf-editor](https://github.com/chibi-mage/mdpf-editor).
-
-## Blank starters
-
-Open **Organize · prompt preview** below the positive prompt, then select the **Templates** tab. The neighboring **Organize & review** tab holds the existing preview and organization controls. Switching tabs preserves choices and never edits the prompt. Choose **Solo**, **Two characters · placement line**, or **Forge Couple · multi-character**. The outline previews section labels and the few starter tags that will be inserted. Nothing changes until **Insert template**. If a draft exists, explicitly check **Replace the current draft** first. **Undo template** restores the exact previous source while the inserted result is still current; subsequent edits disable that undo.
-
-Solo starts with `1girl, solo,`. The ordinary two-character starter uses shared L1/L2, C1 L3/L4/L5, `man next to girl,` as a placement line, C2 L3/L4/L5, then shared L6/L7. Its default counts are `1girl` and `1boy`; edit counts and placement for your scene. The second expression row is optional: leave it empty when sharing the main expression. Distinct expressions can bleed; regional conditioning or later inpainting may help.
-
-Forge Couple supports **2–8 characters**, with Shared region **First / Last / None**. Every character starts with editable `1girl,` and blank L4/L5/L6 rows. Shared First/Last adds blank L1/L2/L6/L7 sections. Literal `---` rows divide regions. Match the separator and Global Effect position in Forge Couple yourself. Insertion never enables, configures or resizes Forge Couple regions.
-
-Empty sections have visual labels and real blank rows, without placeholder quality/appearance/LoRA tags. Type directly in the original textarea; autocomplete, selection and resizing continue there. Blank labels and starter ownership metadata survive normal same-line typing and Detect in this page. They are page-local unless explicitly exported and reopened using Save / load draft: reloading, external replacement, edits across sections or Reset labels can remove them. Within a known template section, Enter and multiline paste continue that section and character, with one heading; joining its own continuation rows preserves the label. Empty content rows remain editable slots. Pasted control markers and edits across headings/owners do not inherit a section. Source text remains intact; use Detect/Assign line for a completed prompt. Turning MDPF off hides decorations, not source rows.
-
-## Add a character without replacing the draft
-
-Under **Organize · prompt preview → Templates → Add character to this draft**, choose Ordinary or Forge Couple, the new count tag (`1girl`, `1boy`, `1other`), and either an editable placement line or the existing shared-region position. **Preview added character** shows the exact complete proposed prompt without writing. **Add character** applies that proposal. Changing source, labels, options or Couple settings requires a new preview.
-
-Ordinary insertion needs labeled L3 count lines. It inserts a placement line and blank L3/L4/L5 before the trailing shared L6/L7 sections, or appends when no shared tail exists. Couple insertion needs standalone `---` boundaries, exactly one explicit single-character count per existing owner region, and the correct Shared First/Last/None position. It adds L3/L4/L5/L6 while preserving the shared chunk position. When Couple is enabled, its Basic mode, separator and shared position must match; the extension never changes those settings.
-
-Existing source text, LoRAs, continued sections and manual labels are retained. No existing `solo` or aggregate count tag is silently removed or updated: fix those for the new scene yourself, and configure the new Forge Couple region manually. **Undo added character** restores the exact previous draft while the inserted result remains current; later text edits disable that undo. The workflow supports up to eight characters. Raw/unclear ownership, mixed separators, competing owner counts, BREAK/advanced controls and composition in progress require manual completion or another supported layout.
-
-## Save and reopen a draft
-
-**Owner-confirmed:** draft file saving works in the owner's further testing (2026-10-23). Save/load is optional; plain prompt copies preserve text but not empty labels or page-local Undo.
-
-Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. There is no automatic recovery or browser storage. Keep a plain-text copy through your usual workflow. Rename or move downloaded files yourself as desired.
-
-Choose an **MDPF draft file** to read and preview it locally. The preview shows the exact incoming prompt and a line/label summary; choosing a file does not change the current draft. Check **Replace the current prompt and labels with this draft** when a draft already exists, then select **Load draft**. If your current prompt, labels or editor state change, select **Preview draft** again. Invalid/unsupported files leave the current draft untouched. **Undo loaded draft** restores the exact previous source, labels and display preferences until another text/label/editor edit changes the loaded result.
-
-Save/load works independently in txt2img and img2img and supports moving a draft between them. It does not save models, seeds, generation settings, classifier changes, pending organization choices or Undo history. Forge Couple guidance is only a separator/shared-position reminder; loading never enables or configures Couple. Generation metadata remains plain prompt text; the JSON labels are never inserted into it.
-
-Version 1 files use LF newlines and allow up to 100,000 prompt characters, 10,000 source rows and 2 MB of JSON. Files are validated before Load is enabled. Unsupported schema versions require a compatible extension version rather than silently losing labels.
+Original extension code is [MIT licensed](LICENSE). No bulk external Tag Autocomplete/Danbooru dataset is bundled. Rights to separately sourced datasets are not established by this code license.

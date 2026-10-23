@@ -2,7 +2,7 @@
 
 Baseline: 0.48.5-alpha.1, 2026-10-23. MIT selected by the owner. Continued template runs now stay coherent after relabeling or inserted control boundaries. Previous word/line deletion and history-cache discovery fixes are retained. Classification and organization rules remain unchanged. The owner confirmed physical resizing works. Draft file saving is confirmed working by the owner's further testing on 2026-10-23. The earlier incomplete-save report is resolved on that basis; no code fix or independent browser save/reload verification is claimed. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.
 
-Automated evidence: 3902 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
+Automated evidence: 3902 workspace JavaScript tests, fifteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
 
 ## Owner acceptance and verification limits
 

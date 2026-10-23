@@ -10,13 +10,17 @@
     ".gitignore": "3fa1f2fdeedea1bb7fd8a5394f6921ec9ff120438a572e59053de0851bbfc5f6",
     "CONTRIBUTING.md": "cdad1091ca9032d6ebad0eb19966134bf364f67ea93b52eb2f1309bb60103254",
     "LICENSE": "15d9fa5711ebf8411f869a5157ba8455f660d7c7c05c5c495c978f0386628d4a",
-    "README.md": "465372f5e712beb5b5e534572e13cfbd86ecfc8d7499f299b0d01cf08d246254",
-    "docs/baseline-acceptance.md": "fdd56a773ca9352bc068c8a192ca14d1cd26c80cb80312cb2e08bf57381568a8",
+    "README.md": "d8b9749c871fcdf09796d5752c23ddfe5c224b77c9957e4579b16f098db782e1",
+    "docs/baseline-acceptance.md": "d113310ff97d248c385b59b8da43fbe4fbc8ab32391cf100689456b46dcc79a7",
     "docs/ci.md": "b84fb0c9644c8a305a7e712d7ea7e065779761e68f4d073f7b83a1b23fd3f104",
-    "docs/installation.md": "13d44340d655bdbd85808eff080175de2fc650972cf6da1c18d5065b4e7426b8",
+    "docs/installation.md": "0d4649d0c916ff15d50a2ec6b1eb6d3ec868f678e0ef2eac759819a98b33fec1",
     "docs/known-issues.md": "64b404b0f63b1ffb79db96769830431b5070571707577a17948f550766ad09a2",
     "docs/known-limitations.md": "d3d91d1cab52affd12c5a8e3c5c55d23fc9b162c3ef8dbe7ac635eb84652b91f",
     "docs/portability.md": "fb84dd7f05344d30ba3ae5bd1f168ca8ba5c1157b7e66ed85cc3577153c9f4b5",
+    "docs/screenshots/README.md": "1ea2a2a3563cacaae70c7c843c37bbed80a0d5aca9f4fcfd9b7bb6037e049435",
+    "docs/screenshots/multi-character.jpg": "0b0fc154241bae6f1693760fb6c5f887fdd2435250cb62ee511d6981eb5e7863",
+    "docs/screenshots/organization-preview.jpg": "f74c0cd5ea315a31d47cc5bd8353eb2d496cc693cdd3ded2dcc90027736ea548",
+    "docs/screenshots/solo.jpg": "1a38a965b109c3638507eda1b94a31b484253664b98984adb4cf03f03012303c",
     "docs/stabilization.md": "d22649b2cf3e22ea3d7b018a2f97896e4348df5e291d7d966d5d9d38ef3e49aa",
     "docs/troubleshooting.md": "5bff37db3b4e1043de8e3d60f51b6fc8731db9f9ee5633bb346d1f10f0d8aedd",
     "docs/user-guide.md": "af1822740c3d57751d004615223d57fc8eb0de32a8c0c3393c96db86866e2f5c",
@@ -54,12 +58,10 @@
     "tests/template-context.test.mjs": "c2f597a2c12b83f752fee5d269082f4d8ab3c7e6d5313c8f11739c728944c291",
     "tests/template-writing.test.mjs": "4813fcdbbe8e5b392d876a85a9288954d4251f0e09940166666efafa115f7deb",
     "tests/templates.test.mjs": "05a19539af6b69dd86723ccbe24a541d6c57b0c1c88d503bdc602f5739127f4f",
-    "tools/package-alpha.py": "eedacddfb446cd46bb4c01e32d50829402701fefeeb9886e23298e859607cad9",
-    "tools/test_package_alpha.py": "ec57f784994ceb18ea2a22ae482d4dfb2978e72b83345d2bdfaac42a9ae12a6c"
+    "tools/package-alpha.py": "5abab6efe1eeb1365cb05f2fb4bba97d21a6b9de7bcb9233e5d343cf8099fad1",
+    "tools/test_package_alpha.py": "d919b1bf3a8531faa4e13f0dac6abc50f6b31bf711704a26fb8b12f883bbc4df"
   },
   "adjustedFiles": [
-    "README.md",
-    "docs/baseline-acceptance.md",
     "package.json"
   ],
   "excluded": [

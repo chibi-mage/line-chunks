@@ -28,10 +28,17 @@ class PackageTests(unittest.TestCase):
 
     def test_exact_files_and_lifecycle(self):
         manifest = package.verify_lifecycle(self.path)
-        self.assertEqual(len(manifest['files']), 22)
+        self.assertEqual(len(manifest['files']), 25)
         self.assertEqual(manifest['distribution'], 'private-alpha')
         self.assertEqual(manifest['license'], 'MIT')
         self.assertIn('LICENSE', manifest['files'])
+
+    def test_invalid_documentation_image_rejected(self):
+        version, payload = package.archive_bytes()
+        payload.pop(package.MANIFEST)
+        payload['docs/screenshots/solo.jpg'] = b'not a JPEG'
+        with self.assertRaisesRegex(ValueError, 'Invalid documentation JPEG'):
+            package.validate_payload(payload, version)
 
     def test_missing_license_rejected(self):
         self.mutate(lambda entries: entries.pop('mdpf-editor/LICENSE'))

@@ -16,6 +16,7 @@ MODULES = (
 )
 FILES = tuple(sorted([
     *(f'javascript/{name}.mjs' for name in MODULES), 'style.css', 'README.md', 'LICENSE',
+    *(f'docs/screenshots/{name}.jpg' for name in ('solo', 'multi-character', 'organization-preview')),
     *(f'docs/{name}.md' for name in (
         'installation', 'user-guide', 'troubleshooting', 'known-limitations', 'portability')),
 ]))
@@ -33,6 +34,10 @@ def validate_payload(payload, version):
     if not payload['LICENSE'].startswith(b'MIT License\n') or b'Copyright (c) 2026 MDPF Editor contributors' not in payload['LICENSE']:
         raise ValueError('Missing or unexpected MIT license notice')
     for name, data in payload.items():
+        if name.endswith('.jpg'):
+            if not data.startswith(b'\xff\xd8\xff'):
+                raise ValueError(f'Invalid documentation JPEG: {name}')
+            continue
         text = data.decode('utf-8-sig')
         if name.endswith('.mjs'):
             # Match source declarations, not quoted UI values such as 'break-import'.

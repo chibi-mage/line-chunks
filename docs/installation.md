@@ -9,7 +9,7 @@ This private alpha targets Forge Neo with support for extension `.mjs` modules a
 3. Start Forge with your usual launcher. Keep a copy of your prompt before Ctrl+F5 to refresh the browser.
 4. Look for **MDPF mode** and **Detect / View** above the txt2img/img2img positive prompts, and **Organize · prompt preview** below them.
 
-The archive includes README, five guides, the MIT `LICENSE` and `release-manifest.json`. They are not executed by Forge.
+The archive includes README, five guides, three documentation screenshots, the MIT `LICENSE` and `release-manifest.json`. They are not executed by Forge.
 
 ## Update
 
