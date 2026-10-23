@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildStarterTemplate, assignStarterTemplate, updateAssignments } from '../javascript/mdpf-assignments.mjs';
+import { buildStarterTemplate, assignStarterTemplate, updateAssignments, setLineAssignment } from '../javascript/mdpf-assignments.mjs';
 import { inspectPrompt } from '../javascript/mdpf-core.mjs';
 import { inspectStructure } from '../javascript/mdpf-structure.mjs';
 
@@ -207,4 +207,38 @@ for (const type of ['pair', 'couple']) test(`${type}: edits crossing placement o
     }
     assert.deepEqual(state.rows.filter(r => r.templateSlot && untouched.some(([id]) => id === r.id))
         .map(r => [r.id, r.module, r.templateCharacter]), untouched);
+});
+
+for (const position of [0, 1, 2]) for (const label of [6, null, undefined]) test(`relabel continued row ${position} to ${String(label)} keeps section runs coherent`, () => {
+    let state = assignStarterTemplate(buildStarterTemplate('pair'));
+    const target = state.rows.find(r => r.module === 4 && r.templateCharacter === 1);
+    state = edit(state, target.start, target.end, 'blue shirt,\nwhite gloves,\nblack boots,');
+    const rows = state.rows.filter(r => r.templateGroup === target.templateGroup);
+    const source = state.source, selected = rows[position];
+    const next = setLineAssignment(state, selected.id, label);
+    assert.equal(next.source, source, 'Relabeling never changes prompt text');
+    assert.equal(next.rows.find(r => r.id === selected.id).module, label === undefined ? selected.detectedModule : label);
+    for (const row of next.rows.filter(r => r.templateContinuation)) {
+        const previous = next.rows[row.index - 1];
+        assert.ok(previous.templateSlot && previous.templateGroup === row.templateGroup && previous.module === row.module && previous.templateCharacter === row.templateCharacter);
+    }
+    assert.deepEqual(next.rows.filter(r => r.templateCharacter === 2).map(r => [r.id, r.module, r.templateGroup]), state.rows.filter(r => r.templateCharacter === 2).map(r => [r.id, r.module, r.templateGroup]), 'Other owner is untouched');
+});
+
+for (const control of ['BREAK', '---']) test(`inserting ${control} inside a continuation starts a separate retained tail`, () => {
+    let state = assignStarterTemplate(buildStarterTemplate('pair'));
+    const target = state.rows.find(r => r.module === 4 && r.templateCharacter === 1);
+    state = edit(state, target.start, target.end, 'blue shirt,\nwhite gloves,\nblack boots,');
+    const middle = state.rows.find(r => r.text === 'white gloves,');
+    const next = edit(state, middle.start, middle.start, control + '\n');
+    const boundary = next.rows.find(r => r.text === control);
+    assert.ok(boundary.protected && !boundary.manual && !boundary.templateSlot);
+    const tail = next.rows.find(r => r.text === 'white gloves,');
+    assert.equal(tail.templateContinuation, false);
+    assert.notEqual(tail.templateGroup, next.rows.find(r => r.text === 'blue shirt,').templateGroup);
+    assert.equal(tail.module, 4);
+    assert.equal(tail.templateCharacter, 1);
+    const last = next.rows.find(r => r.text === 'black boots,');
+    assert.equal(last.templateGroup, tail.templateGroup);
+    assert.equal(last.templateContinuation, true);
 });

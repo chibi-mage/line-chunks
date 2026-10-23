@@ -127,6 +127,9 @@ export function updateAssignments(previous, source, document, { reason = 'extern
             });
         }
     }
+    // Edits can split a continued section with a control or remove its first row.
+    // Retained tails start a fresh run instead of pointing across that boundary.
+    state.rows = coherentTemplateRuns(state.rows);
     // Temporary incomplete syntax may hide detection, but existing row identities survive.
     if (!document?.supported) state.headingRows = previous.headingRows;
     state.headingRows ||= state.rows.some(row => row.templateSlot);
@@ -242,14 +245,35 @@ export function applyCharacterAddition(state, plan) {
     return { ...state, source: plan.proposed, ...fresh, rows, headingRows: true, reset: false };
 }
 
+// A manual label applies to one physical row. Split its logical template run
+// when necessary so later Enter/paste cannot inherit an incompatible section.
+function coherentTemplateRuns(rows) {
+    let previous = null;
+    const used = new Set();
+    return rows.map(row => {
+        if (!row.templateSlot) { previous = null; return row; }
+        if (!row.manual || row.module === null && row.kind !== 'placement') {
+            previous = null;
+            return { ...row, templateSlot: false, templateGroup: undefined, templateContinuation: false };
+        }
+        const key = row.templateGroup ?? row.id;
+        const continuation = !!row.templateContinuation && previous?.key === key
+            && previous.module === row.module && previous.character === row.templateCharacter;
+        const group = continuation ? previous.group : used.has(key) ? row.id : key;
+        used.add(group);
+        previous = { key, group, module: row.module, character: row.templateCharacter };
+        return { ...row, templateGroup: group, templateContinuation: continuation };
+    });
+}
+
 export function setLineAssignment(state, id, module) {
     if (module !== undefined && module !== null && (!Number.isInteger(module) || module < 1 || module > 7)) throw new Error('Choose a module from L1 to L7, unassigned, or detected.');
     const target = state.rows.find(row => row.id === id);
     if (!target || target.header || target.protected) throw new Error('Select a prompt content line, not a heading spacer or boundary.');
-    return { ...state, rows: state.rows.map(row => row.id !== id ? row : {
+    return { ...state, rows: coherentTemplateRuns(state.rows.map(row => row.id !== id ? row : {
         ...row, module: module === undefined ? row.detectedModule : module,
         manual: module !== undefined, kind: module === undefined ? row.detectedKind : module === null ? 'opaque' : 'module',
-    }) };
+    })) };
 }
 
 export function resetLineAssignments(state, document) {

@@ -1,22 +1,14 @@
 # Forge private-alpha baseline acceptance
 
-Baseline: 0.48.4-alpha.1, 2026-10-23. MIT selected by the owner. Word/line deletions now use the actual edit span when tracking continued template sections. The history-cache discovery fix is retained. Classification and organization rules remain unchanged. The owner confirmed physical resizing works. Draft saving was reported to omit an existing full prompt and was explicitly deprioritized; it is a known issue, not a prerequisite for the visual/writing baseline. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.
+Baseline: 0.48.5-alpha.1, 2026-10-23. MIT selected by the owner. Continued template runs now stay coherent after relabeling or inserted control boundaries. Previous word/line deletion and history-cache discovery fixes are retained. Classification and organization rules remain unchanged. The owner confirmed physical resizing works. Draft file saving is confirmed working by the owner's further testing on 2026-10-23. The earlier incomplete-save report is resolved on that basis; no code fix or independent browser save/reload verification is claimed. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.
 
-Automated evidence: 3793 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
+Automated evidence: 3902 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
 
-## Optional draft reproduction — no user retest required
+## Owner acceptance and verification limits
 
-Browser download and file-selection permission was denied in the previous live pass. That refusal remains in effect; no alternate transfer route is used. The following remains a developer reproduction checklist for the optional persistence issue, not work the owner needs to repeat:
+Draft file saving is confirmed working by the owner's further testing on 2026-10-23. The earlier incomplete-save report is resolved on that basis; no code fix or independent browser save/reload verification is claimed.
 
-1. Start a Solo or pair template and type into at least two labeled sections. Continue a section with Enter so it has two content rows. Save through **Templates → Save / load draft → Save draft file**.
-2. Reload the page. Page-local Undo history is expected to be gone. Type a small temporary prompt before loading, so the next Undo has a clear target.
-3. Choose the saved JSON file. Confirm that preview alone does not replace the current prompt. Confirm replacement, then **Load draft**.
-4. Verify exact prompt text, empty section headings, continued-section grouping and character labels. Check that generation/Couple settings were not changed.
-5. Use **Undo loaded draft** immediately. It should restore the temporary prompt from step 2; it does not restore Undo history from before the reload.
-
-Physical resizing is accepted based on the owner's direct report that it works well. Browser automation had not exercised dragging. Harness checks cover 360/560-pixel prompt columns, not every full-window/mobile layout.
-
-Do not claim draft persistence is fixed or independently verified. Offline serialization/controller checks retain the whole synthetic prompt, which does not explain or dismiss the owner's reported live problem. Several normal work sessions are still needed before claiming routine-use reliability; draft saving is not a publication gate.
+Physical resizing is also accepted from the owner's direct report. Offline serialization, editor and lifecycle tests support the implementation; these do not constitute independent verification of every browser file picker, download or graph host. No user retest is required. The prior browser file-transfer refusal remains historical; later authorization applied only to the synthetic PNG used for the live PNG Info check.
 
 ## Sharing boundary
 

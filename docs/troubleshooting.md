@@ -10,7 +10,7 @@
 | Apply disabled | Confirm ownership, resolve placements/bundles, finish text composition and Preview again. Source, label or choice changes invalidate an older proposal. Inspect displayed syntax errors. |
 | Revert/Undo spacing unavailable | Its exact snapshot no longer matches. Use your own saved prompt copy; old snapshots cannot overwrite newer edits. |
 | Intentional repeat removed | Inspect duplicate cleanup and Keep the occurrence before re-previewing. If already applied, Revert while available. Cross-owner/BREAK repeats are protected. |
-| Saved draft looks incomplete | This is a known unresolved optional-feature issue. Keep a plain-text copy through your usual workflow; saving is not required to use MDPF. |
+| Saved draft looks unexpected | Check the selected file and compare its preview before replacement. The earlier incomplete-save report was resolved by further owner testing. |
 | Couple output/expressions wrong | Check Couple's configuration and generation workflow. MDPF does not set masks or conditioning, and text grouping cannot guarantee separate expressions. |
 
 For a private test report, include the MDPF version, Forge build, theme/browser, action and expected/actual result. Share only the smallest positive prompt needed. Remove private information you do not want to share. No report is sent automatically.

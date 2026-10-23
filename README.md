@@ -1,6 +1,6 @@
 # MDPF Editor for Forge Neo
 
-Private Forge alpha · **0.48.4-alpha.1** · packaged 2026-10-23
+Private Forge alpha · **0.48.5-alpha.1** · packaged 2026-10-23
 
 Review and organize positive prompts in Forge's original txt2img and img2img textboxes. MDPF adds colored section headings, manual line labels, scored suggestions, and an organization preview with explicit Apply/Revert. Typing, resizing, selection and Tag Autocomplete use the native textbox.
 
@@ -8,7 +8,7 @@ This project targets Forge Neo. A1111 compatibility needs separate testing; Comf
 
 The primary goal is visual MDPF comprehension, followed by writing assistance. Automatic organization is a conservative convenience; tangled prompts can need manual rewriting or an LLM-assisted draft that the user reviews.
 
-Resizing with MDPF active is confirmed by the owner. Optional draft saving has a reported incomplete-save issue and is low priority; see the [known issues](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/known-issues.md). It does not block visual prompt editing.
+Resizing and draft file saving are confirmed working by the owner. The earlier incomplete-save report is resolved by further owner testing; see the [verification status](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/known-issues.md).
 
 **BREAK import · confirm blocks** adds a reviewed workflow for structured multi-character imports. Detect row-leading BREAK blocks, review every Shared/Character role, confirm, Preview and Apply. Shared text/references and BREAK delimiters stay locked; character blocks organize L3–L7. Two to eight owners, up to four shared blocks, explicit counts and existing size limits apply. Auto Fix ownership limits are unchanged. Bounded color/material/modifier phrases for 48 known outfit nouns now classify as L4 with existing body-area ranks; supported verb-object actions remain L2.
 
@@ -22,7 +22,7 @@ Templates below the prompt now emphasize **Start from a template** for an empty 
 
 ## Start here
 
-0.48.4 fixes section tracking during word/line deletion beside blank template rows. It also retains the 0.48.3 fix for prompt discovery after cached-page history navigation. Classification and organization rules are unchanged.
+0.48.5 keeps continued template sections coherent after per-line relabeling or inserted control boundaries. Existing word/line deletion and history-navigation fixes are retained. Classification and organization rules are unchanged.
 
 New to MDPF? Follow the [five-minute starting guide](docs/user-guide.md#five-minute-starting-guide).
 
@@ -104,7 +104,7 @@ Existing source text, LoRAs, continued sections and manual labels are retained. 
 
 ## Save and reopen a draft
 
-**Known issue:** draft saving has been reported to omit part of an existing prompt and is not confirmed fixed. This optional feature is not required for normal use. Keep a plain-text copy using your usual workflow; it preserves prompt text, not empty labels or page-local Undo.
+**Owner-confirmed:** draft file saving works in the owner's further testing (2026-10-23). Save/load is optional; plain prompt copies preserve text but not empty labels or page-local Undo.
 
 Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. There is no automatic recovery or browser storage. Keep a plain-text copy through your usual workflow. Rename or move downloaded files yourself as desired.
 

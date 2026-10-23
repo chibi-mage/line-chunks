@@ -13,7 +13,7 @@ Three checks cover Ubuntu with Node 18/Python 3.9 (the documented minimums), Ubu
 3. Under **Artifacts**, download the item named `mdpf-forge-<commit>-<attempt>`. A repository login is required while the project is private.
 4. Extract that artifact download. It contains the actual `mdpf-editor-<version>-forge-private-alpha.zip` and its SHA-256 sidecar. Install the inner Forge ZIP according to the installation guide.
 
-Artifacts are per-commit test builds, not GitHub Releases. A green run does not prove image quality, every host integration or the unresolved optional draft-save behavior. Expired artifacts can be rebuilt with a manual workflow run.
+Artifacts are per-commit test builds, not GitHub Releases. A green run does not prove image quality, every host integration or every browser file-transfer route. Draft saving is separately confirmed by the owner's live testing. Expired artifacts can be rebuilt with a manual workflow run.
 
 ## Failure and maintenance behavior
 

@@ -7,7 +7,7 @@ MDPF helps write and organize the **main positive prompt** in Forge's txt2img an
 1. Open **Organize · prompt preview → Templates** below the positive prompt. For a new prompt, choose a starter under **Start from a template**, then **Insert template**. Edit its count and placement tags for your scene. An existing draft keeps replacement collapsed and requires explicit confirmation.
 2. Write in Forge's original positive textbox. Section headings are visual labels; they do not validate your tags. Native Tag Autocomplete remains available. Within one template section, Enter continues that section. Use **Assign line** to correct a label. Drag the native lower-right resize handle to change textbox height.
 3. To expand a supported draft, open **Add character to this draft**, set its layout/count/placement, then **Preview added character → Add character**. Update shared scene counts, remove `solo` when needed, and configure Forge Couple yourself. Distinct expressions can bleed without regional conditioning or later inpainting.
-4. Before reloading, keep a plain-text copy of the prompt using your usual workflow. Empty section labels, review choices and Undo are page-local. Optional **Save / load draft** is available, but a reported incomplete-save issue remains unresolved; it is not a required step.
+4. Before reloading, keep a plain-text copy of the prompt using your usual workflow. Empty section labels, review choices and Undo are page-local. Optional **Save / load draft** preserves text and labels and is confirmed working by the owner; it is not a required step.
 5. For an imported messy prompt, use **Organize & review**: choose its scope, confirm ownership, then **Preview organization**. Inspect proposed destinations and duplicate removals; use **Keep** for intentional repeats, preview again, then **Apply organization**. **Revert organization** restores the prior draft while its exact snapshot remains current. Eligible solo/configured Couple prompts can use **Auto Fix** directly; its **Details** and **Revert Auto Fix** controls appear above the prompt.
 
 Too tangled or ambiguous to organize safely? Continue manually or review an LLM-assisted MDPF conversion. MDPF's main purpose is making prompt structure easier to read and write. Use **Ctrl+F5** after installing an update, after keeping a copy of your prompt.
@@ -18,7 +18,7 @@ Write or paste into the normal positive prompt, then enable **MDPF mode** or cli
 
 Compact display reserves real blank heading rows above logical lines so wrapped text can keep normal spacing. These rows are part of copied prompts and metadata. Extra authored blank rows stay intact. Enabling mode or Detect / View can add missing heading rows; typing and background observation do not. Turning mode off retains the text. **Undo spacing** restores its exact snapshot while valid. The optional two-row L1 setting is under **Info**.
 
-Click a line and open **Assign line** to choose a section or inspect a scored suggestion and its reasons. Accepting a suggestion changes its label, not tag order. Manual labels take priority. **Detected label** resets one correction; **Reset labels** clears them. Splitting/joining lines or replacing the prompt can invalidate labels. Reload clears page-local labels and choices; optional **Save draft file** is intended to preserve prompt text and labels, but its reported incomplete-save issue remains unresolved.
+Click a line and open **Assign line** to choose a section or inspect a scored suggestion and its reasons. Accepting a suggestion changes its label, not tag order. Manual labels take priority. **Detected label** resets one correction; **Reset labels** clears them. Splitting/joining lines or replacing the prompt can invalidate labels. Reload clears page-local labels and choices; optional **Save draft file** preserves prompt text and labels and is confirmed working by the owner.
 
 ## Choose a workflow
 
@@ -185,7 +185,7 @@ Existing source text, LoRAs, continued sections and manual labels are retained. 
 
 ## Save and reopen a draft
 
-**Known issue:** draft saving has been reported to omit part of an existing prompt and is not confirmed fixed. This optional feature is not required for normal use. Keep a plain-text copy using your usual workflow; it preserves prompt text, not empty labels or page-local Undo.
+**Owner-confirmed:** draft file saving works in the owner's further testing (2026-10-23). Save/load is optional; plain prompt copies preserve text but not empty labels or page-local Undo.
 
 Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. There is no automatic recovery or browser storage. Verify any optional saved file against your plain-text copy. Rename or move downloaded files yourself as desired.
 

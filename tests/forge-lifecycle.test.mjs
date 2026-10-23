@@ -7,12 +7,12 @@ import vm from 'node:vm';
 // navigation lifecycle and discovery, not browser cache eligibility or layout.
 function fixture() {
     const handlers = new Map(), timers = new Map();
-    let nextTimer = 0, mounts = 0, observations = 0;
-    const native = { value: '1girl, solo,' };
+    let nextTimer = 0, mounts = 0, observations = 0, disposals = 0, hostVisible = true;
+    let native = { value: '1girl, solo,' };
     const panel = { isConnected: true, remove() {}, classList: { add() {} } };
     const host = { querySelector: () => native, closest: () => null, after() {} };
     const document = {
-        querySelector: selector => selector === '#txt2img_prompt' ? host : null,
+        querySelector: selector => selector === '#txt2img_prompt' && hostVisible ? host : null,
         getElementById: () => null, createElement: () => ({ ...panel }), head: { append() {} },
     };
     const context = {
@@ -24,10 +24,10 @@ function fixture() {
         clearInterval(id) { timers.delete(id); },
         attachInlineEditor() {
             mounts++;
-            return { shell: { isConnected: true }, templates: {}, observe() { observations++; }, destroy() {},
+            return { shell: { isConnected: true }, templates: {}, observe() { observations++; }, destroy() { disposals++; },
                 getLineAssignments() {}, setLineAssignments() {}, getEditorSnapshot() {}, restoreEditorSnapshot() {}, getCoupleState() {} };
         },
-        attachOrganization() { return { panel, observe() { observations++; }, destroy() {} }; },
+        attachOrganization() { return { panel, observe() { observations++; }, destroy() { disposals++; } }; },
         attachPromptTabs() { return { showReview() {} }; },
     };
     let source = readFileSync(new URL('../javascript/mdpf-forge.mjs', import.meta.url), 'utf8');
@@ -36,7 +36,10 @@ function fixture() {
         .replaceAll('import.meta.url', JSON.stringify('https://forge.test/extensions/mdpf-editor/javascript/mdpf-forge.mjs'));
     vm.runInNewContext(source, context);
     return {
-        timers, native,
+        timers, get native() { return native; },
+        replaceNative() { native = { value: '1boy, green hair,' }; },
+        setHostVisible(value) { hostVisible = value; },
+        get disposals() { return disposals; },
         emit(name) {
             const list = handlers.get(name) ?? [];
             handlers.set(name, list.filter(item => !item.once));
@@ -79,4 +82,26 @@ test('repeated navigation pauses and resumes exactly one Forge discovery timer',
         assert.equal(f.timers.size, 1);
     }
     assert.equal(f.mounts, 1);
+});
+
+test('Forge replaces a remounted native textbox and disposes its old controllers exactly once', () => {
+    const f = fixture();
+    f.replaceNative(); f.tick();
+    assert.equal(f.mounts, 2);
+    assert.equal(f.disposals, 2, 'Dispose inline and organization for the replaced textbox');
+    f.tick(); f.emit('pageshow');
+    assert.equal(f.mounts, 2);
+    assert.equal(f.disposals, 2);
+    assert.equal(f.native.value, '1boy, green hair,');
+});
+
+test('Forge host removal and reappearance leave one active discovery timer and fresh controllers', () => {
+    const f = fixture();
+    f.setHostVisible(false); f.tick(); f.tick();
+    assert.equal(f.disposals, 2);
+    assert.equal(f.mounts, 1);
+    f.setHostVisible(true); f.tick(); f.tick();
+    assert.equal(f.mounts, 2);
+    assert.equal(f.disposals, 2);
+    assert.equal(f.timers.size, 1);
 });
