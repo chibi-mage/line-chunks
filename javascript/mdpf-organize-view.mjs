@@ -1,7 +1,7 @@
-import { previewOrganization, previewRegionalOrganization, previewCharacterOrganization, previewBreakImport, detectBreakImport, organizationRows } from './mdpf-organize.mjs?v=0.49.4-alpha.1';
-import { MODULES } from './mdpf-core.mjs?v=0.49.4-alpha.1';
-import { previewWithLineAssignments, organizedLineAssignments, planAutoFix } from './mdpf-line-organization.mjs?v=0.49.4-alpha.1';
-import { reviewOrganizationItems } from './mdpf-review.mjs?v=0.49.4-alpha.1';
+import { previewOrganization, previewRegionalOrganization, previewCharacterOrganization, previewBreakImport, detectBreakImport, organizationRows } from './mdpf-organize.mjs?v=0.49.5-alpha.1';
+import { MODULES } from './mdpf-core.mjs?v=0.49.5-alpha.1';
+import { previewWithLineAssignments, organizedLineAssignments, planAutoFix } from './mdpf-line-organization.mjs?v=0.49.5-alpha.1';
+import { reviewOrganizationItems } from './mdpf-review.mjs?v=0.49.5-alpha.1';
 
 // A receipt never guesses a tag's previous section. Groups count as one item;
 // LoRA references are not counted as unknown tags. All values render as text.

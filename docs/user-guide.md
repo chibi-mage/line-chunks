@@ -232,3 +232,9 @@ Eyebrow gestures and expressions remain L5: `raised eyebrows`, `furrowed brow`, 
 `hikimayu`, `hikimayu eyebrows`, `dot eyebrows`, and `maro eyebrows` belong to L3 as physical face details, after hair and eyes. Raised/furrowed eyebrows remain L5 expressions; eyebrow jewelry remains L4. Weighted groups retain their source spelling and internal order.
 
 Recent reviewed examples also cover camera variants such as `portrait shot` and `eye level`, poses such as `arms behind head`, worn items such as `pilot suit` and `goggles on headwear`, and scenery such as `noon` and `watercraft`. `holding wrench` belongs to L2 and `wrench` to the end of L4. Unknown triggers and unfamiliar prose keep their existing fallback/review behavior. Missing or fused character counts are not repaired automatically.
+
+### Actions, gaze and compound phrases
+
+Recognized actions take priority over physical appearance or garment endings: `stroking hair`, `carrying hat`, `washing dress` and `folding shirt` belong to L2. `closing eyes` and `opening eyes` belong to L5, as does a gaze target such as `looking at red dress` or `looking at blue eyes`. `fake hair`, `wig` and `covered hair` are L4 head details.
+
+An unresolved action or subject/location compound such as `painting hair`, `carrying unusual dress` or `hat in forest` requires a destination choice in Organize. Auto Fix leaves the whole prompt unchanged until the ambiguity is resolved. Explicit garment print phrases such as `holding hat print shirt` remain L4; physical hair descriptions such as `short messy black hair` remain L3. These rules do not infer which character owns a tag. Non-Couple character ranges still organize L3–L7; camera/action lines remain outside those ranges.
