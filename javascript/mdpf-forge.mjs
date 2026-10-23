@@ -1,6 +1,6 @@
 // Forge versions entry scripts, but relative module imports need their own cache key.
-import { attachInlineEditor, attachPromptTabs } from './mdpf-inline.mjs?v=0.48.2-alpha.1';
-import { attachOrganization } from './mdpf-organize-view.mjs?v=0.48.2-alpha.1';
+import { attachInlineEditor, attachPromptTabs } from './mdpf-inline.mjs?v=0.48.3-alpha.1';
+import { attachOrganization } from './mdpf-organize-view.mjs?v=0.48.3-alpha.1';
 
 const controllers = new Map();
 const root = () => typeof gradioApp === 'function' ? gradioApp() : document;
@@ -8,7 +8,7 @@ const root = () => typeof gradioApp === 'function' ? gradioApp() : document;
 // Load the matching release explicitly so script/CSS versions stay together.
 const stylesheet = document.getElementById('mdpf-versioned-styles') ?? document.createElement('link');
 stylesheet.id = 'mdpf-versioned-styles'; stylesheet.rel = 'stylesheet';
-stylesheet.href = new URL('../style.css?v=0.48.2-alpha.1', import.meta.url).href;
+stylesheet.href = new URL('../style.css?v=0.48.3-alpha.1', import.meta.url).href;
 document.head.append(stylesheet);
 
 function mount(native, host, id) {
@@ -63,6 +63,15 @@ function discover() {
 if (typeof onUiLoaded === 'function') onUiLoaded(discover);
 if (typeof onAfterUiUpdate === 'function') onAfterUiUpdate(discover);
 // Catch programmatic .value changes without input events; never write from this timer.
-const timer = setInterval(discover, 750);
-window.addEventListener('pagehide', () => clearInterval(timer), { once: true });
-discover();
+let timer = null;
+function resumeDiscovery() {
+    if (timer === null) timer = setInterval(discover, 750);
+    discover();
+}
+window.addEventListener('pagehide', () => {
+    if (timer !== null) clearInterval(timer);
+    timer = null;
+});
+// A history-cache restore reuses this module; its startup code does not rerun.
+window.addEventListener('pageshow', resumeDiscovery);
+resumeDiscovery();

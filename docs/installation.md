@@ -5,7 +5,7 @@ This private alpha targets Forge Neo with support for extension `.mjs` modules a
 ## First installation
 
 1. Keep a plain-text copy of your prompt using your usual workflow, then close Forge.
-2. Extract `mdpf-editor-0.48.2-alpha.1-forge-private-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
+2. Extract `mdpf-editor-0.48.3-alpha.1-forge-private-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
 3. Start Forge with your usual launcher. Keep a copy of your prompt before Ctrl+F5 to refresh the browser.
 4. Look for **MDPF mode** and **Detect / View** above the txt2img/img2img positive prompts, and **Organize · prompt preview** below them.
 

@@ -1,6 +1,6 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.48.2-alpha.1';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.48.3-alpha.1';
 export const RULESET_VERSION = '0.1.32';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.

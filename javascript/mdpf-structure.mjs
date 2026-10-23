@@ -1,6 +1,6 @@
-import { MODULES, tokenize } from './mdpf-core.mjs?v=0.48.2-alpha.1';
-import { standaloneBreaks } from './mdpf-controls.mjs?v=0.48.2-alpha.1';
-import { scoreLine } from './mdpf-classifier.mjs?v=0.48.2-alpha.1';
+import { MODULES, tokenize } from './mdpf-core.mjs?v=0.48.3-alpha.1';
+import { standaloneBreaks } from './mdpf-controls.mjs?v=0.48.3-alpha.1';
+import { scoreLine } from './mdpf-classifier.mjs?v=0.48.3-alpha.1';
 
 const emotionTags = new Set(['smile', 'smirk', 'crazy smile', 'evil smile', 'grin', 'frown', 'smug', 'annoyed', 'angry', 'furious', 'serious', 'pout', 'blush', 'soft blush', 'happy', 'sad', 'crying', 'clenched teeth', 'parted lips', 'open mouth', 'closed mouth', 'closed eyes']);
 const embeddedExpressions = new Set(['angry male', 'serious male']); // Explicit author corrections.

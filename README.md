@@ -1,6 +1,6 @@
 # MDPF Editor for Forge Neo
 
-Private Forge alpha · **0.48.2-alpha.1** · packaged 2026-10-23
+Private Forge alpha · **0.48.3-alpha.1** · packaged 2026-10-23
 
 Review and organize positive prompts in Forge's original txt2img and img2img textboxes. MDPF adds colored section headings, manual line labels, scored suggestions, and an organization preview with explicit Apply/Revert. Typing, resizing, selection and Tag Autocomplete use the native textbox.
 
@@ -21,6 +21,8 @@ In **Organize → Select items**, select individual preview entries or **Select 
 Templates below the prompt now emphasize **Start from a template** for an empty prompt, or **Add character** and **Save / load draft** for an existing draft. Full replacement remains collapsed and requires explicit confirmation. Section expansion choices and focused controls survive background updates.
 
 ## Start here
+
+0.48.3 fixes background prompt discovery after returning to a cached Forge page through browser history. It retains existing controls and never rewrites the prompt on return.
 
 New to MDPF? Follow the [five-minute starting guide](docs/user-guide.md#five-minute-starting-guide).
 
