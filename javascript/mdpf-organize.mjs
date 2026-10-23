@@ -1,13 +1,15 @@
-import { MODULES, compatibilityIssues, tokenize } from './mdpf-core.mjs?v=0.49.0-alpha.1';
-import { scoreLine, SCORING_POLICY } from './mdpf-classifier.mjs?v=0.49.0-alpha.1';
-import { standaloneBreaks } from './mdpf-controls.mjs?v=0.49.0-alpha.1';
-import { CHARACTER_ANATOMY_RANKS, OUTFIT_ORDER_RANKS, OUTFIT_SUFFIX_RANKS, OUTFIT_LOCATION_RANKS, PATTERN_RULES, COMBINED_CHARACTER_RANKS, COMBINED_OUTFIT_RANKS, GAZE_FIRST_TAGS, CARRIED_PROP_TAGS, CIVIT_SAMPLE_CHARACTER_RANKS, CIVIT_SAMPLE_OUTFIT_RANKS, QUALIFIED_OUTFIT_RANKS, VEGETATION_OUTFIT_RANKS, RECENT_SAMPLE_OUTFIT_RANKS } from './mdpf-rules.mjs?v=0.49.0-alpha.1';
+import { MODULES, compatibilityIssues, tokenize } from './mdpf-core.mjs?v=0.49.1-alpha.1';
+import { scoreLine, SCORING_POLICY } from './mdpf-classifier.mjs?v=0.49.1-alpha.1';
+import { standaloneBreaks } from './mdpf-controls.mjs?v=0.49.1-alpha.1';
+import { CHARACTER_ANATOMY_RANKS, OUTFIT_ORDER_RANKS, OUTFIT_SUFFIX_RANKS, OUTFIT_LOCATION_RANKS, PATTERN_RULES, COMBINED_CHARACTER_RANKS, COMBINED_OUTFIT_RANKS, GAZE_FIRST_TAGS, CARRIED_PROP_TAGS, CIVIT_SAMPLE_CHARACTER_RANKS, CIVIT_SAMPLE_OUTFIT_RANKS, QUALIFIED_OUTFIT_RANKS, VEGETATION_OUTFIT_RANKS, RECENT_SAMPLE_OUTFIT_RANKS, AUDIT_CHARACTER_RANKS, AUDIT_OUTFIT_RANKS, NATURAL_APPEARANCE_RANKS } from './mdpf-rules.mjs?v=0.49.1-alpha.1';
 
 /** Ordering metadata, never classification evidence. Call only for automatic L3. */
 export function characterOrderRank(text) {
     const tag = text.replaceAll('_', ' ').replace(/\s+/g, ' ').trim().toLowerCase();
     if (/^1(?:girl|boy|other)$/.test(tag)) return 0;
     if (tag === 'solo') return 1;
+    if (Object.hasOwn(AUDIT_CHARACTER_RANKS, tag)) return AUDIT_CHARACTER_RANKS[tag];
+    if (PATTERN_RULES.find(rule => rule.id === 'natural-appearance').pattern.test(tag)) return NATURAL_APPEARANCE_RANKS[tag.split(' ').at(-1)];
     if (tag === 'glossy lips') return 30;
     if (Object.hasOwn(CIVIT_SAMPLE_CHARACTER_RANKS, tag)) return CIVIT_SAMPLE_CHARACTER_RANKS[tag];
     if (Object.hasOwn(COMBINED_CHARACTER_RANKS, tag)) return COMBINED_CHARACTER_RANKS[tag];
@@ -32,6 +34,7 @@ const qualifiedOutfitNouns = Object.keys(QUALIFIED_OUTFIT_RANKS).sort((left,righ
 /** Ordering metadata only. Whole-tag classification must already have assigned L4. */
 export function outfitOrderRank(text) {
     const tag = text.replaceAll('_', ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+    if (Object.hasOwn(AUDIT_OUTFIT_RANKS, tag)) return AUDIT_OUTFIT_RANKS[tag];
     if (Object.hasOwn(RECENT_SAMPLE_OUTFIT_RANKS, tag)) return RECENT_SAMPLE_OUTFIT_RANKS[tag];
     if (Object.hasOwn(VEGETATION_OUTFIT_RANKS, tag)) return VEGETATION_OUTFIT_RANKS[tag];
     if (outfitPatterns.get('vegetation-action').test(tag)) return null;

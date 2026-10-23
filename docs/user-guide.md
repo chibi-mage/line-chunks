@@ -205,3 +205,8 @@ The end-to-end batch covers saving/reopening, continuing an outfit section, addi
 ### Vegetation, actions and accessories
 
 Bare vegetation such as `flower`, `leaf`, `maple leaf`, `rose`, `vines` and `ivy` defaults to L6 Background. `Holding flowers`, `picking a rose` and similar bounded actions belong in L2; describe the flowers themselves in L6. Explicit clothing and accessories such as `leaf bikini`, `leaf print`, `leaf hair ornament`, `leaf on head` and `flower crown` belong in L4. `Energy wings`, `fake wings` and `energy horns` also belong in L4, while natural `wings` and `horns` remain character features in L3. These are defaults; an explicit manual destination takes priority. Unknown triggers such as `roren` retain L7 fallback. The extension does not infer a trigger’s meaning or repair arbitrary custom prompt syntax.
+
+
+### Reviewed appearance and scene defaults
+
+Character descriptors such as `anthro`, `obese`, `body fur`, `pink fur` and `shiny lips` belong in L3. Whole-tag natural color forms for skin, fur, horns, claws and paws are bounded; `fur coat`, `fake horns` and `energy horns` remain L4. Outfit-state tags such as `topless`, `breasts out` and `naked butt` lead L4, while `teacher`, `cosplay`, `bloomers` and `footwear bow` follow outfit ordering. `Sideways mouth` belongs in L5; `abstract background`, `heart background`, `rose background`, `scenery` and `neon lights` belong in L6. Exact spelling aliases such as underscores/case and intact weights retain their source form. A weighted group combining character anatomy and an outfit state requires review rather than being split automatically.

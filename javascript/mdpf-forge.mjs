@@ -1,6 +1,6 @@
 // Forge versions entry scripts, but relative module imports need their own cache key.
-import { attachInlineEditor, attachPromptTabs } from './mdpf-inline.mjs?v=0.49.0-alpha.1';
-import { attachOrganization } from './mdpf-organize-view.mjs?v=0.49.0-alpha.1';
+import { attachInlineEditor, attachPromptTabs } from './mdpf-inline.mjs?v=0.49.1-alpha.1';
+import { attachOrganization } from './mdpf-organize-view.mjs?v=0.49.1-alpha.1';
 
 const controllers = new Map();
 const root = () => typeof gradioApp === 'function' ? gradioApp() : document;
@@ -8,7 +8,7 @@ const root = () => typeof gradioApp === 'function' ? gradioApp() : document;
 // Load the matching release explicitly so script/CSS versions stay together.
 const stylesheet = document.getElementById('mdpf-versioned-styles') ?? document.createElement('link');
 stylesheet.id = 'mdpf-versioned-styles'; stylesheet.rel = 'stylesheet';
-stylesheet.href = new URL('../style.css?v=0.49.0-alpha.1', import.meta.url).href;
+stylesheet.href = new URL('../style.css?v=0.49.1-alpha.1', import.meta.url).href;
 document.head.append(stylesheet);
 
 function mount(native, host, id) {

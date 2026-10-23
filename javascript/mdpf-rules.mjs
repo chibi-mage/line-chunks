@@ -1,7 +1,7 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.0-alpha.1';
-export const RULESET_VERSION = '0.1.33';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.1-alpha.1';
+export const RULESET_VERSION = '0.1.34';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.
 export const HEAD_ACCESSORIES = Object.freeze([
@@ -1891,7 +1891,21 @@ export const RECENT_SAMPLE_OUTFIT_RANKS = Object.freeze({"hair bell": 10, "jacke
 const recentSampleExpansion = [...group(4, 4, Object.keys(RECENT_SAMPLE_OUTFIT_RANKS)), ...group(2, 4, ["walking away"]), ...group(3, 4, ["glossy lips"])];
 const vegetationExpansion = [...group(6, 4, VEGETATION_BACKGROUND_TAGS), ...group(4, 4, Object.keys(VEGETATION_OUTFIT_RANKS))];
 // END author vegetation policy
-const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion];
+// BEGIN recent creator audit 2026-10-23
+export const AUDIT_CHARACTER_RANKS = Object.freeze({"anthro":2,"male":2,"masculine":2,"detailed fur texture":40,"body fur":40,"fluffy fur":40,"detailed fluffy fur":40,"tuft of fur":40,"obese":40,"morbidly obese":40,"huge butt":70,"big belly":50,"big nipples":50,"shiny lips":34});
+export const AUDIT_OUTFIT_RANKS = Object.freeze({"topless":0,"teacher":5,"cosplay":5,"bloomers":70,"footwear bow":90,"breasts out":0,"naked butt":0});
+export const NATURAL_APPEARANCE_RANKS = Object.freeze({"fur":40,"skin":40,"horns":10,"claws":51,"paws":51});
+const naturalAppearancePattern = /^(?:(?:light|dark) )?(?:black|white|red|blue|green|yellow|pink|purple|brown|orange|grey|gray|silver|gold|golden|tan|cream|beige) (?:fur|skin|horns|claws|paws)$/;
+const recentAuditExpansion = [
+    ...group(1, 4, ["extremely detailed","ultra-detailed","4k","perfect lighting"]),
+    ...group(2, 4, ["dynamic angle"]),
+    ...group(3, 4, ["anthro","male","masculine","detailed fur texture","body fur","fluffy fur","detailed fluffy fur","tuft of fur","obese","morbidly obese","huge butt","big belly","big nipples","shiny lips"]),
+    ...group(4, 4, ["topless","teacher","cosplay","bloomers","footwear bow","breasts out","naked butt"]),
+    ...group(5, 4, ["sideways mouth"]),
+    ...group(6, 4, ["scenery","abstract background","heart background","rose background","neon lights"]),
+];
+// END recent creator audit
+const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion];
 const expansionByTag = new Map(reviewedExpansions.map(rule => [rule.tag, rule]));
 const baseRules = [
     ...group(1, 4, Array.from({ length: 9 }, (_, index) => [`score ${index + 1}`, `score ${index + 1} up`]).flat()),
@@ -2019,6 +2033,7 @@ const qualifiedOutfitPattern = /^(?:(?:multicolored|sleeveless|turquoise|checker
 const knownOutfitActionPattern = /^(?:putting on|taking off|adjusting|removing|holding|pulling|lifting) (?:(?:own|another's|a|an|the) )?(?:(?:multicolored|sleeveless|turquoise|checkered|polka-dot|oversized|lavender|burgundy|collared|magenta|leather|striped|frilled|ruffled|pleated|yellow|purple|orange|silver|golden|maroon|violet|pastel|bright|cotton|woolen|velvet|frilly|black|white|green|brown|beige|cream|olive|light|satin|linen|denim|plaid|plain|short|loose|blue|pink|grey|gray|gold|cyan|teal|navy|dark|pale|deep|silk|lace|wool|long|red) ){0,4}(?:school uniform|sailor uniform|hair ornament|sailor collar|hair ribbon|neckerchief|neck ribbon|thighhighs|kneehighs|stockings|hair bow|hairclip|headband|hairband|serafuku|cardigan|hairpin|necktie|sweater|sandals|ribbon|bowtie|collar|choker|blouse|hoodie|kimono|jacket|shorts|gloves|scarf|shirt|dress|skirt|pants|apron|socks|shoes|boots|beret|coat|vest|sash|belt|veil|bow|obi|hat)$/;
 // END qualified outfit policy
 export const PATTERN_RULES = Object.freeze([
+    { id: 'natural-appearance', pattern: naturalAppearancePattern, scores: { 3: 4 } },
     { id: 'vegetation-action', pattern: /^(?:holding|picking|smelling|watering|touching) (?:(?:a|an|the|own) )?(?:(?:white|black|red|pink|purple|blue|yellow|orange|green) )?(?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 2: 4 } },
     { id: 'colored-vegetation', pattern: /^(?:white|black|red|pink|purple|blue|yellow|orange|green) (?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 6: 4 } },
     { id: 'known-outfit-action', pattern: knownOutfitActionPattern, scores: { 2: 4 } },

@@ -1,5 +1,5 @@
-import { tokenize } from './mdpf-core.mjs?v=0.49.0-alpha.1';
-import { EXACT_RULES, PATTERN_RULES, RULESET_VERSION } from './mdpf-rules.mjs?v=0.49.0-alpha.1';
+import { tokenize } from './mdpf-core.mjs?v=0.49.1-alpha.1';
+import { EXACT_RULES, PATTERN_RULES, RULESET_VERSION } from './mdpf-rules.mjs?v=0.49.1-alpha.1';
 
 const exact = new Map(EXACT_RULES.map(rule => [rule.tag, rule]));
 export const SCORING_POLICY = Object.freeze({ minScore: 4, minCoverage: 0.4, minShare: 0.7, minMargin: 3, mixedShare: 0.3, mixedScore: 4 });
