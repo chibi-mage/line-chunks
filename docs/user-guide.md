@@ -226,3 +226,9 @@ A named character can share a word with ordinary scenery. For example, bare `fer
 Physical descriptions such as `big eyelashes`, `long thick black eyelashes`, `colored eyelashes`, `red eyelashes`, `thin eyebrows`, `short eyebrows`, `bushy brows` and `light blue eyebrows` belong in L3. Complete tags accept up to four known color/size/shape modifiers; original spelling and weights are retained. They keep the existing face-detail rank, after hair, eyes and pupils and before general body marks/build. Equal-ranked facial details retain source order.
 
 Eyebrow gestures and expressions remain L5: `raised eyebrows`, `furrowed brow`, `furrowed eyebrows`, `one eyebrow raised` and the existing `v-shaped eyebrows`. Explicit eyebrow piercings/rings remain L4. Unknown word prefixes, action phrases, trigger suffixes and printed garments do not become facial appearance just because they contain an eyebrow or eyelash word. Manual destinations still take priority.
+
+### Special eyebrow shapes and reviewed prompt vocabulary
+
+`hikimayu`, `hikimayu eyebrows`, `dot eyebrows`, and `maro eyebrows` belong to L3 as physical face details, after hair and eyes. Raised/furrowed eyebrows remain L5 expressions; eyebrow jewelry remains L4. Weighted groups retain their source spelling and internal order.
+
+Recent reviewed examples also cover camera variants such as `portrait shot` and `eye level`, poses such as `arms behind head`, worn items such as `pilot suit` and `goggles on headwear`, and scenery such as `noon` and `watercraft`. `holding wrench` belongs to L2 and `wrench` to the end of L4. Unknown triggers and unfamiliar prose keep their existing fallback/review behavior. Missing or fused character counts are not repaired automatically.

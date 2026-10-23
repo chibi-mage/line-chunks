@@ -1,7 +1,7 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.3-alpha.1';
-export const RULESET_VERSION = '0.1.36';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.4-alpha.1';
+export const RULESET_VERSION = '0.1.37';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.
 export const HEAD_ACCESSORIES = Object.freeze([
@@ -1922,12 +1922,23 @@ const monthlyAuditExpansion = [
 // BEGIN eyelash eyebrow policy 2026-10-23
 const facialAppearancePattern = /^(?:(?:black|white|red|blue|green|yellow|pink|purple|brown|orange|grey|gray|silver|gold|golden|blonde|blond|ginger|cyan|aqua|teal|magenta|violet|colored|coloured|multicolored|multicoloured|two-tone|big|large|small|long|short|thick|thin|full|sparse|bushy|straight|arched|curved|round|dark|light|pale|bright|wide|narrow|curly|curled) ){1,4}(?:eyelashes|eyelash|eyebrows|eyebrow|brows|brow)$/;
 const facialDetailExpansion = [
-    ...group(3, 4, ["eyelashes","eyelash","eyebrows","eyebrow","unibrow","brow","brows","no eyebrows","no eyelashes"]),
+    ...group(3, 4, ["eyelashes","eyelash","eyebrows","eyebrow","unibrow","brow","brows","no eyebrows","no eyelashes","hikimayu","hikimayu eyebrows","dot eyebrows","maro eyebrows"]),
     ...group(5, 4, ["furrowed eyebrows","furrowed brows","raised brows","lowered eyebrows","lowered brow","lowered brows","raising eyebrow","raising eyebrows","arching eyebrows","furrowing brow","furrowing eyebrows","knit eyebrows","knitted eyebrows","one eyebrow raised","eyebrow raised","angry eyebrows"]),
     ...group(4, 4, ["eyebrow ring"]),
 ];
 // END eyelash eyebrow policy
-const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion, ...monthlyAuditExpansion, ...facialDetailExpansion];
+// BEGIN diverse theme audit 2026-10-23
+export const DIVERSE_CHARACTER_RANKS = Object.freeze({"fish man":5,"big male":35,"big body":35,"muscular body":35,"big muscles":35,"body builder":35,"large pectorals":40,"moobs":40,"elf":5,"long ears":30,"cow horns":5,"cow ears":30,"battle scars":30,"dirty face":30,"curvy build":35,"thigh gap":60,"butt":70,"pale yellow scleras":21});
+export const DIVERSE_OUTFIT_RANKS = Object.freeze({"microbikini":40,"cowbell":25,"chin guard":20,"pilot suit":40,"completely naked":0,"goggles on headwear":10,"goggles on head":10,"eyewear on headwear":10,"brown headwear":10,"dirty clothes":0,"mechanic":5,"wrench":100,"bandaid":40,"bandaid on face":20,"bandaid on nose":20});
+const diverseAuditExpansion = [
+    ...group(2, 4, ["eye level","overhead view","portrait shot","rear view","back view","arms behind head","fighting stance","clenched hands","holding wrench","facing viewer"]),
+    ...group(3, 4, ["fish man","big male","big body","muscular body","big muscles","body builder","large pectorals","moobs","elf","long ears","cow horns","cow ears","battle scars","dirty face","curvy build","thigh gap","butt","pale yellow scleras"]),
+    ...group(4, 4, ["microbikini","cowbell","chin guard","pilot suit","completely naked","goggles on headwear","goggles on head","eyewear on headwear","brown headwear","dirty clothes","mechanic","wrench","bandaid","bandaid on face","bandaid on nose"]),
+    ...group(5, 4, ["upper teeth only","blushing","flirty","smiling","relaxed expression"]),
+    ...group(6, 4, ["rock","nature","outdoor","noon","on mars","on a ufo","watercraft","steam","night city"]),
+];
+// END diverse theme audit
+const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion, ...monthlyAuditExpansion, ...facialDetailExpansion, ...diverseAuditExpansion];
 const expansionByTag = new Map(reviewedExpansions.map(rule => [rule.tag, rule]));
 const baseRules = [
     ...group(1, 4, Array.from({ length: 9 }, (_, index) => [`score ${index + 1}`, `score ${index + 1} up`]).flat()),
