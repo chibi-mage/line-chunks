@@ -210,3 +210,12 @@ Bare vegetation such as `flower`, `leaf`, `maple leaf`, `rose`, `vines` and `ivy
 ### Reviewed appearance and scene defaults
 
 Character descriptors such as `anthro`, `obese`, `body fur`, `pink fur` and `shiny lips` belong in L3. Whole-tag natural color forms for skin, fur, horns, claws and paws are bounded; `fur coat`, `fake horns` and `energy horns` remain L4. Outfit-state tags such as `topless`, `breasts out` and `naked butt` lead L4, while `teacher`, `cosplay`, `bloomers` and `footwear bow` follow outfit ordering. `Sideways mouth` belongs in L5; `abstract background`, `heart background`, `rose background`, `scenery` and `neon lights` belong in L6. Exact spelling aliases such as underscores/case and intact weights retain their source form. A weighted group combining character anatomy and an outfit state requires review rather than being split automatically.
+
+
+### Makeup variants and monthly coverage
+
+Bounded cosmetic phrases such as `black eyeshadow`, `gold eyeliner`, `black smudged makeup`, `black matte lipstick` and `pink nail polish` belong in L3 and follow face-to-hands ordering. Matching uses complete tags with up to three known color/finish modifiers. Actions, unknown trigger strings and printed clothing are not inferred from a cosmetic word.
+
+Additional reviewed defaults include `bokeh`, `side view`, `heart hands` and `hands on own knees` in L2; `cyborg`, `mechanical arms`, `ear tuft`, `thick eyebrows`, `tanlines` and `bikini tan` in L3; `yukata`, `visor`, `head-mounted display`, `coat on shoulders` and `hat flower` in L4; and `onsen`, `coffee shop`, `Christmas tree`, `white walls` and `light particles` in L6. Weapons and reviewed carried items such as a `rocket launcher` or `coffee mug` use the end of L4. Clothing/pose/character text still keeps ownership and opaque-group boundaries.
+
+A named character can share a word with ordinary scenery. For example, bare `fern` keeps the vegetation default in L6 even when the author meant a character called Fern. Use an explicit manual destination in that case; the extension does not infer identity from nearby names. A weighted group such as `(visor, holographic interface:1.3)` requires review while any of its contents remain unresolved.

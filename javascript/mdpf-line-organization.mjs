@@ -1,8 +1,8 @@
 // Portable bridge from explicit physical-line labels to scoped organization.
 // Detected labels never become placement constraints. Source text is never changed here.
-import { tokenize } from './mdpf-core.mjs?v=0.49.1-alpha.1';
-import { previewOrganization, previewRegionalOrganization } from './mdpf-organize.mjs?v=0.49.1-alpha.1';
-import { standaloneBreaks } from './mdpf-controls.mjs?v=0.49.1-alpha.1';
+import { tokenize } from './mdpf-core.mjs?v=0.49.2-alpha.1';
+import { previewOrganization, previewRegionalOrganization } from './mdpf-organize.mjs?v=0.49.2-alpha.1';
+import { standaloneBreaks } from './mdpf-controls.mjs?v=0.49.2-alpha.1';
 
 // One-click policy is independent of review-panel choices. It never infers owners
 // from line order and never treats weak/tentative evidence as automatic evidence.

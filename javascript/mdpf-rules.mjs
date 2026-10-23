@@ -1,7 +1,7 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.1-alpha.1';
-export const RULESET_VERSION = '0.1.34';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.2-alpha.1';
+export const RULESET_VERSION = '0.1.35';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.
 export const HEAD_ACCESSORIES = Object.freeze([
@@ -1905,7 +1905,21 @@ const recentAuditExpansion = [
     ...group(6, 4, ["scenery","abstract background","heart background","rose background","neon lights"]),
 ];
 // END recent creator audit
-const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion];
+// BEGIN monthly reaction audit 2026-10-23
+export const MONTHLY_CHARACTER_RANKS = Object.freeze({"thick eyebrows":30,"ear tuft":10,"flesh whiskers":30,"barbel (anatomy)":30,"dragon girl":2,"eastern dragon":2,"cyborg":2,"mechanical arms":51,"fox nose":32,"open forehead":10,"side swept bangs":10,"tanlines":40,"bikini tan":40,"lipgloss":34,"ginger fur":40,"cyan fur":40});
+export const MONTHLY_OUTFIT_RANKS = Object.freeze({"yukata":40,"eyewear on head":10,"hat flower":10,"white headwear":10,"food-themed hair ornament":10,"carrot hair ornament":10,"coat on shoulders":40,"fur-trimmed capelet":40,"black t-shirt":40,"rocket launcher":100,"grenade launcher":100,"rpg (weapon)":100,"head-mounted display":20,"visor":20,"coffee mug":100,"neckline":30});
+export const MONTHLY_COSMETIC_RANKS = Object.freeze({"makeup":30,"eyeshadow":31,"eyeliner":31,"lipstick":34,"lipgloss":34,"lips":34,"nail polish":51});
+const monthlyCosmeticPattern = /^(?:(?:black|white|red|blue|green|yellow|pink|purple|brown|orange|grey|gray|silver|gold|golden|smudged|matte|glossy|heavy|light|dark|pale|bright|shiny) ){1,3}(?:makeup|eyeshadow|eyeliner|lipstick|lipgloss|lips|nail polish)$/;
+const monthlyAuditExpansion = [
+    ...group(1, 4, ["high detail","perfect anatomy","detailed face","ultra detailed face","dynamic lighting","dynamic shadows","lens flare"]),
+    ...group(2, 4, ["bokeh","sharp focus","side view","three quarter view","heart hands","holding coffee","hands on own knees","outstretched arm","contrapposto"]),
+    ...group(3, 4, ["thick eyebrows","ear tuft","flesh whiskers","barbel (anatomy)","dragon girl","eastern dragon","cyborg","mechanical arms","fox nose","open forehead","side swept bangs","tanlines","bikini tan","lipgloss","ginger fur","cyan fur"]),
+    ...group(4, 4, ["yukata","eyewear on head","hat flower","white headwear","food-themed hair ornament","carrot hair ornament","coat on shoulders","fur-trimmed capelet","black t-shirt","rocket launcher","grenade launcher","rpg (weapon)","head-mounted display","visor","coffee mug","neckline"]),
+    ...group(5, 4, ["soft smile","big smile","silly grin","cute smile"]),
+    ...group(6, 4, ["onsen","coffee shop","daytime","sunbeams","weeds","glade","island","jungle","waterfalls","cavern","cave interior","christmas tree","love hotel","speed lines background","street view","light particles","white walls","heart shaped bed","pink sheets"]),
+];
+// END monthly reaction audit
+const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion, ...monthlyAuditExpansion];
 const expansionByTag = new Map(reviewedExpansions.map(rule => [rule.tag, rule]));
 const baseRules = [
     ...group(1, 4, Array.from({ length: 9 }, (_, index) => [`score ${index + 1}`, `score ${index + 1} up`]).flat()),
@@ -2033,6 +2047,7 @@ const qualifiedOutfitPattern = /^(?:(?:multicolored|sleeveless|turquoise|checker
 const knownOutfitActionPattern = /^(?:putting on|taking off|adjusting|removing|holding|pulling|lifting) (?:(?:own|another's|a|an|the) )?(?:(?:multicolored|sleeveless|turquoise|checkered|polka-dot|oversized|lavender|burgundy|collared|magenta|leather|striped|frilled|ruffled|pleated|yellow|purple|orange|silver|golden|maroon|violet|pastel|bright|cotton|woolen|velvet|frilly|black|white|green|brown|beige|cream|olive|light|satin|linen|denim|plaid|plain|short|loose|blue|pink|grey|gray|gold|cyan|teal|navy|dark|pale|deep|silk|lace|wool|long|red) ){0,4}(?:school uniform|sailor uniform|hair ornament|sailor collar|hair ribbon|neckerchief|neck ribbon|thighhighs|kneehighs|stockings|hair bow|hairclip|headband|hairband|serafuku|cardigan|hairpin|necktie|sweater|sandals|ribbon|bowtie|collar|choker|blouse|hoodie|kimono|jacket|shorts|gloves|scarf|shirt|dress|skirt|pants|apron|socks|shoes|boots|beret|coat|vest|sash|belt|veil|bow|obi|hat)$/;
 // END qualified outfit policy
 export const PATTERN_RULES = Object.freeze([
+    { id: 'qualified-cosmetic', pattern: monthlyCosmeticPattern, scores: { 3: 4 } },
     { id: 'natural-appearance', pattern: naturalAppearancePattern, scores: { 3: 4 } },
     { id: 'vegetation-action', pattern: /^(?:holding|picking|smelling|watering|touching) (?:(?:a|an|the|own) )?(?:(?:white|black|red|pink|purple|blue|yellow|orange|green) )?(?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 2: 4 } },
     { id: 'colored-vegetation', pattern: /^(?:white|black|red|pink|purple|blue|yellow|orange|green) (?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 6: 4 } },
