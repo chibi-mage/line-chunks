@@ -1,9 +1,9 @@
-import { MODULES, inspectPrompt, addHeadingRows } from './mdpf-core.mjs?v=0.49.2-alpha.1';
-import { inspectStructure, structureAdvisories, addStructureHeadingRows } from './mdpf-structure.mjs?v=0.49.2-alpha.1';
-import { updateAssignments, setLineAssignment, resetLineAssignments, lineAtOffset, buildStarterTemplate, assignStarterTemplate, planCharacterAddition, applyCharacterAddition } from './mdpf-assignments.mjs?v=0.49.2-alpha.1';
-import { scoreLine } from './mdpf-classifier.mjs?v=0.49.2-alpha.1';
-import { reviewLines, prepareReviewCase } from './mdpf-review.mjs?v=0.49.2-alpha.1';
-import { serializeDraft, parseDraft, restoreDraft, DRAFT_MAX_BYTES } from './mdpf-drafts.mjs?v=0.49.2-alpha.1';
+import { MODULES, inspectPrompt, addHeadingRows } from './mdpf-core.mjs?v=0.49.3-alpha.1';
+import { inspectStructure, structureAdvisories, addStructureHeadingRows } from './mdpf-structure.mjs?v=0.49.3-alpha.1';
+import { updateAssignments, setLineAssignment, resetLineAssignments, lineAtOffset, buildStarterTemplate, assignStarterTemplate, planCharacterAddition, applyCharacterAddition } from './mdpf-assignments.mjs?v=0.49.3-alpha.1';
+import { scoreLine } from './mdpf-classifier.mjs?v=0.49.3-alpha.1';
+import { reviewLines, prepareReviewCase } from './mdpf-review.mjs?v=0.49.3-alpha.1';
+import { serializeDraft, parseDraft, restoreDraft, DRAFT_MAX_BYTES } from './mdpf-drafts.mjs?v=0.49.3-alpha.1';
 
 export function coupleState(host, id) {
     const app = typeof gradioApp === 'function' ? gradioApp() : host.ownerDocument;
@@ -672,14 +672,14 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
         else if (sourceDoc.supported) compactLayout = !!sourceDoc.headingRows && !(integration.state === 'enabled' && /[\r\n]/.test(integration.separator));
         native.style.lineHeight = compactLayout ? '1.5' : 'calc(1.5em + 32px)';
         status.textContent = !sourceDoc.supported
-            ? 'MDPF 0.49.2-alpha.1 · Keep writing or use Assign line; existing line labels are retained while detection is incomplete.'
+            ? 'MDPF 0.49.3-alpha.1 · Keep writing or use Assign line; existing line labels are retained while detection is incomplete.'
             : sourceDoc.empty
-                ? 'MDPF 0.49.2-alpha.1 · Start a prompt · Use Assign line to choose a section, then type in the prompt box.'
+                ? 'MDPF 0.49.3-alpha.1 · Start a prompt · Use Assign line to choose a section, then type in the prompt box.'
             : compactLayout
-                ? 'MDPF 0.49.2-alpha.1 · Compact wraps ACTIVE · Normal spacing within sections; blank heading rows are part of the prompt.'
+                ? 'MDPF 0.49.3-alpha.1 · Compact wraps ACTIVE · Normal spacing within sections; blank heading rows are part of the prompt.'
                 : !sourceDoc.modules || sourceDoc.empty || integration.state === 'enabled'
-                    ? 'MDPF 0.49.2-alpha.1 · Existing spacing · Select Detect / View for supported standalone regions; newline or inline separators keep their spacing.'
-                    : 'MDPF 0.49.2-alpha.1 · Prompt changed · Select Detect / View to apply the default compact spacing.';
+                    ? 'MDPF 0.49.3-alpha.1 · Existing spacing · Select Detect / View for supported standalone regions; newline or inline separators keep their spacing.'
+                    : 'MDPF 0.49.3-alpha.1 · Prompt changed · Select Detect / View to apply the default compact spacing.';
         const messages = sourceDoc.supported && sourceDoc.blocks ? structureAdvisories(sourceDoc, integration) : [];
         advisory.replaceChildren(...messages.map(message => make('p', '', message)));
         advisory.hidden = !messages.length;

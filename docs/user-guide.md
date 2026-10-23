@@ -219,3 +219,10 @@ Bounded cosmetic phrases such as `black eyeshadow`, `gold eyeliner`, `black smud
 Additional reviewed defaults include `bokeh`, `side view`, `heart hands` and `hands on own knees` in L2; `cyborg`, `mechanical arms`, `ear tuft`, `thick eyebrows`, `tanlines` and `bikini tan` in L3; `yukata`, `visor`, `head-mounted display`, `coat on shoulders` and `hat flower` in L4; and `onsen`, `coffee shop`, `Christmas tree`, `white walls` and `light particles` in L6. Weapons and reviewed carried items such as a `rocket launcher` or `coffee mug` use the end of L4. Clothing/pose/character text still keeps ownership and opaque-group boundaries.
 
 A named character can share a word with ordinary scenery. For example, bare `fern` keeps the vegetation default in L6 even when the author meant a character called Fern. Use an explicit manual destination in that case; the extension does not infer identity from nearby names. A weighted group such as `(visor, holographic interface:1.3)` requires review while any of its contents remain unresolved.
+
+
+### Eyelashes and eyebrows
+
+Physical descriptions such as `big eyelashes`, `long thick black eyelashes`, `colored eyelashes`, `red eyelashes`, `thin eyebrows`, `short eyebrows`, `bushy brows` and `light blue eyebrows` belong in L3. Complete tags accept up to four known color/size/shape modifiers; original spelling and weights are retained. They keep the existing face-detail rank, after hair, eyes and pupils and before general body marks/build. Equal-ranked facial details retain source order.
+
+Eyebrow gestures and expressions remain L5: `raised eyebrows`, `furrowed brow`, `furrowed eyebrows`, `one eyebrow raised` and the existing `v-shaped eyebrows`. Explicit eyebrow piercings/rings remain L4. Unknown word prefixes, action phrases, trigger suffixes and printed garments do not become facial appearance just because they contain an eyebrow or eyelash word. Manual destinations still take priority.

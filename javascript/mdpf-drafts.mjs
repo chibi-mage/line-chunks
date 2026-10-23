@@ -1,4 +1,4 @@
-import { updateAssignments } from './mdpf-assignments.mjs?v=0.49.2-alpha.1';
+import { updateAssignments } from './mdpf-assignments.mjs?v=0.49.3-alpha.1';
 
 export const DRAFT_MAX_BYTES = 2 * 1024 * 1024;
 const kinds = new Set(['module', 'opaque', 'placement', 'delimiter', 'control']);

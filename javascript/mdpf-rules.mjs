@@ -1,7 +1,7 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.2-alpha.1';
-export const RULESET_VERSION = '0.1.35';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.3-alpha.1';
+export const RULESET_VERSION = '0.1.36';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.
 export const HEAD_ACCESSORIES = Object.freeze([
@@ -1919,7 +1919,15 @@ const monthlyAuditExpansion = [
     ...group(6, 4, ["onsen","coffee shop","daytime","sunbeams","weeds","glade","island","jungle","waterfalls","cavern","cave interior","christmas tree","love hotel","speed lines background","street view","light particles","white walls","heart shaped bed","pink sheets"]),
 ];
 // END monthly reaction audit
-const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion, ...monthlyAuditExpansion];
+// BEGIN eyelash eyebrow policy 2026-10-23
+const facialAppearancePattern = /^(?:(?:black|white|red|blue|green|yellow|pink|purple|brown|orange|grey|gray|silver|gold|golden|blonde|blond|ginger|cyan|aqua|teal|magenta|violet|colored|coloured|multicolored|multicoloured|two-tone|big|large|small|long|short|thick|thin|full|sparse|bushy|straight|arched|curved|round|dark|light|pale|bright|wide|narrow|curly|curled) ){1,4}(?:eyelashes|eyelash|eyebrows|eyebrow|brows|brow)$/;
+const facialDetailExpansion = [
+    ...group(3, 4, ["eyelashes","eyelash","eyebrows","eyebrow","unibrow","brow","brows","no eyebrows","no eyelashes"]),
+    ...group(5, 4, ["furrowed eyebrows","furrowed brows","raised brows","lowered eyebrows","lowered brow","lowered brows","raising eyebrow","raising eyebrows","arching eyebrows","furrowing brow","furrowing eyebrows","knit eyebrows","knitted eyebrows","one eyebrow raised","eyebrow raised","angry eyebrows"]),
+    ...group(4, 4, ["eyebrow ring"]),
+];
+// END eyelash eyebrow policy
+const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion, ...recentAuditExpansion, ...monthlyAuditExpansion, ...facialDetailExpansion];
 const expansionByTag = new Map(reviewedExpansions.map(rule => [rule.tag, rule]));
 const baseRules = [
     ...group(1, 4, Array.from({ length: 9 }, (_, index) => [`score ${index + 1}`, `score ${index + 1} up`]).flat()),
@@ -2047,6 +2055,7 @@ const qualifiedOutfitPattern = /^(?:(?:multicolored|sleeveless|turquoise|checker
 const knownOutfitActionPattern = /^(?:putting on|taking off|adjusting|removing|holding|pulling|lifting) (?:(?:own|another's|a|an|the) )?(?:(?:multicolored|sleeveless|turquoise|checkered|polka-dot|oversized|lavender|burgundy|collared|magenta|leather|striped|frilled|ruffled|pleated|yellow|purple|orange|silver|golden|maroon|violet|pastel|bright|cotton|woolen|velvet|frilly|black|white|green|brown|beige|cream|olive|light|satin|linen|denim|plaid|plain|short|loose|blue|pink|grey|gray|gold|cyan|teal|navy|dark|pale|deep|silk|lace|wool|long|red) ){0,4}(?:school uniform|sailor uniform|hair ornament|sailor collar|hair ribbon|neckerchief|neck ribbon|thighhighs|kneehighs|stockings|hair bow|hairclip|headband|hairband|serafuku|cardigan|hairpin|necktie|sweater|sandals|ribbon|bowtie|collar|choker|blouse|hoodie|kimono|jacket|shorts|gloves|scarf|shirt|dress|skirt|pants|apron|socks|shoes|boots|beret|coat|vest|sash|belt|veil|bow|obi|hat)$/;
 // END qualified outfit policy
 export const PATTERN_RULES = Object.freeze([
+    { id: 'eyelash-eyebrow-appearance', pattern: facialAppearancePattern, scores: { 3: 4 } },
     { id: 'qualified-cosmetic', pattern: monthlyCosmeticPattern, scores: { 3: 4 } },
     { id: 'natural-appearance', pattern: naturalAppearancePattern, scores: { 3: 4 } },
     { id: 'vegetation-action', pattern: /^(?:holding|picking|smelling|watering|touching) (?:(?:a|an|the|own) )?(?:(?:white|black|red|pink|purple|blue|yellow|orange|green) )?(?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 2: 4 } },
