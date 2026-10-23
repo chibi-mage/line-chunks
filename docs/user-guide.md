@@ -200,3 +200,8 @@ Version 1 files use LF newlines and allow up to 100,000 prompt characters, 10,00
 **Revert organization** and **Revert Auto Fix** restore the original prompt together with its blank-slot labels, character assignments, continued sections and editor display state. The restore remains guarded by the exact current output text. This is a page-local snapshot; draft files do not include Undo history. A later source edit can invalidate Revert.
 
 The end-to-end batch covers saving/reopening, continuing an outfit section, adding a character, organizing and saving again across 60 authored prompt/layout combinations. Ordinary multi-character organization still requires confirmed nonempty character ranges; Forge Couple shared chunks must contain authored context before organization. Unverified character LoRAs and dynamic constructs retain their existing review/unsupported guards.
+
+
+### Vegetation, actions and accessories
+
+Bare vegetation such as `flower`, `leaf`, `maple leaf`, `rose`, `vines` and `ivy` defaults to L6 Background. `Holding flowers`, `picking a rose` and similar bounded actions belong in L2; describe the flowers themselves in L6. Explicit clothing and accessories such as `leaf bikini`, `leaf print`, `leaf hair ornament`, `leaf on head` and `flower crown` belong in L4. `Energy wings`, `fake wings` and `energy horns` also belong in L4, while natural `wings` and `horns` remain character features in L3. These are defaults; an explicit manual destination takes priority. Unknown triggers such as `roren` retain L7 fallback. The extension does not infer a trigger’s meaning or repair arbitrary custom prompt syntax.

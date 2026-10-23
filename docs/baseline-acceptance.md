@@ -1,3 +1,5 @@
+Current update: 0.49.0-alpha.1 adds reviewed vegetation/accessory defaults (ruleset 0.1.33). Earlier baseline evidence below remains historical; current checks pass: 4,009 private-workspace JavaScript tests, 454 clean-source tests, 15 packaging checks and 2 source-handoff checks. These are controlled checks, not generated-image quality guarantees.
+
 # Forge private-alpha baseline acceptance
 
 Baseline: 0.48.5-alpha.1, 2026-10-23. MIT selected by the owner. Continued template runs now stay coherent after relabeling or inserted control boundaries. Previous word/line deletion and history-cache discovery fixes are retained. Classification and organization rules remain unchanged. The owner confirmed physical resizing works. Draft file saving is confirmed working by the owner's further testing on 2026-10-23. The earlier incomplete-save report is resolved on that basis; no code fix or independent browser save/reload verification is claimed. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.

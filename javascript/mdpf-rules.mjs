@@ -1,7 +1,7 @@
 // Original, provisional MDPF rules. No third-party tag dataset or model-name lists.
 // These weights express evidence strength, not probabilities or generation weights.
-import { CURATED_RULES } from './mdpf-curated.mjs?v=0.48.5-alpha.1';
-export const RULESET_VERSION = '0.1.32';
+import { CURATED_RULES } from './mdpf-curated.mjs?v=0.49.0-alpha.1';
+export const RULESET_VERSION = '0.1.33';
 // Author policy, 2026-10-22. Worn accessories are outfit details even when a
 // character/LoRA description includes them. Historical curated reviews stay intact.
 export const HEAD_ACCESSORIES = Object.freeze([
@@ -1884,7 +1884,14 @@ export const BACKGROUND_DEFAULT_TAGS = Object.freeze([
 ]);
 const backgroundDefaultExpansion = group(6, 4, BACKGROUND_DEFAULT_TAGS);
 // END author background defaults
-const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion];
+// BEGIN author vegetation policy 2026-10-23
+export const VEGETATION_BACKGROUND_TAGS = Object.freeze(["flower", "flowers", "leaf", "leaves", "maple leaf", "maple leaves", "autumn leaf", "falling leaves", "falling petals", "petals", "flower petals", "rose petals", "cherry blossoms", "cherry blossom", "sakura", "rose", "roses", "tulip", "tulips", "sunflower", "sunflowers", "lily", "lilies", "lotus", "lotus flower", "daisy", "daisies", "hydrangea", "wisteria", "dandelion", "lavender", "hibiscus", "orchid", "orchids", "vine", "vines", "ivy", "vegetation", "foliage", "plants", "plant", "fern", "ferns", "moss", "bamboo", "shrub", "shrubs", "hedge", "potted plant", "flower field", "flower bed"]);
+export const VEGETATION_OUTFIT_RANKS = Object.freeze({"leaf hair ornament": 10, "flower hair ornament": 10, "vine hair ornament": 10, "leaf on head": 10, "flower on head": 10, "flower crown": 10, "leaf crown": 10, "energy horns": 10, "fake horns": 10, "leaf print": 40, "flower print": 40, "energy wings": 45, "fake wings": 45, "artificial wings": 45, "mechanical wings": 45});
+export const RECENT_SAMPLE_OUTFIT_RANKS = Object.freeze({"hair bell": 10, "jacket on shoulders": 40, "oil-paper umbrella": 100});
+const recentSampleExpansion = [...group(4, 4, Object.keys(RECENT_SAMPLE_OUTFIT_RANKS)), ...group(2, 4, ["walking away"]), ...group(3, 4, ["glossy lips"])];
+const vegetationExpansion = [...group(6, 4, VEGETATION_BACKGROUND_TAGS), ...group(4, 4, Object.keys(VEGETATION_OUTFIT_RANKS))];
+// END author vegetation policy
+const reviewedExpansions = [...appearanceExpansion, ...outfitPoseSceneExpansion, ...freshAuditExpansion, ...userImportExpansion, ...bodyOutfitExpansion, ...bodyFeatureExpansion, ...characterAnatomyExpansion, ...outfitOrderExpansion, ...combinedAppearanceExpansion, ...focusExpressionExpansion, ...actionExpressionExpansion, ...scenePropExpansion, ...civitSampleExpansion, ...backgroundDefaultExpansion, ...vegetationExpansion, ...recentSampleExpansion];
 const expansionByTag = new Map(reviewedExpansions.map(rule => [rule.tag, rule]));
 const baseRules = [
     ...group(1, 4, Array.from({ length: 9 }, (_, index) => [`score ${index + 1}`, `score ${index + 1} up`]).flat()),
@@ -2012,6 +2019,8 @@ const qualifiedOutfitPattern = /^(?:(?:multicolored|sleeveless|turquoise|checker
 const knownOutfitActionPattern = /^(?:putting on|taking off|adjusting|removing|holding|pulling|lifting) (?:(?:own|another's|a|an|the) )?(?:(?:multicolored|sleeveless|turquoise|checkered|polka-dot|oversized|lavender|burgundy|collared|magenta|leather|striped|frilled|ruffled|pleated|yellow|purple|orange|silver|golden|maroon|violet|pastel|bright|cotton|woolen|velvet|frilly|black|white|green|brown|beige|cream|olive|light|satin|linen|denim|plaid|plain|short|loose|blue|pink|grey|gray|gold|cyan|teal|navy|dark|pale|deep|silk|lace|wool|long|red) ){0,4}(?:school uniform|sailor uniform|hair ornament|sailor collar|hair ribbon|neckerchief|neck ribbon|thighhighs|kneehighs|stockings|hair bow|hairclip|headband|hairband|serafuku|cardigan|hairpin|necktie|sweater|sandals|ribbon|bowtie|collar|choker|blouse|hoodie|kimono|jacket|shorts|gloves|scarf|shirt|dress|skirt|pants|apron|socks|shoes|boots|beret|coat|vest|sash|belt|veil|bow|obi|hat)$/;
 // END qualified outfit policy
 export const PATTERN_RULES = Object.freeze([
+    { id: 'vegetation-action', pattern: /^(?:holding|picking|smelling|watering|touching) (?:(?:a|an|the|own) )?(?:(?:white|black|red|pink|purple|blue|yellow|orange|green) )?(?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 2: 4 } },
+    { id: 'colored-vegetation', pattern: /^(?:white|black|red|pink|purple|blue|yellow|orange|green) (?:flower bouquet|lotus flower|maple leaves|sunflowers|maple leaf|sunflower|flowers|daisies|bouquet|flower|tulips|lilies|leaves|plants|roses|tulip|lotus|daisy|vines|plant|rose|lily|leaf|vine)$/, scores: { 6: 4 } },
     { id: 'known-outfit-action', pattern: knownOutfitActionPattern, scores: { 2: 4 } },
     { id: 'qualified-known-outfit', pattern: qualifiedOutfitPattern, scores: { 4: 4 } },
     { id: 'held-object', pattern: heldObjectPattern, scores: { 2: 4 } },
