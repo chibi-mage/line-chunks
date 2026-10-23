@@ -373,3 +373,93 @@ test('compact defaults on mode entry; observers preserve source and spacing Undo
         for (const key of keys) if (originals[key] === undefined) delete globalThis[key]; else globalThis[key] = originals[key];
     }
 });
+
+// Forge transfers can emit input/change or replace .value silently. Exercise
+// those delivery contracts without depending on PNG files or generation.
+function replacementEnvironment(run) {
+    const keys = ['document', 'window', 'ResizeObserver', 'requestAnimationFrame', 'cancelAnimationFrame', 'getComputedStyle'];
+    const originals = Object.fromEntries(keys.map(key => [key, globalThis[key]]));
+    const body = new Element('body');
+    const document = { body, createElement: tag => new Element(tag), createTextNode: text => ({ textContent: text }), querySelector: () => null };
+    const frames = new Map(); let sequence = 0;
+    Object.assign(globalThis, {
+        document, window: new Element('window'), ResizeObserver: class { observe() {} disconnect() {} },
+        requestAnimationFrame: fn => { frames.set(++sequence, fn); return sequence; }, cancelAnimationFrame: id => frames.delete(id),
+        getComputedStyle: () => ({ paddingTop: '8px', paddingLeft: '12px', paddingRight: '8px', lineHeight: '24px', fontSize: '16px' }),
+    });
+    const instances = [];
+    const mount = (source, id) => {
+        const host = new Element('div'), wrapper = new Element('label'), native = new Element('textarea');
+        native.value = source; native.clientWidth = 600; native.clientHeight = 160; native.scrollTop = 0;
+        native.selectionStart = native.selectionEnd = 0;
+        native.offsetTop = native.offsetLeft = native.clientTop = native.clientLeft = 0;
+        host.ownerDocument = document; wrapper.append(native); host.append(wrapper);
+        let extra = false;
+        const inline = attachInlineEditor(native, host, id, { getExtraQuality: () => extra, setExtraQuality: value => { extra = value; } });
+        const organization = attachOrganization(native, new Element('div'), {
+            getLineAssignments: () => inline.getLineAssignments(), setLineAssignments: state => inline.setLineAssignments(state),
+            getEditorSnapshot: () => inline.getEditorSnapshot(), restoreEditorSnapshot: state => inline.restoreEditorSnapshot(state),
+        });
+        const instance = { native, inline, organization, replace(text, delivery) {
+            native.value = text;
+            if (delivery !== 'poll') native.fire(delivery, { isTrusted: false });
+            inline.observe(); organization.observe();
+        } };
+        instances.push(instance); return instance;
+    };
+    try { run(mount); }
+    finally {
+        for (const { inline, organization } of instances) { organization.destroy(); inline.destroy(); }
+        for (const key of keys) if (originals[key] === undefined) delete globalThis[key]; else globalThis[key] = originals[key];
+    }
+}
+
+const replacementLayouts = [buildStarterTemplate('solo'), buildStarterTemplate('pair'),
+    buildStarterTemplate('couple', { characters: 2, globalPosition: 'first' }),
+    buildStarterTemplate('couple', { characters: 4, globalPosition: 'last' }),
+    buildStarterTemplate('couple', { characters: 3, globalPosition: 'none' })];
+for (const delivery of ['input', 'change', 'poll']) test(`Forge ${delivery} replacement clears old labels and leaves the other tab unchanged`, () => {
+    replacementEnvironment(mount => {
+        for (const [targetId, otherId] of [['txt2img', 'img2img'], ['img2img', 'txt2img']])
+        for (const template of replacementLayouts) for (const replacement of ['', '1boy, green hair, black coat, forest,',
+            'masterpiece,\nstanding,\n1girl, blue hair,\nblue dress,\nsmile,\ncastle,\nanime style,',
+            'masterpiece,\n---\n1boy,\nblack coat,\nfrown,\n---\n1girl,\nblue dress,\nsmile,',
+            'cinematic lighting, ' + template.source, template.source + ', watercolor,']) {
+            const a = mount(template.source, targetId), b = mount(template.source, otherId);
+            for (const view of [a, b]) assert.equal(view.inline.restoreEditorSnapshot({
+                source: template.source, labels: assignStarterTemplate(template), active: true, compact: true, extra: false,
+            }), true);
+            const untouched = b.inline.getEditorSnapshot();
+            assert.ok(a.inline.getLineAssignments().rows.length);
+            a.replace(replacement, delivery);
+            assert.equal(a.native.value, replacement, 'Observing an import must not format or rewrite it');
+            assert.deepEqual(a.inline.getLineAssignments().rows, [], 'Old labels must not attach to the imported prompt');
+            assert.deepEqual(b.inline.getEditorSnapshot(), untouched, `${targetId} import must not modify ${otherId} state`);
+        }
+    });
+});
+
+for (const delivery of ['input', 'change', 'poll']) test(`Forge ${delivery} replacement invalidates preview and guards prior Auto Fix Revert`, () => {
+    replacementEnvironment(mount => {
+        const source = 'smile, blue dress, 1girl, solo, blue hair, castle, masterpiece, standing, blue dress,';
+        const view = mount(source, 'txt2img');
+        const panel = view.organization.panel;
+        const confirm = panel.children[2].children[0];
+        const [preview, apply, revert] = panel.children[3].children;
+        confirm.checked = true; confirm.fire('change'); preview.fire('click');
+        assert.equal(apply.disabled, false);
+        const imported = '1boy, green hair, black coat, forest,';
+        view.replace(imported, delivery);
+        assert.equal(apply.disabled, true);
+        apply.fire('click'); assert.equal(view.native.value, imported);
+        // Recreate the source and apply a new edit so this case also has Undo.
+        view.replace(source, delivery);
+        assert.equal(view.organization.autoFix().applied, true);
+        assert.equal(view.organization.getAutoFixState().canRevert, true);
+        view.replace('', delivery);
+        assert.equal(revert.disabled, true);
+        assert.equal(view.organization.getAutoFixState().canRevert, false);
+        assert.equal(view.organization.revertAutoFix(), false);
+        assert.equal(view.native.value, '', 'Old Undo must never replace a cleared prompt');
+    });
+});

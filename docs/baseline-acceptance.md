@@ -2,7 +2,7 @@
 
 Baseline: 0.48.4-alpha.1, 2026-10-23. MIT selected by the owner. Word/line deletions now use the actual edit span when tracking continued template sections. The history-cache discovery fix is retained. Classification and organization rules remain unchanged. The owner confirmed physical resizing works. Draft saving was reported to omit an existing full prompt and was explicitly deprioritized; it is a known issue, not a prerequisite for the visual/writing baseline. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.
 
-Automated evidence: 3787 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
+Automated evidence: 3793 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
 
 ## Optional draft reproduction — no user retest required
 
