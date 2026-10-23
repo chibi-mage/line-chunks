@@ -1,0 +1,15 @@
+{
+  "name": "mdpf-editor",
+  "version": "0.48.2-alpha.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "package:check": "python tools/test_package_alpha.py",
+    "package:alpha": "python tools/package-alpha.py"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
