@@ -2,7 +2,7 @@
 
 The **Forge CI** workflow runs for pushes to main, pull requests and manual runs from the Actions page. It tests the clean repository's self-contained regressions, not the private workspace's additional fixtures.
 
-Three checks cover Ubuntu with Node 18/Python 3.9 (the documented minimums), Ubuntu with Node 24/Python 3.13, and Windows with Node 24/Python 3.13. Each runs `npm test` and the packaging tests, including fixed cross-platform ZIP metadata. No dependency installation is needed for the project tests. The official setup actions provide the requested runtimes.
+Three checks cover Ubuntu 24.04 with Node 18/Python 3.9 (the documented minimums), ubuntu-latest with Node 24/Python 3.13, and Windows with Node 24/Python 3.13. Each runs `npm test` and the packaging tests, including fixed cross-platform ZIP metadata. No dependency installation is needed for the project tests. The official setup actions provide the requested runtimes.
 
 **Build tested Forge ZIP** waits for all three checks to pass. It invokes the existing allowlisted packager and uploads only the installable ZIP and its `.zip.sha256` file. Test-only fixtures, workflows, Git history, outputs and private source material are not added to the Forge package. Artifacts are kept for fourteen days.
 
@@ -22,3 +22,5 @@ A failed check prevents the package job from running. Check the failed step's lo
 The workflow requests only repository contents read access, does not persist checkout credentials and publishes no release, tag, repository commit or external deployment. Branch protection and required-check policy are separate repository settings and are not configured by this workflow.
 
 References: [GitHub workflow artifacts](https://docs.github.com/en/actions/tutorials/store-and-share-data), [checkout](https://github.com/actions/checkout), [setup-node](https://github.com/actions/setup-node), [setup-python](https://github.com/actions/setup-python), and [upload-artifact](https://github.com/actions/upload-artifact).
+
+The minimum-version job pins Ubuntu 24.04 because Python 3.9 is not supplied for the Ubuntu 26.04 runner. The current-version Linux job still follows ubuntu-latest. A setup failure before tests is infrastructure evidence, not an extension regression.
