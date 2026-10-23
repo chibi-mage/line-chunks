@@ -254,6 +254,14 @@ test('compact defaults on mode entry; observers preserve source and spacing Undo
         native.fire('input', { isTrusted: true }); flush();
         assert.equal(controller.getLineAssignments().rows.filter(row => row.templateGroup === emptyOutfit.templateGroup).length, 2);
         assert.equal(wrapper.children[1].children.filter(label => label.textContent === 'C2 · L4 · Outfit (top to bottom)').length, 1, 'Continuation must not duplicate its section heading');
+        native.selectionStart = native.selectionEnd = emptyOutfit.start + 1;
+        native.fire('beforeinput', { inputType: 'deleteWordBackward' });
+        value = beforeEnter; native.fire('input', { isTrusted: true }); flush();
+        assert.equal(controller.getLineAssignments().rows.filter(row => row.templateGroup === emptyOutfit.templateGroup).length, 1, 'Word deletion must use the actual continuation caret');
+        native.selectionStart = native.selectionEnd = emptyOutfit.start;
+        native.fire('beforeinput');
+        value = value.slice(0, emptyOutfit.start) + '\n' + value.slice(emptyOutfit.start);
+        native.fire('input', { isTrusted: true }); flush();
         native.selectionStart = emptyOutfit.start; native.selectionEnd = emptyOutfit.start + 1;
         native.fire('beforeinput'); value = beforeEnter; native.fire('input', { isTrusted: true }); flush();
         assert.equal(controller.getLineAssignments().rows.filter(row => row.templateGroup === emptyOutfit.templateGroup).length, 1);

@@ -20,3 +20,5 @@ If a preview item cannot be selected, check whether it belongs to an explicit li
 For BREAK imports, choose the import scope and Detect candidate blocks before confirming. Source/role changes clear confirmation; redetect after Apply or replacement. Keep shared quality/camera text in Shared blocks, start each Character block with its explicit count, and resolve count disagreements manually. A clothing phrase provisionally in L7 can be selected and moved to L4 in the review; trigger associations still need deliberate verified bundles.
 
 Version 0.48.3-alpha.1 resumes background discovery after returning through browser history to a cached Forge page. This keeps externally replaced prompts observable without remounting controls or rewriting the text. Navigation lifecycle is covered by controlled entry-script regressions; actual browser cache eligibility depends on the host.
+
+Version 0.48.4-alpha.1 fixes labels after word/line deletion beside blank template rows. Selections and partial-tag replacements within one known section retain its character; edits across headings, placement lines or regional boundaries still require review rather than inheriting one owner.

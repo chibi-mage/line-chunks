@@ -77,8 +77,12 @@ export function updateAssignments(previous, source, document, { reason = 'extern
     while (suffix < before.length - prefix && suffix < source.length - prefix && before[before.length - 1 - suffix] === source[source.length - 1 - suffix]) suffix++;
     if (edit?.source === before && edit.start === edit.end && source.length < before.length) {
         const removed = before.length - source.length;
-        if (edit.inputType === 'deleteContentBackward') edit = { ...edit, start: edit.start - removed };
-        if (edit.inputType === 'deleteContentForward') edit = { ...edit, end: edit.end + removed };
+        // Word/line deletion also reports a collapsed caret in beforeinput.
+        // Resolve its actual removed span before matching identical blank rows;
+        // unchanged-side validation below still rejects stale or invalid hints.
+        const direction = /^delete(?:Content|Word|SoftLine|HardLine)(Backward|Forward)$/.exec(edit.inputType)?.[1];
+        if (direction === 'Backward') edit = { ...edit, start: edit.start - removed };
+        if (direction === 'Forward') edit = { ...edit, end: edit.end + removed };
     }
     // Native beforeinput disambiguates edits among consecutive empty template
     // rows. Accept its selection only when both unchanged sides still match.

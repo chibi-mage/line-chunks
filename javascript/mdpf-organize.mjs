@@ -1,7 +1,7 @@
-import { MODULES, compatibilityIssues, tokenize } from './mdpf-core.mjs?v=0.48.3-alpha.1';
-import { scoreLine, SCORING_POLICY } from './mdpf-classifier.mjs?v=0.48.3-alpha.1';
-import { standaloneBreaks } from './mdpf-controls.mjs?v=0.48.3-alpha.1';
-import { CHARACTER_ANATOMY_RANKS, OUTFIT_ORDER_RANKS, OUTFIT_SUFFIX_RANKS, OUTFIT_LOCATION_RANKS, PATTERN_RULES, COMBINED_CHARACTER_RANKS, COMBINED_OUTFIT_RANKS, GAZE_FIRST_TAGS, CARRIED_PROP_TAGS, CIVIT_SAMPLE_CHARACTER_RANKS, CIVIT_SAMPLE_OUTFIT_RANKS, QUALIFIED_OUTFIT_RANKS } from './mdpf-rules.mjs?v=0.48.3-alpha.1';
+import { MODULES, compatibilityIssues, tokenize } from './mdpf-core.mjs?v=0.48.4-alpha.1';
+import { scoreLine, SCORING_POLICY } from './mdpf-classifier.mjs?v=0.48.4-alpha.1';
+import { standaloneBreaks } from './mdpf-controls.mjs?v=0.48.4-alpha.1';
+import { CHARACTER_ANATOMY_RANKS, OUTFIT_ORDER_RANKS, OUTFIT_SUFFIX_RANKS, OUTFIT_LOCATION_RANKS, PATTERN_RULES, COMBINED_CHARACTER_RANKS, COMBINED_OUTFIT_RANKS, GAZE_FIRST_TAGS, CARRIED_PROP_TAGS, CIVIT_SAMPLE_CHARACTER_RANKS, CIVIT_SAMPLE_OUTFIT_RANKS, QUALIFIED_OUTFIT_RANKS } from './mdpf-rules.mjs?v=0.48.4-alpha.1';
 
 /** Ordering metadata, never classification evidence. Call only for automatic L3. */
 export function characterOrderRank(text) {

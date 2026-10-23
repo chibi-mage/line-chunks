@@ -140,3 +140,71 @@ for (const inputType of ['deleteContentBackward', 'deleteContentForward']) test(
     assert.equal(result.rows.filter(row => row.templateGroup === target.templateGroup).length, 1);
     assert.deepEqual(result.rows.filter(row => row.templateSlot && row.templateGroup !== target.templateGroup).map(row => [row.id, row.module, row.templateCharacter]), initial.rows.filter(row => row.templateSlot && row.templateGroup !== target.templateGroup).map(row => [row.id, row.module, row.templateCharacter]));
 });
+
+// Editing audit: exercise selections and browser-style deletion ranges rather
+// than assuming every edit replaces one whole line.
+for (const [type, options] of layouts) test(`selection editing ${type} ${JSON.stringify(options)} preserves section and owner`, () => {
+    const template = buildStarterTemplate(type, options);
+    for (const slot of template.slots.filter(s => s.module)) {
+        let state = assignStarterTemplate(template);
+        const original = state.rows[slot.index], group = original.templateGroup;
+        const untouched = state.rows.filter(r => r.templateSlot && r.templateGroup !== group)
+            .map(r => [r.id, r.module, r.templateCharacter]);
+        const a = content[slot.module][0], b = content[slot.module][1];
+        state = edit(state, original.start, original.end, a + '\n' + b + '\n' + a);
+        let rows = state.rows.filter(r => r.templateGroup === group);
+        // Replace a selection crossing two continuation rows, not their heading.
+        state = edit(state, rows[1].start + 1, rows[2].end - 1, 'replacement,\nmore tags,');
+        rows = state.rows.filter(r => r.templateGroup === group);
+        assert.equal(rows.length, 3);
+        assert.ok(rows.every(r => r.module === slot.module && r.templateCharacter === slot.templateCharacter));
+        assert.deepEqual(rows.map(r => r.templateContinuation), [false, true, true]);
+        // Removing the whole first content row must promote a single heading.
+        state = edit(state, rows[0].start, rows[1].start, '');
+        rows = state.rows.filter(r => r.templateGroup === group);
+        assert.deepEqual(rows.map(r => r.templateContinuation), [false, true]);
+        assert.equal(rows[0].id, original.id);
+        // Replace a partial tag, as native completion does, without moving it.
+        const before = rows[1];
+        state = edit(state, before.start, before.start + 4, 'completed_tag');
+        assert.equal(state.rows.find(r => r.id === before.id).templateCharacter, slot.templateCharacter);
+        assert.deepEqual(state.rows.filter(r => r.templateSlot && r.templateGroup !== group)
+            .map(r => [r.id, r.module, r.templateCharacter]), untouched);
+        assert.equal(new Set(state.rows.map(r => r.id)).size, state.rows.length);
+    }
+});
+
+for (const inputType of ['deleteWordBackward', 'deleteWordForward', 'deleteSoftLineBackward', 'deleteSoftLineForward', 'deleteHardLineBackward', 'deleteHardLineForward']) test(`${inputType} beside identical blank slots preserves the actual section`, () => {
+    for (const [type, options] of layouts) {
+        let state = assignStarterTemplate(buildStarterTemplate(type, options));
+        const target = state.rows.find(r => r.templateSlot && r.module === 4);
+        state = edit(state, target.start, target.end, 'blue shirt,\n');
+        const rows = state.rows.filter(r => r.templateGroup === target.templateGroup);
+        const untouched = state.rows.filter(r => r.templateGroup !== target.templateGroup).map(r => [r.protected ? null : r.id, r.text, r.module, r.templateCharacter, r.header, r.protected]);
+        const start = rows[0].end, end = rows[1].start;
+        const source = state.source.slice(0, start) + state.source.slice(end);
+        const caret = inputType.endsWith('Backward') ? end : start;
+        const next = updateAssignments(state, source, detect(source), {
+            reason: 'typing', edit: { source: state.source, start: caret, end: caret, inputType },
+        });
+        assert.equal(next.source, source);
+        assert.equal(next.rows.filter(r => r.templateGroup === target.templateGroup).length, 1);
+        assert.equal(next.rows.find(r => r.text === 'blue shirt,').module, 4);
+        assert.deepEqual(next.rows.filter(r => r.templateGroup !== target.templateGroup).map(r => [r.protected ? null : r.id, r.text, r.module, r.templateCharacter, r.header, r.protected]), untouched);
+    }
+});
+
+for (const type of ['pair', 'couple']) test(`${type}: edits crossing placement or region boundaries never inherit one owner`, () => {
+    let state = assignStarterTemplate(buildStarterTemplate(type, { characters: 4 }));
+    const c1 = state.rows.find(r => r.module === 5 && r.templateCharacter === 1);
+    const c2 = state.rows.find(r => r.module === 3 && r.templateCharacter === 2);
+    const untouched = state.rows.filter(r => r.templateSlot && r.start > c2.end)
+        .map(r => [r.id, r.module, r.templateCharacter]);
+    state = edit(state, c1.start, c2.end, 'mixed selection,\nneeds review,');
+    for (const text of ['mixed selection,', 'needs review,']) {
+        const row = state.rows.find(r => r.text === text);
+        assert.ok(!row.templateSlot && !row.templateCharacter);
+    }
+    assert.deepEqual(state.rows.filter(r => r.templateSlot && untouched.some(([id]) => id === r.id))
+        .map(r => [r.id, r.module, r.templateCharacter]), untouched);
+});
