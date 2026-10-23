@@ -22,6 +22,8 @@ Templates below the prompt now emphasize **Start from a template** for an empty 
 
 ## Start here
 
+Current phase: **normal-use stabilization** on 0.48.5. [Report a bug](https://github.com/chibi-mage/mdpf-editor/issues/new?template=bug_report.yml) when one occurs; no additional acceptance test session is required. See the [stabilization notes](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/stabilization.md).
+
 0.48.5 keeps continued template sections coherent after per-line relabeling or inserted control boundaries. Existing word/line deletion and history-navigation fixes are retained. Classification and organization rules are unchanged.
 
 New to MDPF? Follow the [five-minute starting guide](docs/user-guide.md#five-minute-starting-guide).

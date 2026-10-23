@@ -8,13 +8,15 @@ Use Node 18 or later for `npm test`; no dependency installation is needed. Pytho
 
 Forge CI runs the neutral tests and packaging checks on Windows and Linux. A separate package job waits for every matrix check, then uploads the Forge ZIP and checksum. See docs/ci.md for download and failure instructions. A green run is automated regression evidence, not a resolution of known live issues.
 
-Change portable planning/scoring independently of host UI. `docs/portability.md` describes the boundaries and draft schema for a future ComfyUI adapter. Do not claim ComfyUI compatibility from portable-engine tests alone.
+Change portable planning/scoring independently of host UI. `docs/portability.md` describes the core/Forge boundaries and draft schema. ComfyUI is outside this project.
 
 Retain explicit ownership, BREAK/regional scopes, manual-label and opaque/weighted-group barriers, duplicate audits, composition guards, exact-source Apply/Revert checks and stale-preview invalidation. Unknown triggers are not evidence of LoRA ownership. Never synthesize absent tags or change generation settings to make a test pass.
 
 For a fix, add a small meaningful regression that demonstrates the failure and verifies preserved source or scope. Generated vocabulary rules should be reviewed as complete tag decisions, not inferred from substring matches. Do not silently import a third-party dataset or alias table.
 
 ## Reporting a problem
+
+Use the repository's **Bug report** issue form for problems found in normal use. The stabilization notes in docs/stabilization.md describe triage and patch expectations. No issue, notification or report is submitted automatically.
 
 Include extension version, Forge build, browser, the action that caused the issue and expected/actual behavior. Prefer a short neutral synthetic prompt. Check prompts, screenshots and draft JSON for private information before sharing. A visual label is not proof that every tag belongs in its section, and automated coverage is not an image-quality benchmark.
 

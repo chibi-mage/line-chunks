@@ -1,0 +1,35 @@
+name: Bug report
+description: Report unexpected behavior in the main positive-prompt workflow.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe a problem encountered during normal use. No extra test session is required.
+        A small neutral prompt is optional; check attachments and text before sharing.
+        Nothing is sent until you submit this report.
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: What were you doing?
+      description: A few steps, or the action immediately before the problem, are enough.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Version and setup (if known)
+      placeholder: "MDPF version, Forge build, browser; txt2img or img2img"
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Small example prompt (optional)
+      description: Use a neutral example if possible. Screenshots, JSON files and logs are not required.
+      render: text
