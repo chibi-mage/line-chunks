@@ -2,14 +2,15 @@
 
 | Symptom | Check or action |
 | --- | --- |
-| No controls | Check folder nesting, enable the extension, restart Forge and save drafts before Ctrl+F5. The host must support `.mjs` extension scripts. |
+| No controls | Check folder nesting, enable the extension, restart Forge and keep a plain-text copy of the prompt before Ctrl+F5. The host must support `.mjs` extension scripts. |
 | Old/inconsistent controls after updating | Close Forge, replace the entire extension folder from one package, restart and hard-refresh. Avoid mixed module versions. |
 | Wrong label | Structural mapping and semantic scoring differ. Inspect Assign line evidence and choose a manual label. Mixed/unknown tags can remain unresolved. |
 | Large section gaps | Extra authored blank rows are preserved. Inspect raw text with mode off; save it before changing whitespace, especially with regional separators. |
 | Autocomplete fails | Compare with MDPF off in the same textbox. Check Tag Autocomplete's settings and host support. Other builds/themes remain unverified. |
 | Apply disabled | Confirm ownership, resolve placements/bundles, finish text composition and Preview again. Source, label or choice changes invalidate an older proposal. Inspect displayed syntax errors. |
-| Revert/Undo spacing unavailable | Its exact snapshot no longer matches. Restore your saved draft; old snapshots cannot overwrite newer edits. |
+| Revert/Undo spacing unavailable | Its exact snapshot no longer matches. Use your own saved prompt copy; old snapshots cannot overwrite newer edits. |
 | Intentional repeat removed | Inspect duplicate cleanup and Keep the occurrence before re-previewing. If already applied, Revert while available. Cross-owner/BREAK repeats are protected. |
+| Saved draft looks incomplete | This is a known unresolved optional-feature issue. Keep a plain-text copy through your usual workflow; saving is not required to use MDPF. |
 | Couple output/expressions wrong | Check Couple's configuration and generation workflow. MDPF does not set masks or conditioning, and text grouping cannot guarantee separate expressions. |
 
 For a private test report, include the MDPF version, Forge build, theme/browser, action and expected/actual result. Share only the smallest positive prompt needed. Remove private information you do not want to share. No report is sent automatically.

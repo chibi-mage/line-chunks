@@ -4,16 +4,16 @@ This private alpha targets Forge Neo with support for extension `.mjs` modules a
 
 ## First installation
 
-1. Save prompt drafts and close Forge.
+1. Keep a plain-text copy of your prompt using your usual workflow, then close Forge.
 2. Extract `mdpf-editor-0.48.2-alpha.1-forge-private-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
-3. Start Forge with your usual launcher. Save drafts before Ctrl+F5 to refresh the browser.
+3. Start Forge with your usual launcher. Keep a copy of your prompt before Ctrl+F5 to refresh the browser.
 4. Look for **MDPF mode** and **Detect / View** above the txt2img/img2img positive prompts, and **Organize · prompt preview** below them.
 
 The archive includes README, five guides, the MIT `LICENSE` and `release-manifest.json`. They are not executed by Forge.
 
 ## Update
 
-Save drafts and close Forge. Move the old extension folder to a backup location outside `extensions`, then extract the new package. Keep the backup until the new version is checked. Start Forge and hard-refresh. Replacing the entire folder avoids mixing versions. Manual labels can be exported and reopened using Save / load draft. Pending review choices and undo history remain page-local.
+Keep a plain-text copy of your prompt and close Forge. Move the old extension folder to a backup location outside `extensions`, then extract the new package. Keep the backup until the new version is checked. Start Forge and hard-refresh. Replacing the entire folder avoids mixing versions. Optional Save / load draft is intended to preserve manual labels, but a reported incomplete-save issue remains unresolved; keep your own plain-text copy. Pending review choices and undo history remain page-local.
 
 ## Disable, remove or roll back
 

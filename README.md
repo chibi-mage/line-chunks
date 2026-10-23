@@ -4,6 +4,8 @@ Private Forge alpha · **0.48.2-alpha.1** · packaged 2026-10-23
 
 Review and organize positive prompts in Forge's original txt2img and img2img textboxes. MDPF adds colored section headings, manual line labels, scored suggestions, and an organization preview with explicit Apply/Revert. Typing, resizing, selection and Tag Autocomplete use the native textbox.
 
+This project targets Forge Neo. A1111 compatibility needs separate testing; ComfyUI is outside this project and would be a separate project if pursued.
+
 The primary goal is visual MDPF comprehension, followed by writing assistance. Automatic organization is a conservative convenience; tangled prompts can need manual rewriting or an LLM-assisted draft that the user reviews.
 
 Resizing with MDPF active is confirmed by the owner. Optional draft saving has a reported incomplete-save issue and is low priority; see the [known issues](https://github.com/chibi-mage/mdpf-editor/blob/main/docs/known-issues.md). It does not block visual prompt editing.
@@ -26,7 +28,7 @@ New to MDPF? Follow the [five-minute starting guide](docs/user-guide.md#five-min
 - [Using MDPF](docs/user-guide.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Known limitations](docs/known-limitations.md)
-- [Portable core and future ComfyUI adapter](docs/portability.md)
+- [Core and Forge adapter boundaries](docs/portability.md)
 
 L1 Quality & medium; L2 Camera, pose & action; L3 Character; L4 Outfit; L5 Gaze & expression; L6 Background; L7 Style. Labels are visual metadata, not generation tags. Explicit compact formatting can add real blank heading rows. Organize writes after Apply; Auto Fix is a separate explicit one-click write.
 
@@ -100,7 +102,9 @@ Existing source text, LoRAs, continued sections and manual labels are retained. 
 
 ## Save and reopen a draft
 
-Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. Save explicitly before reloading; there is no automatic recovery or browser storage. Rename or move downloaded files yourself as desired.
+**Known issue:** draft saving has been reported to omit part of an existing prompt and is not confirmed fixed. This optional feature is not required for normal use. Keep a plain-text copy using your usual workflow; it preserves prompt text, not empty labels or page-local Undo.
+
+Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. There is no automatic recovery or browser storage. Keep a plain-text copy through your usual workflow. Rename or move downloaded files yourself as desired.
 
 Choose an **MDPF draft file** to read and preview it locally. The preview shows the exact incoming prompt and a line/label summary; choosing a file does not change the current draft. Check **Replace the current prompt and labels with this draft** when a draft already exists, then select **Load draft**. If your current prompt, labels or editor state change, select **Preview draft** again. Invalid/unsupported files leave the current draft untouched. **Undo loaded draft** restores the exact previous source, labels and display preferences until another text/label/editor edit changes the loaded result.
 

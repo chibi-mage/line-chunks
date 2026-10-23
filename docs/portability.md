@@ -1,6 +1,6 @@
 # Portable core and host adapter boundaries
 
-Reuse the text engine in a future ComfyUI adapter, with a separate host UI/lifecycle/persistence contract.
+Current scope is Forge Neo. Keep the text engine independent of the Forge UI for testing and maintenance. ComfyUI is not on this project's roadmap; any eventual port would be a separate project. The adapter notes below are architectural reference only, not planned implementation work.
 
 | Layer | Modules | Responsibility |
 | --- | --- | --- |

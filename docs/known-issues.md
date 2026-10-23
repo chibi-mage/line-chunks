@@ -16,4 +16,6 @@ The owner directly confirmed that resizing with MDPF active works well. This res
 
 ## Product priorities
 
-Keep readable colored sections in the native positive prompt first, writing assistance second and conservative organization third. Save/load is optional. Do not add persistence complexity or treat an editor convenience as essential to starting the ComfyUI visual port.
+Focus maintenance on native typing/completion, wrapped-line readability, manual labels, resizing and exact Apply/Revert behavior. Reproduce a concrete issue before changing runtime behavior. Keep optional saving low priority.
+
+Keep readable colored sections in the native positive prompt first, writing assistance second and conservative organization third. Save/load is optional. Do not add persistence complexity. ComfyUI is outside this project; any eventual port would be a separate project.

@@ -1,8 +1,8 @@
 # Forge private-alpha baseline acceptance
 
-Baseline: 0.48.2-alpha.1, 2026-10-23. MIT selected by the owner. Runtime behavior and rules remain at the tested 0.48.1 milestone. The owner confirmed physical resizing works. Draft saving was reported to omit an existing full prompt and was explicitly deprioritized; it is a known issue, not a prerequisite for the visual/writing baseline. Source home: https://github.com/chibi-mage/mdpf-editor.
+Baseline: 0.48.2-alpha.1, 2026-10-23. MIT selected by the owner. Runtime behavior and rules remain at the tested 0.48.1 milestone. The owner confirmed physical resizing works. Draft saving was reported to omit an existing full prompt and was explicitly deprioritized; it is a known issue, not a prerequisite for the visual/writing baseline. The clean source has been published to the owner's private GitHub repository, with passing Windows/Linux CI.
 
-Automated evidence: 3760 workspace JavaScript tests, thirteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
+Automated evidence: 3760 workspace JavaScript tests, fourteen packaging checks and two clean-handoff checks pass. The clean repository has its own neutral subset; it does not contain the private evaluation fixtures. See CONTRIBUTING.md for the developer workflow. These are authored regressions, not an independent accuracy or image-quality benchmark.
 
 ## Optional draft reproduction — no user retest required
 
@@ -24,4 +24,4 @@ The clean source handoff contains the fourteen runtime modules, stylesheet, MIT 
 
 MIT covers the project's original code; it does not establish redistribution rights for separately sourced datasets. The license text was checked against the [Open Source Initiative MIT license](https://opensource.org/license/mit). The bulk autocomplete dataset has not been added to this release. Future third-party additions need their own provenance and notices.
 
-The future ComfyUI adapter should prioritize visual structure and writing. Persistence is optional follow-up work. Reuse portable planning/scoring while treating graph/widget lifecycle and conditioning as separate host work.
+The current maintenance scope is Forge Neo visual structure and writing. Persistence remains optional. ComfyUI is outside this project and would be separate if pursued.
