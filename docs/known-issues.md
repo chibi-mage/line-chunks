@@ -1,6 +1,6 @@
 # Known issues and priorities
 
-Updated 2026-10-23 for Forge baseline 0.48.5-alpha.1.
+Updated 2026-10-29 for MDPF 0.49.5-alpha.1. The newer SD9 Forge Neo build 2900d59 has a focused [host compatibility record](host-compatibility.md).
 
 ## Draft saving confirmed by the owner
 
@@ -14,7 +14,7 @@ The owner directly confirmed that resizing with MDPF active works well. This doe
 
 ## Remaining verification limits
 
-Populated-style application has not been live-verified because the inspected style list was empty. The last live img2img clear attempt stalled at its browser confirmation; it is unverified, not a confirmed MDPF defect. Controlled replacement, stale-preview and guarded-Undo tests pass. No confirmed runtime issue is currently listed here.
+Populated-style application remains unverified because the Styles list was empty. The previous img2img clear limitation was resolved by a successful native clear check on SD9 (2026-10-29); no code fix was needed. Native infotext replacement, stale-preview blocking and exact Auto Fix Revert also passed live checks. Image-upload transfers and generation remain outside this compatibility pass. Minor observations, including a stale negative token-count badge after host Clear, are recorded in host-compatibility.md. No blocking MDPF runtime issue was reproduced.
 
 ## Product priorities
 

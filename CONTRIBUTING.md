@@ -25,3 +25,5 @@ Include extension version, Forge build, browser, the action that caused the issu
 Original extension code is MIT licensed; retain its notice. The bulk Tag Autocomplete/Danbooru vocabulary, local intake catalog, supplied PNG metadata, private prompts and backup/history files are excluded from the clean handoff. Third-party material needs its own provenance and applicable terms; this project's license does not establish those rights.
 
 The current Forge baseline is for visual/writing use. The owner confirmed physical resizing. Draft file saving is confirmed working by further owner testing on 2026-10-23; the earlier report is resolved on that basis. This is owner acceptance, not independent browser verification; see docs/known-issues.md. An installable package is produced by an explicit allowlist and a SHA-256 manifest. Keep source packages and installable Forge packages separate.
+
+Host builds and the scope of their live checks are recorded in [host compatibility](docs/host-compatibility.md). Do not equate a host UI smoke test with image-generation or model-quality validation.
