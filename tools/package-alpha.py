@@ -1,4 +1,4 @@
-"""Build a private, allowlisted Forge alpha without touching the installed extension."""
+"""Build an allowlisted Forge alpha without touching the installed extension."""
 import argparse
 import hashlib
 import json
@@ -67,7 +67,7 @@ def validate_payload(payload, version):
 def archive_bytes(root=ROOT):
     version = json.loads((root / 'package.json').read_text(encoding='utf-8-sig'))['version']
     if not re.fullmatch(r'\d+\.\d+\.\d+-alpha\.\d+', version):
-        raise ValueError('This tool packages private alpha versions only')
+        raise ValueError('This tool packages alpha versions only')
     payload = {}
     for name in FILES:
         path = root / name
@@ -77,7 +77,7 @@ def archive_bytes(root=ROOT):
     validate_payload(payload, version)
     manifest = {
         'formatVersion': 1, 'name': 'mdpf-editor', 'version': version,
-        'distribution': 'private-alpha', 'license': 'MIT',
+        'distribution': 'alpha', 'license': 'MIT',
         'files': {name: digest(data) for name, data in sorted(payload.items())},
     }
     payload[MANIFEST] = (json.dumps(manifest, indent=2) + '\n').encode('utf-8')
@@ -94,7 +94,7 @@ def verify_archive(path):
     manifest = json.loads(payload.pop(MANIFEST))
     if manifest.get('formatVersion') != 1 or manifest.get('name') != 'mdpf-editor':
         raise ValueError('Invalid release manifest')
-    if manifest.get('license') != 'MIT' or manifest.get('distribution') != 'private-alpha':
+    if manifest.get('license') != 'MIT' or manifest.get('distribution') not in {'alpha', 'private-alpha'}:
         raise ValueError('Invalid release license or distribution metadata')
     actual = {name: digest(data) for name, data in sorted(payload.items())}
     if manifest.get('files') != actual:
@@ -130,7 +130,7 @@ def verify_lifecycle(path):
 
 def build(root=ROOT, output=None):
     version, payload = archive_bytes(root)
-    output = Path(output) if output else root / 'dist' / f'line-chunks-editor-{version}-forge-private-alpha.zip'
+    output = Path(output) if output else root / 'dist' / f'line-chunks-editor-{version}-forge-alpha.zip'
     output.parent.mkdir(parents=True, exist_ok=True)
     # Stable metadata and ordering make identical source produce identical archives.
     with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:

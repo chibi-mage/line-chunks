@@ -6,14 +6,14 @@ Formerly **MDPF Editor**. The name changes; the existing seven-section order and
 
 Line Chunks adds colored section headings and character labels while keeping native typing, selection, resizing and Tag Autocomplete. Its main purpose is helping you understand and write structured prompts; automatic organization is a secondary convenience.
 
-Private alpha **0.50.0-alpha.1** · [User guide](docs/user-guide.md) · [Installation](docs/installation.md) · [Report a bug](https://github.com/chibi-mage/line-chunks-editor/issues/new?template=bug_report.yml)
+Public alpha **0.50.0-alpha.1** · [Download](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) · [User guide](docs/user-guide.md) · [Installation](docs/installation.md) · [Report a bug](https://github.com/chibi-mage/line-chunks-editor/issues/new?template=bug_report.yml)
 
 ![Solo prompt with seven colored Line Chunks sections in Forge](docs/screenshots/solo.jpg)
 
 ## Install
 
-1. Download a successful **Forge CI** build from [Actions](https://github.com/chibi-mage/line-chunks-editor/actions). Repository access is required while it is private. Extract the artifact download to find the actual Forge ZIP and checksum.
-2. Close Forge and extract the inner `line-chunks-editor-0.50.0-alpha.1-forge-private-alpha.zip` into `extensions`. The result should include `extensions/mdpf-editor/javascript/mdpf-forge.mjs`, with no extra nested folder.
+1. Open the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) and download **line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip**. The matching `.zip.sha256` file is available beside it. Use the named Forge ZIP for the installation below; GitHub’s automatic Source code archives are development checkouts.
+2. Close Forge and extract the inner `line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip` into `extensions`. The result should include `extensions/mdpf-editor/javascript/mdpf-forge.mjs`, with no extra nested folder.
 3. Start Forge and refresh its page with **Ctrl+F5**, after keeping a copy of any open prompt.
 
 The installed folder remains `mdpf-editor` so this updates the existing extension. Do not add a second copy under a new folder name. Existing MDPF draft files remain compatible.
@@ -70,7 +70,7 @@ Line Chunks never configures Forge Couple. Match its separator and shared-region
 
 ## Compatibility and limits
 
-- Tested locally on **Forge Neo with Gradio 4.40.0**. Other Forge builds/themes and A1111 require validation. ComfyUI is outside this project.
+- Tested locally on **Forge Classic/Neo, branch neo, commit 2900d59, with Gradio 4.40.0**. Other Forge builds/themes and A1111 require validation. ComfyUI is outside this project.
 - Only the main positive prompts are supported. Negative and ADetailer prompts are outside scope. Line Chunks does not change models or generation settings.
 - Compact display may insert real blank heading rows when explicitly enabled/detected. Labels are editor metadata, but those blank rows are part of copied prompt text.
 - Organization is bounded to **20,000 source characters and 200 editable items**. Complex syntax or uncertain ownership can block the entire proposal.

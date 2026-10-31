@@ -1,15 +1,17 @@
 # Installation and removal
 
-This private alpha targets Forge Neo with support for extension `.mjs` modules and root `style.css`. No pip, npm, Python extension script or Forge core changes are required.
+This alpha targets Forge Classic/Neo (branch neo, tested commit 2900d59) with support for extension `.mjs` modules and root `style.css`. No pip, npm, Python extension script or Forge core changes are required.
 
 ## First installation
 
 1. Keep a plain-text copy of your prompt using your usual workflow, then close Forge.
-2. Extract `line-chunks-editor-0.50.0-alpha.1-forge-private-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
+2. Download the named Forge ZIP from the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1), then extract `line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
 3. Start Forge with your usual launcher. Keep a copy of your prompt before Ctrl+F5 to refresh the browser.
 4. Look for **Line Chunks** and **Detect / View** above the txt2img/img2img positive prompts, and **Organize · prompt preview** below them.
 
 The archive includes README, five guides, three documentation screenshots, the MIT `LICENSE` and `release-manifest.json`. They are not executed by Forge.
+
+GitHub’s automatic **Source code** archives are development checkouts. The installation layout above uses the named Forge ZIP. Other Forge builds, themes and A1111 are not yet established as compatible.
 
 ## Update
 

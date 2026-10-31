@@ -29,9 +29,28 @@ class PackageTests(unittest.TestCase):
     def test_exact_files_and_lifecycle(self):
         manifest = package.verify_lifecycle(self.path)
         self.assertEqual(len(manifest['files']), 25)
-        self.assertEqual(manifest['distribution'], 'private-alpha')
+        self.assertEqual(manifest['distribution'], 'alpha')
         self.assertEqual(manifest['license'], 'MIT')
         self.assertIn('LICENSE', manifest['files'])
+
+    def test_legacy_private_alpha_manifest_remains_readable(self):
+        import json
+        def legacy(entries):
+            manifest = json.loads(entries['mdpf-editor/release-manifest.json'])
+            manifest['distribution'] = 'private-alpha'
+            entries['mdpf-editor/release-manifest.json'] = json.dumps(manifest).encode()
+        self.mutate(legacy)
+        self.assertEqual(package.verify_archive(self.path)['distribution'], 'private-alpha')
+
+    def test_unknown_distribution_rejected(self):
+        import json
+        def unknown(entries):
+            manifest = json.loads(entries['mdpf-editor/release-manifest.json'])
+            manifest['distribution'] = 'unknown'
+            entries['mdpf-editor/release-manifest.json'] = json.dumps(manifest).encode()
+        self.mutate(unknown)
+        with self.assertRaisesRegex(ValueError, 'distribution'):
+            package.verify_archive(self.path)
 
     def test_invalid_documentation_image_rejected(self):
         version, payload = package.archive_bytes()

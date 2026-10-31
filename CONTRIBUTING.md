@@ -4,7 +4,7 @@ Line Chunks first makes main positive prompts easier to read, then assists writi
 
 ## Development
 
-Use Node 18 or later for `npm test`; no dependency installation is needed. Python 3.9 or later runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. The clean repository candidate includes a self-contained neutral regression subset. The private development workspace has a larger suite with reference fixtures that are not distributed.
+Use Node 18 or later for `npm test`; no dependency installation is needed. Python 3.9 or later runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. The repository includes a self-contained neutral regression subset. The private development workspace has a larger suite with reference fixtures that are not distributed.
 
 Forge CI runs the neutral tests and packaging checks on Windows and Linux. A separate package job waits for every matrix check, then uploads the Forge ZIP and checksum. See docs/ci.md for download and failure instructions. A green run is automated regression evidence, not a resolution of known live issues.
 

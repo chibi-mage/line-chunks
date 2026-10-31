@@ -17,8 +17,8 @@ The form prepares a report only. It sends nothing until the user submits it. Rev
 3. Make the smallest correction, run relevant checks and existing release checks, then publish a patch after successful CI. Keep a rollback package.
 4. Record what was tested and what remains unverified. Do not describe a browser-control failure or unsupported host as a reproduced extension bug.
 
-## Before broader sharing
+## Public alpha
 
-Review the installation/starting guide and capture a few neutral screenshots of the actual installed UI. State the tested Forge version and outstanding host-integration limits. Public distribution or a GitHub Release is a separate action; this stabilization setup does not change repository visibility or create a release.
+0.50.0-alpha.1 is the first Line Chunks public alpha. Installation uses the named Forge ZIP and checksum in GitHub Releases. The guide introduces it as an optional positive-prompt editor. Keep compatibility claims tied to the tested Forge Classic/Neo build; A1111 and other builds remain unverified.
 
-There is no claim that a normal-use observation period has already elapsed. Revisit broader sharing after actual use produces no outstanding blocking reports. ComfyUI remains outside this project.
+Public availability invites feedback; it does not establish a representative accuracy score or a completed observation period. Prioritize reproduced bugs and installation problems. Further vocabulary additions can ship as separate reviewed updates. ComfyUI remains outside this project.

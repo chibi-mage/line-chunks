@@ -6,12 +6,16 @@ Three checks cover Ubuntu 24.04 with Node 18/Python 3.9 (the documented minimums
 
 **Build tested Forge ZIP** waits for all three checks to pass. It invokes the existing allowlisted packager and uploads only the installable ZIP and its `.zip.sha256` file. Test-only fixtures, workflows, Git history, outputs and private source material are not added to the Forge package. Artifacts are kept for fourteen days.
 
-## Download a tested build
+## Download the public alpha
+
+Use the named Forge ZIP and checksum under the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) for the published alpha. Release downloads are separate from the short-lived development artifacts below.
+
+## Download a development build
 
 1. Open the repository's **Actions → Forge CI** page.
 2. Select a successful run for the commit you want. Confirm **Build tested Forge ZIP** succeeded; an incomplete or failed run has no tested package from that job.
-3. Under **Artifacts**, download the item named `mdpf-forge-<commit>-<attempt>`. A repository login is required while the project is private.
-4. Extract that artifact download. It contains the actual `line-chunks-editor-<version>-forge-private-alpha.zip` and its SHA-256 sidecar. Install the inner Forge ZIP according to the installation guide.
+3. Under **Artifacts**, download the item named `line-chunks-forge-<commit>-<attempt>`. GitHub may require a signed-in account for artifact downloads.
+4. Extract that artifact download. It contains the actual `line-chunks-editor-<version>-forge-alpha.zip` and its SHA-256 sidecar. Install the inner Forge ZIP according to the installation guide.
 
 Artifacts are per-commit test builds, not GitHub Releases. A green run does not prove image quality, every host integration or every browser file-transfer route. Draft saving is separately confirmed by the owner's live testing. Expired artifacts can be rebuilt with a manual workflow run.
 
