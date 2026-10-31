@@ -1,9 +1,9 @@
-import { MODULES, inspectPrompt, addHeadingRows } from './mdpf-core.mjs?v=0.49.5-alpha.1';
-import { inspectStructure, structureAdvisories, addStructureHeadingRows } from './mdpf-structure.mjs?v=0.49.5-alpha.1';
-import { updateAssignments, setLineAssignment, resetLineAssignments, lineAtOffset, buildStarterTemplate, assignStarterTemplate, planCharacterAddition, applyCharacterAddition } from './mdpf-assignments.mjs?v=0.49.5-alpha.1';
-import { scoreLine } from './mdpf-classifier.mjs?v=0.49.5-alpha.1';
-import { reviewLines, prepareReviewCase } from './mdpf-review.mjs?v=0.49.5-alpha.1';
-import { serializeDraft, parseDraft, restoreDraft, DRAFT_MAX_BYTES } from './mdpf-drafts.mjs?v=0.49.5-alpha.1';
+import { MODULES, inspectPrompt, addHeadingRows } from './mdpf-core.mjs?v=0.50.0-alpha.1';
+import { inspectStructure, structureAdvisories, addStructureHeadingRows } from './mdpf-structure.mjs?v=0.50.0-alpha.1';
+import { updateAssignments, setLineAssignment, resetLineAssignments, lineAtOffset, buildStarterTemplate, assignStarterTemplate, planCharacterAddition, applyCharacterAddition } from './mdpf-assignments.mjs?v=0.50.0-alpha.1';
+import { scoreLine } from './mdpf-classifier.mjs?v=0.50.0-alpha.1';
+import { reviewLines, prepareReviewCase } from './mdpf-review.mjs?v=0.50.0-alpha.1';
+import { serializeDraft, parseDraft, restoreDraft, DRAFT_MAX_BYTES } from './mdpf-drafts.mjs?v=0.50.0-alpha.1';
 
 export function coupleState(host, id) {
     const app = typeof gradioApp === 'function' ? gradioApp() : host.ownerDocument;
@@ -36,7 +36,7 @@ export function attachPromptTabs(panel, templates, id) {
     const review = make('section', 'mdpf-workspace-review');
     review.append(...[...panel.children].slice(1));
     const tabs = make('div', 'mdpf-workspace-tabs');
-    tabs.setAttribute('role', 'tablist'); tabs.setAttribute('aria-label', 'MDPF tools');
+    tabs.setAttribute('role', 'tablist'); tabs.setAttribute('aria-label', 'Line Chunks tools');
     const reviewTab = make('button', '', 'Organize & review');
     const templateTab = make('button', '', 'Templates');
     const pairs = [[reviewTab, review, 'review'], [templateTab, templates, 'templates']];
@@ -136,10 +136,10 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
     const shell = make('section', 'mdpf-inline');
     shell.id = `${id}_mdpf_inline`;
     const toolbar = make('div', 'mdpf-inline-toolbar');
-    const toggle = make('button', 'mdpf-mode-switch', 'MDPF mode · Off');
+    const toggle = make('button', 'mdpf-mode-switch', 'Line Chunks · Off');
     toggle.setAttribute('role', 'switch');
     toggle.setAttribute('aria-checked', 'false');
-    toggle.setAttribute('aria-label', 'MDPF mode');
+    toggle.setAttribute('aria-label', 'Line Chunks');
     const detect = make('button', '', 'Detect / View');
     const fix = make('button', '', 'Auto Fix');
     fix.disabled = typeof onAutoFix !== 'function';
@@ -151,7 +151,7 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
         observe(true);
     });
     const info = make('button', 'mdpf-info-button', 'ⓘ');
-    info.setAttribute('aria-label', 'MDPF information');
+    info.setAttribute('aria-label', 'Line Chunks information');
     info.setAttribute('aria-expanded', 'false');
     const undoSpacing = make('button', '', 'Undo spacing');
     undoSpacing.disabled = true;
@@ -163,9 +163,9 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
     toolbar.append(toggle, detect, fix, info, undoSpacing, assignButton);
     const help = make('div', 'mdpf-inline-help');
     help.hidden = true;
-    help.append(make('p', '', 'Edit directly in Forge’s original positive prompt. Enabling MDPF or selecting Detect / View uses compact spacing for supported simple and multi-character prompts, including Forge Couple with standalone literal separators. Existing blank rows are reused; missing heading rows are added. Standalone uppercase BREAK rows are protected text-chunk boundaries; organization and duplicate cleanup stay within each segment. Inline BREAK forms remain in raw mode. Headings themselves are never sent to generation. Native autocomplete, selection and copying use the original textbox; tag text is unchanged.'));
-    help.append(make('p', '', 'Blank heading rows appear in copied prompts and saved metadata. Existing blank rows and regional separators are preserved. Undo spacing restores the exact pre-format prompt and turns MDPF off, until another edit replaces the snapshot. Turning mode Off alone keeps formatting. Background updates and typing never add rows. Newline-based and inline regional separators keep their existing spacing.'));
-    help.append(make('p', '', 'L1 Quality · L2 Camera / pose · L3 Character · L4 Outfit · L5 Expression · L6 Background · L7 Style. C1 / C2 / C3 / C4 and onward identify character candidates. Labels are suggestions; unknown rows stay editable. Use Organize · prompt preview below for conservative grouping.'));
+    help.append(make('p', '', 'Edit directly in Forge’s original positive prompt. Enabling Line Chunks or selecting Detect / View uses compact spacing for supported simple and multi-character prompts, including Forge Couple with standalone literal separators. Existing blank rows are reused; missing heading rows are added. Standalone uppercase BREAK rows are protected text-chunk boundaries; organization and duplicate cleanup stay within each segment. Inline BREAK forms remain in raw mode. Headings themselves are never sent to generation. Native autocomplete, selection and copying use the original textbox; tag text is unchanged.'));
+    help.append(make('p', '', 'Blank heading rows appear in copied prompts and saved metadata. Existing blank rows and regional separators are preserved. Undo spacing restores the exact pre-format prompt and turns Line Chunks off, until another edit replaces the snapshot. Turning mode Off alone keeps formatting. Background updates and typing never add rows. Newline-based and inline regional separators keep their existing spacing.'));
+    help.append(make('p', '', 'L means Line Chunk: a semantic section, not every wrapped row. L1 Quality · L2 Camera / pose · L3 Character · L4 Outfit · L5 Expression · L6 Background · L7 Style. C1 / C2 / C3 / C4 and onward identify character candidates. Labels are suggestions; unknown rows stay editable. Use Organize · prompt preview below for conservative grouping.'));
     help.append(make('p', '', 'Different character expressions can bleed in Illustrious generations. Forge Couple or later inpainting may help. ADetailer prompts remain manual.'));
     help.append(make('p', '', 'Assign line changes a line’s section label only. Labels stay with a line during normal typing; splitting or joining lines clears ambiguous assignments. Manual labels remain when you use Detect, until you choose Detected label or Reset labels. Labels are page-local; use Save / load draft to export and reopen them across reloads. These corrections do not yet train a tag dictionary or change character/region binding.'));
     help.append(make('p', '', 'Auto Fix immediately organizes supported solo prompts or Basic Forge Couple prompts with exact standalone --- separators and a readable Global Effect position. Each editable Couple region needs one explicit 1girl/1boy/1other tag. Shared text, separator order and BREAK scopes stay locked. Manual labels take priority; unknown triggers/standalone LoRAs may use provisional L7. Ambiguous, weak or unsupported items block the whole change. Revert Auto Fix restores the exact original. Custom/newline separators, Mask/Advanced, Tile Mode and active Common Prompts constructs use Organize. Couple settings are read only.'));
@@ -277,7 +277,7 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
     const draftBox = make('details', 'mdpf-draft-files'); draftBox.append(make('summary', '', 'Save / load draft'));
     const saveDraft = make('button', '', 'Save draft file'); saveDraft.type = 'button';
     const fileLabel = make('label', '', 'Draft file ');
-    const draftFile = make('input', ''); draftFile.type = 'file'; draftFile.accept = '.json,application/json'; draftFile.setAttribute('aria-label', 'MDPF draft file'); fileLabel.append(draftFile);
+    const draftFile = make('input', ''); draftFile.type = 'file'; draftFile.accept = '.json,application/json'; draftFile.setAttribute('aria-label', 'Line Chunks draft file'); fileLabel.append(draftFile);
     const previewDraft = make('button', '', 'Preview draft'); previewDraft.type = 'button'; previewDraft.disabled = true;
     const replaceFileLabel = make('label', ''); const replaceFile = make('input', ''); replaceFile.type = 'checkbox';
     replaceFileLabel.append(replaceFile, document.createTextNode(' Replace the current prompt and labels with this draft'));
@@ -294,9 +294,9 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
     const draftKey = () => JSON.stringify([native.value, labels?.rows.map(row => [row.start, row.end, row.module, row.kind, row.manual, row.header, row.templateSlot, row.templateCharacter, row.templateGroup, row.templateContinuation]), active, compactLayout, getExtraQuality()]);
     function refreshDraft() {
         actionAvailability(saveDraft, addComposing ? 'Finish composing text before saving.' : '');
-        actionAvailability(previewDraft, addComposing ? 'Finish composing text first.' : !draftCandidate ? 'Choose a valid MDPF draft file first.' : '');
+        actionAvailability(previewDraft, addComposing ? 'Finish composing text first.' : !draftCandidate ? 'Choose a valid Line Chunks draft file first.' : '');
         replaceFileLabel.hidden = !hasCurrentDraft();
-        const reason = addComposing ? 'Finish composing text first.' : !draftCandidate ? 'Choose a saved MDPF draft file to preview it.' : !draftStage || draftStage.key !== draftKey() ? 'Preview draft again before loading.' : !replaceFileLabel.hidden && !replaceFile.checked ? 'Confirm replacement above to load this draft.' : '';
+        const reason = addComposing ? 'Finish composing text first.' : !draftCandidate ? 'Choose a saved Line Chunks draft file to preview it.' : !draftStage || draftStage.key !== draftKey() ? 'Preview draft again before loading.' : !replaceFileLabel.hidden && !replaceFile.checked ? 'Confirm replacement above to load this draft.' : '';
         actionAvailability(loadDraft, reason);
         actionAvailability(undoLoad, addComposing ? 'Finish composing text first.' : !draftUndo ? 'No loaded draft to undo.' : draftUndo.afterKey !== draftKey() ? 'The prompt or labels changed after loading; Undo is unavailable.' : '');
         if (draftGuidance.textContent !== reason) draftGuidance.textContent = reason;
@@ -322,7 +322,7 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
         draftCandidate = draftStage = null; draftPreview.hidden = true; replaceFile.checked = false; refreshDraft();
         const file = draftFile.files?.[0];
         if (!file) { draftStatus.textContent = 'No file selected. Current prompt unchanged.'; return; }
-        if (file.size > DRAFT_MAX_BYTES) { draftStatus.textContent = 'Choose an MDPF JSON draft file up to 2 MB. Current prompt unchanged.'; return; }
+        if (file.size > DRAFT_MAX_BYTES) { draftStatus.textContent = 'Choose a Line Chunks JSON draft file up to 2 MB. Current prompt unchanged.'; return; }
         draftStatus.textContent = 'Reading the selected local draft…';
         try {
             const text = await file.text();
@@ -341,9 +341,9 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
             const text = serializeDraft(labels, { enabled: active, compact: compactLayout, extraQualityLine: getExtraQuality(),
                 coupleHint: couple.state === 'enabled' ? { separator: couple.separator, sharedPosition: couple.globalPosition } : null });
             const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
-            const link = make('a', ''); link.href = url; link.download = 'mdpf-draft.json'; document.body.append(link); link.click(); link.remove();
+            const link = make('a', ''); link.href = url; link.download = 'line-chunks-draft.json'; document.body.append(link); link.click(); link.remove();
             const timer = setTimeout(() => { URL.revokeObjectURL(url); draftUrls.delete(url); }, 1000); draftUrls.set(url, timer);
-            draftStatus.textContent = 'Draft download requested: mdpf-draft.json. Keep the file to reopen its prompt and labels later.';
+            draftStatus.textContent = 'Draft download requested: line-chunks-draft.json. Keep the file to reopen its prompt and labels later.';
         } catch (error) { draftStatus.textContent = `${error.message} Current prompt unchanged.`; }
     });
     loadDraft.addEventListener('click', () => {
@@ -672,14 +672,14 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
         else if (sourceDoc.supported) compactLayout = !!sourceDoc.headingRows && !(integration.state === 'enabled' && /[\r\n]/.test(integration.separator));
         native.style.lineHeight = compactLayout ? '1.5' : 'calc(1.5em + 32px)';
         status.textContent = !sourceDoc.supported
-            ? 'MDPF 0.49.5-alpha.1 · Keep writing or use Assign line; existing line labels are retained while detection is incomplete.'
+            ? 'Line Chunks 0.50.0-alpha.1 · Keep writing or use Assign line; existing line labels are retained while detection is incomplete.'
             : sourceDoc.empty
-                ? 'MDPF 0.49.5-alpha.1 · Start a prompt · Use Assign line to choose a section, then type in the prompt box.'
+                ? 'Line Chunks 0.50.0-alpha.1 · Start a prompt · Use Assign line to choose a section, then type in the prompt box.'
             : compactLayout
-                ? 'MDPF 0.49.5-alpha.1 · Compact wraps ACTIVE · Normal spacing within sections; blank heading rows are part of the prompt.'
+                ? 'Line Chunks 0.50.0-alpha.1 · Compact wraps ACTIVE · Normal spacing within sections; blank heading rows are part of the prompt.'
                 : !sourceDoc.modules || sourceDoc.empty || integration.state === 'enabled'
-                    ? 'MDPF 0.49.5-alpha.1 · Existing spacing · Select Detect / View for supported standalone regions; newline or inline separators keep their spacing.'
-                    : 'MDPF 0.49.5-alpha.1 · Prompt changed · Select Detect / View to apply the default compact spacing.';
+                    ? 'Line Chunks 0.50.0-alpha.1 · Existing spacing · Select Detect / View for supported standalone regions; newline or inline separators keep their spacing.'
+                    : 'Line Chunks 0.50.0-alpha.1 · Prompt changed · Select Detect / View to apply the default compact spacing.';
         const messages = sourceDoc.supported && sourceDoc.blocks ? structureAdvisories(sourceDoc, integration) : [];
         advisory.replaceChildren(...messages.map(message => make('p', '', message)));
         advisory.hidden = !messages.length;
@@ -687,7 +687,7 @@ export function attachInlineEditor(native, host, id, { getExtraQuality, setExtra
     }
     function setActive(value, format = true, reason = 'redetect') {
         active = value;
-        toggle.textContent = `MDPF mode · ${active ? 'On' : 'Off'}`;
+        toggle.textContent = `Line Chunks · ${active ? 'On' : 'Off'}`;
         toggle.setAttribute('aria-checked', String(active));
         gutter.hidden = !active;
         status.hidden = !active;

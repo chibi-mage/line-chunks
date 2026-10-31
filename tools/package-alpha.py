@@ -130,7 +130,7 @@ def verify_lifecycle(path):
 
 def build(root=ROOT, output=None):
     version, payload = archive_bytes(root)
-    output = Path(output) if output else root / 'dist' / f'mdpf-editor-{version}-forge-private-alpha.zip'
+    output = Path(output) if output else root / 'dist' / f'line-chunks-editor-{version}-forge-private-alpha.zip'
     output.parent.mkdir(parents=True, exist_ok=True)
     # Stable metadata and ordering make identical source produce identical archives.
     with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:

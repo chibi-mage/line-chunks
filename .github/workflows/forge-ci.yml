@@ -69,7 +69,7 @@ jobs:
       - name: Upload Forge ZIP and SHA-256
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
-          name: mdpf-forge-${{ github.sha }}-${{ github.run_attempt }}
+          name: line-chunks-forge-${{ github.sha }}-${{ github.run_attempt }}
           path: |
             dist/*.zip
             dist/*.zip.sha256

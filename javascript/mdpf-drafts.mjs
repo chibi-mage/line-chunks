@@ -1,4 +1,4 @@
-import { updateAssignments } from './mdpf-assignments.mjs?v=0.49.5-alpha.1';
+import { updateAssignments } from './mdpf-assignments.mjs?v=0.50.0-alpha.1';
 
 export const DRAFT_MAX_BYTES = 2 * 1024 * 1024;
 const kinds = new Set(['module', 'opaque', 'placement', 'delimiter', 'control']);
@@ -16,7 +16,7 @@ function identifier(value) {
 // generation parameters, credentials, filesystem paths or undo history.
 export function validateDraft(value) {
     keys(value, ['format', 'schemaVersion', 'prompt', 'editor', 'lines', 'coupleHint']);
-    if (value.format !== 'mdpf-draft' || value.schemaVersion !== 1) throw new Error('Unsupported MDPF draft format or version.');
+    if (value.format !== 'mdpf-draft' || value.schemaVersion !== 1) throw new Error('Unsupported Line Chunks draft format or version.');
     if (typeof value.prompt !== 'string' || value.prompt.length > 100000 || /\r|\u0000/.test(value.prompt)) throw new Error('Draft prompt must use LF newlines and contain at most 100,000 characters.');
     keys(value.editor, ['enabled', 'compact', 'extraQualityLine']);
     const editor = { enabled: bool(value.editor.enabled), compact: bool(value.editor.compact), extraQualityLine: bool(value.editor.extraQualityLine) };
@@ -76,7 +76,7 @@ export function serializeDraft(state, { enabled = true, compact = !!state?.headi
 }
 
 export function parseDraft(text) {
-    if (typeof text !== 'string' || new TextEncoder().encode(text).length > DRAFT_MAX_BYTES) throw new Error('Choose an MDPF JSON draft file up to 2 MB.');
+    if (typeof text !== 'string' || new TextEncoder().encode(text).length > DRAFT_MAX_BYTES) throw new Error('Choose a Line Chunks JSON draft file up to 2 MB.');
     let value;
     try { value = JSON.parse(text.replace(/^\uFEFF/, '')); } catch { throw new Error('The selected file is not valid JSON.'); }
     return validateDraft(value);

@@ -26,7 +26,7 @@ body:
     id: environment
     attributes:
       label: Version and setup (if known)
-      placeholder: "MDPF version, Forge build, browser; txt2img or img2img"
+      placeholder: "Line Chunks version, Forge build, browser; txt2img or img2img"
   - type: textarea
     id: prompt
     attributes:

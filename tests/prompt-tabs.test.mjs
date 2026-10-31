@@ -56,6 +56,7 @@ test('txt2img and img2img tabs have unique accessible relationships and independ
         assert.equal(a.templates.hidden, false); assert.equal(b.templates.hidden, true);
         assert.notEqual(a.review.id, b.review.id);
         assert.equal(a.bar.attributes.role, 'tablist');
+        assert.equal(a.bar.attributes['aria-label'], 'Line Chunks tools');
         assert.equal(a.bar.children[0].attributes['aria-controls'], a.review.id);
         assert.equal(a.review.attributes['aria-labelledby'], a.bar.children[0].id);
     } finally { globalThis.document = previous; }

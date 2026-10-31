@@ -52,3 +52,7 @@ planCharacterAddition/applyCharacterAddition in mdpf-assignments implement inser
 `serializeDraft`, `parseDraft`, `validateDraft`, `restoreDraft` enforce supported fields/version, types, source-row correspondence, control/header constraints, 100,000 UTF-16 source units, 10,000 rows and a 2 MiB file bound. A future ComfyUI adapter can reuse this source/metadata contract but must implement its own file picker, download, widget display preferences and exact guarded undo; Couple hints never configure graph conditioning.
 
 The organization adapter accepts optional getEditorSnapshot/restoreEditorSnapshot callbacks for page-local Revert. Capture full label/header/group/display state independently of portable placement constraints; after exact source restoration, validate physical spans and restore metadata without inserting formatting rows. Hosts without this bridge retain the previous line-label fallback. Undo snapshots are never included in exported draft files.
+
+## Line Chunks branding
+
+The 0.50.0 rebrand retains internal mdpf module/DOM/CSS identifiers, `mdpf-editor` installation/manifest identity, and `mdpf-draft` v1 serialization. These are compatibility identifiers, not missed UI labels. The visible product is Line Chunks Editor; no classification, ordering or scope change accompanies the rename.

@@ -54,6 +54,8 @@ test('compact defaults on mode entry; observers preserve source and spacing Undo
         host.ownerDocument = document; wrapper.append(native); host.append(wrapper);
         const controller = attachInlineEditor(native, host, 'txt2img', { getExtraQuality: () => false, setExtraQuality() {} });
         const [toggle, detect] = controller.shell.children[0].children;
+        assert.equal(toggle.attributes['aria-label'], 'Line Chunks');
+        assert.match(toggle.textContent, /^Line Chunks · (On|Off)$/);
         // Newline-separated Forge Couple must block automatic whitespace formatting.
         document.querySelector = () => ({ querySelector: selector => selector.includes('checkbox') ? { checked: true } : selector.includes('separator') ? { value: '\\n' } : { value: 'None' } });
         detect.fire('click'); flush();

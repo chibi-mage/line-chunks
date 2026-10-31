@@ -1,5 +1,18 @@
 # Forge host compatibility
 
+## Line Chunks 0.50.0 branding check — 2026-10-31
+
+Updated the existing `E:/SD9/sd-webui-forge-neo/extensions/mdpf-editor` installation in place, retaining an external rollback copy. Host remains Forge Classic/Neo 2900d59, launched with webui-user.bat; Python 3.11.9, Torch 2.14.0+cu130, Gradio 4.40.0. Fresh temporary browser tabs loaded the versioned modules and stylesheet. Two controllers were present: one per main positive field, with Line Chunks accessible names; no negative editor was added.
+
+- Solo and ordinary two-character compact headings displayed under the new brand; all L1–L7 and C1/C2 labels were inspected. Main positive scope and the native textarea remain unchanged.
+- Tag Autocomplete offered blue_hair and Tab accepted it while Line Chunks was active. Native resize increased the textarea from 314 to 397 pixels without changing text.
+- Auto Fix removed one intended duplicate; Revert restored the exact original. A reviewed proposal left source unchanged, and subsequent typing disabled stale Apply.
+- img2img mounted independently and completed Auto Fix successfully.
+- Basic Forge Couple with shared first text and four characters removed one local duplicate, retained the matching tag across BREAK, preserved four separators and shared source, and reverted exactly. Enable=false, empty separator and Global=None were restored afterward.
+- Actual neutral screenshots document solo, placement pair and an unapplied organization preview with duplicate review. No image generation, PNG upload, populated-style test or new file-picker check was performed for this branding pass. Earlier verification limits below still apply.
+
+The automated legacy-draft cases establish format compatibility; they are not a fresh live browser download/upload claim. The owner previously confirmed draft saving on 2026-10-23.
+
 ## Current installation check — 2026-10-29
 
 MDPF 0.49.5-alpha.1 was installed from its verified private-alpha package into `E:/SD9/sd-webui-forge-neo/extensions/mdpf-editor`. This was a new extension installation in the SD9 folder, followed by Forge's Reload UI while idle. No runtime patch was needed.

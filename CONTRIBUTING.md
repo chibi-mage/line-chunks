@@ -1,6 +1,6 @@
-# Contributing to MDPF Editor
+# Contributing to Line Chunks Editor
 
-MDPF first makes main positive prompts easier to read, then assists writing, and finally offers conservative organization. Keep the native Forge textarea, autocomplete, selection and resize behavior. Negative and ADetailer prompts remain outside scope.
+Line Chunks first makes main positive prompts easier to read, then assists writing, and finally offers conservative organization. Keep the native Forge textarea, autocomplete, selection and resize behavior. Negative and ADetailer prompts remain outside scope.
 
 ## Development
 

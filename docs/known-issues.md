@@ -1,5 +1,9 @@
 # Known issues and priorities
 
+## Line Chunks 0.50.0 — 2026-10-31
+
+The former MDPF Editor is now Line Chunks Editor. Branding and documentation changed; existing prompt logic and positive-only scope did not. The focused rebrand check on SD9 passed; see host-compatibility.md. Old draft markers and the mdpf-editor folder are intentional compatibility identifiers. Keep a single installed copy. Prior limitations and owner confirmations remain applicable.
+
 Updated 2026-10-29 for MDPF 0.49.5-alpha.1. The newer SD9 Forge Neo build 2900d59 has a focused [host compatibility record](host-compatibility.md).
 
 ## Draft saving confirmed by the owner

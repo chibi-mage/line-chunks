@@ -1,6 +1,6 @@
-# Using MDPF
+# Using Line Chunks
 
-MDPF helps write and organize the **main positive prompt** in Forge's txt2img and img2img tabs. The original textbox remains the editor, including selection, autocomplete integration and vertical resizing. Negative and ADetailer prompts are outside scope.
+Line Chunks helps write and organize the **main positive prompt** in Forge's txt2img and img2img tabs. The original textbox remains the editor, including selection, autocomplete integration and vertical resizing. Negative and ADetailer prompts are outside scope.
 
 ## Five-minute starting guide
 
@@ -10,11 +10,11 @@ MDPF helps write and organize the **main positive prompt** in Forge's txt2img an
 4. Before reloading, keep a plain-text copy of the prompt using your usual workflow. Empty section labels, review choices and Undo are page-local. Optional **Save / load draft** preserves text and labels and is confirmed working by the owner; it is not a required step.
 5. For an imported messy prompt, use **Organize & review**: choose its scope, confirm ownership, then **Preview organization**. Inspect proposed destinations and duplicate removals; use **Keep** for intentional repeats, preview again, then **Apply organization**. **Revert organization** restores the prior draft while its exact snapshot remains current. Eligible solo/configured Couple prompts can use **Auto Fix** directly; its **Details** and **Revert Auto Fix** controls appear above the prompt.
 
-Too tangled or ambiguous to organize safely? Continue manually or review an LLM-assisted MDPF conversion. MDPF's main purpose is making prompt structure easier to read and write. Use **Ctrl+F5** after installing an update, after keeping a copy of your prompt.
+Too tangled or ambiguous to organize safely? Continue manually or review an LLM-assisted Line Chunks conversion. Line Chunks's main purpose is making prompt structure easier to read and write. Use **Ctrl+F5** after installing an update, after keeping a copy of your prompt.
 
 ## Start writing
 
-Write or paste into the normal positive prompt, then enable **MDPF mode** or click **Detect / View**. Supported layouts receive colored section headings. A seven-line template maps by position; a heading is a structural label, not proof that every tag belongs there.
+Write or paste into the normal positive prompt, then enable **Line Chunks** or click **Detect / View**. Supported layouts receive colored section headings. A seven-line template maps by position; a heading is a structural label, not proof that every tag belongs there.
 
 Compact display reserves real blank heading rows above logical lines so wrapped text can keep normal spacing. These rows are part of copied prompts and metadata. Extra authored blank rows stay intact. Enabling mode or Detect / View can add missing heading rows; typing and background observation do not. Turning mode off retains the text. **Undo spacing** restores its exact snapshot while valid. The optional two-row L1 setting is under **Info**.
 
@@ -58,7 +58,7 @@ For several corrections, expand **Select items · destinations and verified bund
 
 Individual destination dropdowns are also available. Manual line labels take priority: change/reset them in Assign line first. Bundle members cannot be selected separately until their bundle is removed. Removed repeats must first be kept. Weighted items move intact and are never split.
 
-To bundle a contiguous range, choose its first/last items and destination, verify the range and any LoRA–trigger associations, then confirm. Every intervening item moves together. A singleton LoRA outside L7 also needs verification. MDPF cannot infer trigger relationships from adjacent text or filenames.
+To bundle a contiguous range, choose its first/last items and destination, verify the range and any LoRA–trigger associations, then confirm. Every intervening item moves together. A singleton LoRA outside L7 also needs verification. Line Chunks cannot infer trigger relationships from adjacent text or filenames.
 
 Exact plain repeats are removed by default only in the **same destination, owner and BREAK segment**. Use Keep for an intentional occurrence, then Preview again. Weighted groups, references, bundles and locked shared text are protected. Synonyms and different spellings/case are not merged.
 
@@ -70,7 +70,7 @@ Exact plain repeats are removed by default only in the **same destination, owner
 
 Reviewed Regional organization needs literal `---` separators on their own rows. Choose **Shared chunk** explicitly: First, Last or None. Confirm every editable chunk describes one character. Two to eight editable chunks are supported. Shared text, separators and owner order stay locked, including shared unresolved terms, repeats, references and spacing.
 
-Couple Auto Fix requires readable live **Basic Region Assignment**, exact separator `---`, Global Effect first/last/none, disabled Tile Mode and no active unsupported Common Prompts constructs. MDPF reads these settings and never enables or configures Couple. Eligible configured regions are chosen even when Organize's scope is Solo. Advanced/Mask assignment and custom/newline separators require deliberate review of a supported text layout.
+Couple Auto Fix requires readable live **Basic Region Assignment**, exact separator `---`, Global Effect first/last/none, disabled Tile Mode and no active unsupported Common Prompts constructs. Line Chunks reads these settings and never enables or configures Couple. Eligible configured regions are chosen even when Organize's scope is Solo. Advanced/Mask assignment and custom/newline separators require deliberate review of a supported text layout.
 
 With Common Prompts set to `{ }`, a prompt without braces can be eligible; `< >` with angle references is blocked. Unreadable/unsupported settings leave the prompt untouched. Auto Fix also preserves shared spacing: use explicit Detect / View if that chunk lacks heading rows, remembering formatting can invalidate an older Revert snapshot.
 
@@ -95,7 +95,7 @@ Unknown trigger strings remain provisional L7. Bounded known clothing phrases su
 
 Standalone `BREAK` rows are text-chunk boundaries within an owner. Tags and duplicates never move across them. Outside the reviewed import, inline BREAK remains unsupported for organization; BREAK never establishes another character without explicit ownership confirmation. Sparse/mixed layouts may display Unassigned headings. Use Assign line for explicit display labels instead of treating the heading as proof of a classification error.
 
-Separate character, outfit, expression and background lines can be retained per owner. MDPF provides no conditioning isolation: expressions can bleed between characters. Forge Couple or later inpainting may help. A shared/main expression can be a useful generation choice, not an automatic prompt rewrite.
+Separate character, outfit, expression and background lines can be retained per owner. Line Chunks provides no conditioning isolation: expressions can bleed between characters. Forge Couple or later inpainting may help. A shared/main expression can be a useful generation choice, not an automatic prompt rewrite.
 
 ## Section reference
 
@@ -111,7 +111,7 @@ These are the author's writing conventions, matched through reviewed whole tags 
 | **L6 · Background** | Simple/color backgrounds, scenery, furniture, walls/buildings/structures: on bed, throne, pillar, stone wall, castle, ornate chair, white background. Existing sunlight/moonlight/backlighting and reviewed colored scene effects stay here. |
 | **L7 · Style** | Style phrases, standalone LoRA references and provisional unknowns/triggers. A fallback does not prove an unknown term is a style tag. |
 
-`Action` remains L2/L7 ambiguity; `sketch` and anime style retain L1/L7 context. Empty/blank/sparkling/heart-shaped eyes can remain L3/L5 ambiguity. Unknown names/triggers are not classified from a neighboring LoRA. Manual examples may change wording or emphasis; MDPF does not copy those edits into imports.
+`Action` remains L2/L7 ambiguity; `sketch` and anime style retain L1/L7 context. Empty/blank/sparkling/heart-shaped eyes can remain L3/L5 ambiguity. Unknown names/triggers are not classified from a neighboring LoRA. Manual examples may change wording or emphasis; Line Chunks does not copy those edits into imports.
 
 Reviewed imported phrases also include high resolution/ultra detailed/perfect details (L1), reaching viewer/aiming at viewer (L2), androgynous/tomboy (L3), and bags, school bags, strap between breasts, obi, floral print and detached wings hair ornament (L4). Autumn/autumn leaves use L6. Gun/handgun descriptions follow the final carried-prop group in L4; their holding action stays L2. These are exact or existing bounded forms, not a general prose parser.
 
@@ -153,15 +153,15 @@ L3/L4/L5 sorting stays inside automatic plain runs. Explicit line/item choices, 
 | `Holding sword` | `Silver longsword` at the end of L4 after footwear |
 | `Holding umbrella` | `Red umbrella` at the end of L4 |
 
-Reviewed bare weapon/umbrella types also default to L4 without inferring they are held. Explicit scene forms such as beach/patio/garden umbrella, umbrella stand and weapon rack use L6. Use item/line choices for another intended scene interpretation. MDPF adds no missing descriptions and does not bind attributes to the held object.
+Reviewed bare weapon/umbrella types also default to L4 without inferring they are held. Explicit scene forms such as beach/patio/garden umbrella, umbrella stand and weapon rack use L6. Use item/line choices for another intended scene interpretation. Line Chunks adds no missing descriptions and does not bind attributes to the held object.
 
 ## Save, undo and troubleshoot
 
-Save/copy the **actual prompt**, including intended separator and blank rows, when sharing generation text. Use **Save / load draft** for explicit local persistence of source and line labels. Labels are not embedded as generation tags or global preferences. Pending bundles, organization choices and Undo history remain page-local. Forge may restore plain text after reload; reopening an MDPF draft file also restores its saved editor labels.
+Save/copy the **actual prompt**, including intended separator and blank rows, when sharing generation text. Use **Save / load draft** for explicit local persistence of source and line labels. Labels are not embedded as generation tags or global preferences. Pending bundles, organization choices and Undo history remain page-local. Forge may restore plain text after reload; reopening an Line Chunks draft file also restores its saved editor labels.
 
 Revert is an exact snapshot guard, not permanent undo history. Later edits, spacing changes or another extension replacing text can invalidate it. Save a source copy when experimenting. Reordering may change generation results even if all tags are retained.
 
-After an update use **Ctrl+F5** for stale display. If autocomplete is missing, compare the same input with mode off and check Tag Autocomplete's own settings; MDPF uses the native textbox. See [Troubleshooting](troubleshooting.md) and [Known limitations](known-limitations.md). MDPF changes no negative/ADetailer prompt, model or generation setting.
+After an update use **Ctrl+F5** for stale display. If autocomplete is missing, compare the same input with mode off and check Tag Autocomplete's own settings; Line Chunks uses the native textbox. See [Troubleshooting](troubleshooting.md) and [Known limitations](known-limitations.md). Line Chunks changes no negative/ADetailer prompt, model or generation setting.
 
 Known outfit qualifiers use a reviewed vocabulary of 48 clothing/accessory nouns and up to four color/material/garment modifiers. Examples include light blue sailor collar, silk ribbon and plaid serafuku. Holding/pulling/adjusting/putting on/taking off/removing/lifting these supported objects uses L2. Whole phrases stay intact; arbitrary trigger strings or adjective combinations are not inferred. Bare ribbon/bow remains an unlocated L4 detail; explicit hair ribbon/bow uses the head group.
 
@@ -173,7 +173,7 @@ Solo starts with `1girl, solo,`. The ordinary two-character starter uses shared 
 
 Forge Couple supports **2–8 characters**, with Shared region **First / Last / None**. Every character starts with editable `1girl,` and blank L4/L5/L6 rows. Shared First/Last adds blank L1/L2/L6/L7 sections. Literal `---` rows divide regions. Match the separator and Global Effect position in Forge Couple yourself. Insertion never enables, configures or resizes Forge Couple regions.
 
-Empty sections have visual labels and real blank rows, without placeholder quality/appearance/LoRA tags. Type directly in the original textarea; autocomplete, selection and resizing continue there. Blank labels and starter ownership metadata survive normal same-line typing and Detect in this page. They are page-local unless explicitly exported and reopened using Save / load draft: reloading, external replacement, edits across sections or Reset labels can remove them. Within a known template section, Enter and multiline paste continue that section and character, with one heading; joining its own continuation rows preserves the label. Empty content rows remain editable slots. Pasted control markers and edits across headings/owners do not inherit a section. Source text remains intact; use Detect/Assign line for a completed prompt. Turning MDPF off hides decorations, not source rows.
+Empty sections have visual labels and real blank rows, without placeholder quality/appearance/LoRA tags. Type directly in the original textarea; autocomplete, selection and resizing continue there. Blank labels and starter ownership metadata survive normal same-line typing and Detect in this page. They are page-local unless explicitly exported and reopened using Save / load draft: reloading, external replacement, edits across sections or Reset labels can remove them. Within a known template section, Enter and multiline paste continue that section and character, with one heading; joining its own continuation rows preserves the label. Empty content rows remain editable slots. Pasted control markers and edits across headings/owners do not inherit a section. Source text remains intact; use Detect/Assign line for a completed prompt. Turning Line Chunks off hides decorations, not source rows.
 
 ## Add a character without replacing the draft
 
@@ -189,7 +189,7 @@ Existing source text, LoRAs, continued sections and manual labels are retained. 
 
 Open **Organize · prompt preview → Templates → Save / load draft**. **Save draft file** downloads `mdpf-draft.json` with the current positive prompt, section/character labels, empty slots, continued sections and editor display preferences. There is no automatic recovery or browser storage. Verify any optional saved file against your plain-text copy. Rename or move downloaded files yourself as desired.
 
-Choose an **MDPF draft file** to read and preview it locally. The preview shows the exact incoming prompt and a line/label summary; choosing a file does not change the current draft. Check **Replace the current prompt and labels with this draft** when a draft already exists, then select **Load draft**. If your current prompt, labels or editor state change, select **Preview draft** again. Invalid/unsupported files leave the current draft untouched. **Undo loaded draft** restores the exact previous source, labels and display preferences until another text/label/editor edit changes the loaded result.
+Choose an **Line Chunks draft file** to read and preview it locally. The preview shows the exact incoming prompt and a line/label summary; choosing a file does not change the current draft. Check **Replace the current prompt and labels with this draft** when a draft already exists, then select **Load draft**. If your current prompt, labels or editor state change, select **Preview draft** again. Invalid/unsupported files leave the current draft untouched. **Undo loaded draft** restores the exact previous source, labels and display preferences until another text/label/editor edit changes the loaded result.
 
 Save/load works independently in txt2img and img2img and supports moving a draft between them. It does not save models, seeds, generation settings, classifier changes, pending organization choices or Undo history. Forge Couple guidance is only a separator/shared-position reminder; loading never enables or configures Couple. Generation metadata remains plain prompt text; the JSON labels are never inserted into it.
 
@@ -238,3 +238,7 @@ Recent reviewed examples also cover camera variants such as `portrait shot` and 
 Recognized actions take priority over physical appearance or garment endings: `stroking hair`, `carrying hat`, `washing dress` and `folding shirt` belong to L2. `closing eyes` and `opening eyes` belong to L5, as does a gaze target such as `looking at red dress` or `looking at blue eyes`. `fake hair`, `wig` and `covered hair` are L4 head details.
 
 An unresolved action or subject/location compound such as `painting hair`, `carrying unusual dress` or `hat in forest` requires a destination choice in Organize. Auto Fix leaves the whole prompt unchanged until the ambiguity is resolved. Explicit garment print phrases such as `holding hat print shirt` remain L4; physical hair descriptions such as `short messy black hair` remain L3. These rules do not infer which character owns a tag. Non-Couple character ranges still organize L3–L7; camera/action lines remain outside those ranges.
+
+## Name and draft compatibility
+
+Line Chunks Editor was previously called MDPF Editor. L means Line Chunk: a semantic section, not every wrapped visual row. C1, C2 and later labels identify character blocks. BREAK remains a text-encoder boundary, and Forge Couple regions retain their own meaning. The rebrand preserves the current classification and ordering, including character and outfit order. Existing v1 MDPF drafts are supported; new downloads use `line-chunks-draft.json` while retaining the compatible `mdpf-draft` format marker.
