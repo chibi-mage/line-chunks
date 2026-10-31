@@ -1,32 +1,33 @@
-# Installation and removal
-
-This alpha targets Forge Classic/Neo (branch neo, tested commit 2900d59) with support for extension `.mjs` modules and root `style.css`. No pip, npm, Python extension script or Forge core changes are required.
+# Install Line Chunks
 
 ## First installation
 
-1. Keep a plain-text copy of your prompt using your usual workflow, then close Forge.
-2. Download the named Forge ZIP from the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1), then extract `line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip` into Forge's `extensions` directory. The result must be `extensions/mdpf-editor/javascript/mdpf-forge.mjs` and `extensions/mdpf-editor/style.css`, with no second nested `mdpf-editor` directory.
-3. Start Forge with your usual launcher. Keep a copy of your prompt before Ctrl+F5 to refresh the browser.
-4. Look for **Line Chunks** and **Detect / View** above the txt2img/img2img positive prompts, and **Organize · prompt preview** below them.
+1. In Forge, open **Extensions → Install from URL**.
+2. Paste `https://github.com/chibi-mage/line-chunks` into **URL for extension's git repository**.
+3. Leave **Specific branch name** and **Local directory name** blank. Click **Install**.
+4. When installation finishes, open **Installed** and click **Apply and restart UI**. Keep a copy of any open prompt before restarting.
+5. Refresh the page when Forge is ready. Look for **Line Chunks** and **Detect / View** above the positive prompt.
 
-The archive includes README, five guides, three documentation screenshots, the MIT `LICENSE` and `release-manifest.json`. They are not executed by Forge.
+No extra installation steps or packages are needed. Forge creates the `extensions/line-chunks` folder and manages the Git checkout.
 
-GitHub’s automatic **Source code** archives are development checkouts. The installation layout above uses the named Forge ZIP. Other Forge builds, themes and A1111 are not yet established as compatible.
+## Updating
 
-## Update
+Use Forge's **Extensions → Installed** page to check for updates, apply the update for Line Chunks, and restart the UI. Keep a copy of your open prompt before restarting or refreshing.
 
-Keep a plain-text copy of your prompt and close Forge. Move the old extension folder to a backup location outside `extensions`, then extract the new package. Keep the backup until the new version is checked. Start Forge and hard-refresh. Replacing the entire folder avoids mixing versions. Optional Save / load draft preserves prompt text and manual labels and is confirmed working by the owner. Pending review choices and undo history remain page-local.
+If you previously installed a manual ZIP copy, close Forge and move that older copy outside `extensions` before installing through the URL. Keep the backup until the new copy works. Install only one copy of Line Chunks. Existing draft files continue to load.
 
-## Disable, remove or roll back
+## Disable or remove
 
-Disable Line Chunks in Forge's Extensions interface and restart Forge, or close Forge and move its folder outside `extensions`. Refresh the browser afterward. To roll back, restore the saved folder while Forge is closed, then restart and hard-refresh.
+Disable Line Chunks on Forge's **Installed** page and apply the change. To remove it, close Forge and move its `extensions/line-chunks` folder outside `extensions`.
 
-Removal does not undo text you explicitly formatted or organized. Save the original prompt, use Undo spacing/Revert while their snapshots are current, or restore your own draft before removing the extension.
+Removing the extension does not restore prompt text you explicitly organized. Use a current Revert/Undo snapshot or your own saved prompt when you want the earlier text.
 
-## Integrity and validation
+## Optional packaged downloads
 
-The manifest records SHA-256 digests for every other packaged file. It detects accidental mismatches; it is not a signed publisher identity. The packaging tool checks the archive, module imports, documentation links and an isolated extraction/removal cycle. That filesystem check does not substitute for launching an independent Forge installation.
+[GitHub Releases](https://github.com/chibi-mage/line-chunks/releases) also keeps versioned ZIP downloads with checksums. Those packages retain their original archive layout and installation notes. The normal installation above uses Forge's URL installer.
 
-## Updating from MDPF Editor
+## Technical compatibility
 
-Line Chunks Editor 0.50.0 is a branding-only update. Keep the installed folder `extensions/mdpf-editor` and replace its contents using the package. Do not install a second `line-chunks-editor` folder beside it. Module filenames, saved format `mdpf-draft` v1 and the package manifest identity remain unchanged for compatibility. Existing drafts open normally; new draft downloads are named `line-chunks-draft.json`. The original MIT copyright notice is retained.
+The current host checks are recorded in the repository's host-compatibility document. Other builds and themes may need testing; see [Troubleshooting](troubleshooting.md) and [Known limitations](known-limitations.md).
+
+The text format, saved draft schema and internal module identifiers remain compatible with earlier versions. The original MIT notice is retained.

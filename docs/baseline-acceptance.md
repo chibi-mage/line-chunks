@@ -1,5 +1,9 @@
 Compatibility update 2026-10-29: MDPF 0.49.5-alpha.1 installed and smoke-tested on Haoming02 Forge Classic neo 2900d5948a17ec993075fb810a695ce4f674bd0c (SD9), Gradio 4.40.0 / Python 3.11.9 / Torch 2.14.0+cu130. No runtime patch required. See [host compatibility](host-compatibility.md) for native editing, completion, resize, transfers, clearing, templates, four-character Couple checks and remaining limits.
 
+## URL installation and beginner documentation — 2026-10-31
+
+Verified Forge's Extensions → Install from URL workflow against the renamed public repository chibi-mage/line-chunks. Installation with default fields, Apply and restart UI, a single Line Chunks controller per positive field, compact display, Auto Fix/exact Revert and native autocomplete passed. README and installation instructions now lead with this standard workflow. The guide uses a short optional personal introduction and retains its screenshot. Runtime/scoring/order are unchanged. Existing release ZIP assets and their checksums are retained as archived alternatives.
+
 ## Public packaging update — 2026-10-31
 
 0.50.0-alpha.1 is prepared as the first public Line Chunks alpha. Runtime modules and CSS match the tested branding build byte for byte. Release packaging uses distribution `alpha` and a `forge-alpha.zip` filename, while the installed folder and manifest identity remain mdpf-editor. The verifier also accepts previous private-alpha manifests. Current limitations and installation docs were refreshed; no scoring or ordering change was made. The release package retains the MIT notice and the explicit runtime/documentation allowlist.

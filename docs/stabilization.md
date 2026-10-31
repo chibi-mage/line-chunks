@@ -19,6 +19,6 @@ The form prepares a report only. It sends nothing until the user submits it. Rev
 
 ## Public alpha
 
-0.50.0-alpha.1 is the first Line Chunks public alpha. Installation uses the named Forge ZIP and checksum in GitHub Releases. The guide introduces it as an optional positive-prompt editor. Keep compatibility claims tied to the tested Forge Classic/Neo build; A1111 and other builds remain unverified.
+0.50.0-alpha.1 is the first Line Chunks public alpha. Recommended installation uses Forge’s Extensions → Install from URL. Versioned ZIP downloads remain available in GitHub Releases. The guide introduces it as an optional positive-prompt editor. Keep compatibility claims tied to the tested Forge Classic/Neo build; A1111 and other builds remain unverified.
 
 Public availability invites feedback; it does not establish a representative accuracy score or a completed observation period. Prioritize reproduced bugs and installation problems. Further vocabulary additions can ship as separate reviewed updates. ComfyUI remains outside this project.

@@ -239,6 +239,6 @@ Recognized actions take priority over physical appearance or garment endings: `s
 
 An unresolved action or subject/location compound such as `painting hair`, `carrying unusual dress` or `hat in forest` requires a destination choice in Organize. Auto Fix leaves the whole prompt unchanged until the ambiguity is resolved. Explicit garment print phrases such as `holding hat print shirt` remain L4; physical hair descriptions such as `short messy black hair` remain L3. These rules do not infer which character owns a tag. Non-Couple character ranges still organize L3–L7; camera/action lines remain outside those ranges.
 
-## Name and draft compatibility
+## Line Chunk labels and drafts
 
-Line Chunks Editor was previously called MDPF Editor. L means Line Chunk: a semantic section, not every wrapped visual row. C1, C2 and later labels identify character blocks. BREAK remains a text-encoder boundary, and Forge Couple regions retain their own meaning. The rebrand preserves the current classification and ordering, including character and outfit order. Existing v1 MDPF drafts are supported; new downloads use `line-chunks-draft.json` while retaining the compatible `mdpf-draft` format marker.
+L means Line Chunk: a semantic section, not every wrapped visual row. C1, C2 and later labels identify character blocks. BREAK remains a text-encoder boundary, and Forge Couple regions retain their own meaning. Existing drafts continue to load; the editor keeps its established classification and ordering rules.

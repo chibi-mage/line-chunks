@@ -1,89 +1,41 @@
-# Line Chunks Editor for Forge
+# Line Chunks for Forge
 
-Formerly **MDPF Editor**. The name changes; the existing seven-section order and prompt logic are preserved.
+**Make your positive prompt easier to read and write.**
 
-**Readable, structured positive prompts in Forge's original textbox.**
+I'm testing this extension to make using Line Chunks easier inside Forge. It labels and colours the chunks in your original prompt box, while keeping normal typing, Tag Autocomplete and resizing.
 
-Line Chunks adds colored section headings and character labels while keeping native typing, selection, resizing and Tag Autocomplete. Its main purpose is helping you understand and write structured prompts; automatic organization is a secondary convenience.
-
-Public alpha **0.50.0-alpha.1** · [Download](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) · [User guide](docs/user-guide.md) · [Installation](docs/installation.md) · [Report a bug](https://github.com/chibi-mage/line-chunks-editor/issues/new?template=bug_report.yml)
-
-![Solo prompt with seven colored Line Chunks sections in Forge](docs/screenshots/solo.jpg)
+![Line Chunks in Forge's prompt box](docs/screenshots/solo.jpg)
 
 ## Install
 
-1. Open the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) and download **line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip**. The matching `.zip.sha256` file is available beside it. Use the named Forge ZIP for the installation below; GitHub’s automatic Source code archives are development checkouts.
-2. Close Forge and extract the inner `line-chunks-editor-0.50.0-alpha.1-forge-alpha.zip` into `extensions`. The result should include `extensions/mdpf-editor/javascript/mdpf-forge.mjs`, with no extra nested folder.
-3. Start Forge and refresh its page with **Ctrl+F5**, after keeping a copy of any open prompt.
+1. In Forge, open **Extensions → Install from URL**.
+2. Paste this into **URL for extension's git repository**:
 
-The installed folder remains `mdpf-editor` so this updates the existing extension. Do not add a second copy under a new folder name. Existing MDPF draft files remain compatible.
+   ```text
+   https://github.com/chibi-mage/line-chunks
+   ```
 
-No extra pip/npm dependencies or Forge core changes are needed. See [installation, updates and removal](docs/installation.md) for rollback instructions.
+3. Leave the other fields blank and click **Install**.
+4. Open **Installed**, click **Apply and restart UI**, then refresh the page when Forge is ready.
 
-## First use
+You'll find **Line Chunks** and **Detect / View** above the positive prompt. If you used an earlier manual installation, see [updating](docs/installation.md#updating) first.
 
-1. Write or paste a positive prompt in **txt2img** or **img2img**, then choose **Line Chunks** or **Detect / View**.
-2. For a fresh structured prompt, open **Organize · prompt preview → Templates** below the prompt and insert a starter. Choose Solo, a two-character placement layout, or a multi-character Forge Couple layout.
-3. Keep typing in the original textbox. Use **Assign line** to correct a section label. A label describes structure; it does not prove every tag on the line belongs there.
+## Try it
 
-| Section | Purpose |
-| --- | --- |
-| L1 | Quality and medium |
-| L2 | Camera, pose and action |
-| L3 | Character, generally head to toe |
-| L4 | Outfit and accessories, generally top to bottom |
-| L5 | Gaze and expression |
-| L6 | Background, scenery and scene effects |
-| L7 | Style and LoRA references |
+- Write or paste a positive prompt, then turn **Line Chunks** on or click **Detect / View**.
+- For a fresh prompt, open **Organize · prompt preview → Templates** and choose a starter.
+- Keep writing in the normal prompt box. Use **Assign line** when you want to change a line's label.
 
-[Five-minute starting guide](docs/user-guide.md#five-minute-starting-guide) · [Full user guide](docs/user-guide.md)
+It works with the main positive prompts in **txt2img** and **img2img**. Negative and ADetailer prompts stay manual.
 
-## Organize an imported prompt
+**Organize & review** lets you inspect an arrangement before applying it. **Auto Fix** is optional and handles supported prompts; tangled prompts can still need your judgement. Reordering tags can change the generated image.
 
-**Organize & review** lets you inspect proposed destinations, correct individual items and keep intentional repeats before **Apply organization**. **Auto Fix** writes immediately for eligible solo or configured Basic Forge Couple prompts. Its result includes duplicate/unknown counts and Details.
+This is an **alpha**. [Report a bug](https://github.com/chibi-mage/line-chunks/issues/new?template=bug_report.yml) if something goes wrong.
 
-Exact plain duplicates are removed by default only within the same destination, character/region and BREAK segment. Revert is available while its exact result remains current; it is not permanent Undo history. Unknown triggers may use provisional L7, and ambiguous or unsupported prompts need review or manual rewriting. Line Chunks does not infer LoRA–trigger relationships.
-
-<details>
-<summary>See a preview with exact comparison and duplicate review</summary>
-
-![Unchanged messy source above an organization preview, proposed text and duplicate Keep control](docs/screenshots/organization-preview.jpg)
-
-The screenshot shows a proposal only. The duplicate is marked for removal, and the source stays unchanged until Apply.
-
-</details>
-
-## Multiple characters
-
-Keep characters in distinct blocks with their own outfit/expression sections. Starters support an ordinary two-character placement layout and **2–8 characters** in Forge Couple layouts. Reviewed organization also supports explicit character ranges and structured BREAK imports; see the [workflow guide](docs/user-guide.md#choose-a-workflow).
-
-<details>
-<summary>See two characters with a placement line and shared scene</summary>
-
-![Two characters with separate L3–L5 blocks, a placement line, and shared L6/L7](docs/screenshots/multi-character.jpg)
-
-This is an ordinary placement-line prompt, not a demonstration of regional conditioning. The example LoRA name is a placeholder; no model or LoRA was loaded for these screenshots.
-
-</details>
-
-Line Chunks never configures Forge Couple. Match its separator and shared-region settings yourself. Distinct expressions can bleed across characters; regional conditioning or later inpainting may help. Text labels alone do not isolate conditioning.
-
-## Compatibility and limits
-
-- Tested locally on **Forge Classic/Neo, branch neo, commit 2900d59, with Gradio 4.40.0**. Other Forge builds/themes and A1111 require validation. ComfyUI is outside this project.
-- Only the main positive prompts are supported. Negative and ADetailer prompts are outside scope. Line Chunks does not change models or generation settings.
-- Compact display may insert real blank heading rows when explicitly enabled/detected. Labels are editor metadata, but those blank rows are part of copied prompt text.
-- Organization is bounded to **20,000 source characters and 200 editable items**. Complex syntax or uncertain ownership can block the entire proposal.
-- Draft saving and native resizing are confirmed working by the owner. Save/load is optional; pending organization choices and Undo remain page-local.
-
-The current phase is [normal-use stabilization](https://github.com/chibi-mage/line-chunks-editor/blob/main/docs/stabilization.md). The [verification status](https://github.com/chibi-mage/line-chunks-editor/blob/main/docs/known-issues.md) distinguishes live checks from automated evidence. These UI screenshots show neutral authored prompts, not generated-image results.
-
-[Troubleshooting](docs/troubleshooting.md) · [Known limitations](docs/known-limitations.md) · [Core/Forge boundaries](docs/portability.md)
+[User guide](docs/user-guide.md) · [Installation and updates](docs/installation.md) · [Troubleshooting](docs/troubleshooting.md) · [Known limitations](docs/known-limitations.md) · [Releases](https://github.com/chibi-mage/line-chunks/releases)
 
 ## Development
 
-Run `npm test` with Node 18+; no dependency installation is needed. Python 3.9+ runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. The GitHub source contains neutral self-contained tests; the private workspace's additional fixtures and historical evaluations are excluded. See [contribution guidance](https://github.com/chibi-mage/line-chunks-editor/blob/main/CONTRIBUTING.md) and [CI/download details](https://github.com/chibi-mage/line-chunks-editor/blob/main/docs/ci.md).
+Run `npm test` with Node 18+. Python 3.9+ runs `python tools/test_package_alpha.py` and `python tools/package-alpha.py`. No dependency installation is needed for those checks. [Contribution guidance](https://github.com/chibi-mage/line-chunks/blob/main/CONTRIBUTING.md) covers the text engine and source boundaries; [host checks](https://github.com/chibi-mage/line-chunks/blob/main/docs/host-compatibility.md) record tested builds and verification limits.
 
-## License
-
-Original extension code is [MIT licensed](LICENSE). No bulk external Tag Autocomplete/Danbooru dataset is bundled. Rights to separately sourced datasets are not established by this code license.
+Original extension code is [MIT licensed](LICENSE). No bulk external tag catalog or private reference fixtures are bundled.

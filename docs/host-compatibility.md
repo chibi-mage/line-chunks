@@ -1,5 +1,13 @@
 # Forge host compatibility
 
+## Normal URL installation — 2026-10-31
+
+Verified through the running Forge Extensions UI using only `https://github.com/chibi-mage/line-chunks`; Specific branch name and Local directory name were left blank. Forge cloned main into `E:/SD9/sd-webui-forge-neo/extensions/line-chunks` and reported successful installation. The prior manual copy was backed up and moved outside extensions before Apply and restart UI.
+
+After the normal restart, Installed listed one line-chunks checkout with the correct remote. The page loaded all fourteen modules from extensions/line-chunks, mounted one controller per main positive field, and displayed the Line Chunks toolbar. Compact labels, one-duplicate Auto Fix, exact Revert and Tag Autocomplete suggestions/Tab acceptance passed. No package download, extra installer, Python script or filename change was needed. Runtime matches the released alpha byte for byte. No images were generated for this installation check.
+
+The URL installer is the recommended installation route. Earlier records below describe the folder names used for prior manual packages at the time of those checks.
+
 ## Line Chunks 0.50.0 branding check — 2026-10-31
 
 Updated the existing `E:/SD9/sd-webui-forge-neo/extensions/mdpf-editor` installation in place, retaining an external rollback copy. Host remains Forge Classic/Neo 2900d59, launched with webui-user.bat; Python 3.11.9, Torch 2.14.0+cu130, Gradio 4.40.0. Fresh temporary browser tabs loaded the versioned modules and stylesheet. Two controllers were present: one per main positive field, with Line Chunks accessible names; no negative editor was added.

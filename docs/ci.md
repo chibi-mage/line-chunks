@@ -8,7 +8,7 @@ Three checks cover Ubuntu 24.04 with Node 18/Python 3.9 (the documented minimums
 
 ## Download the public alpha
 
-Use the named Forge ZIP and checksum under the [0.50.0-alpha.1 release](https://github.com/chibi-mage/line-chunks-editor/releases/tag/v0.50.0-alpha.1) for the published alpha. Release downloads are separate from the short-lived development artifacts below.
+The normal installation route is Forge’s **Extensions → Install from URL**, using `https://github.com/chibi-mage/line-chunks`. Versioned ZIP downloads and checksums remain under [Releases](https://github.com/chibi-mage/line-chunks/releases). They are separate from the short-lived development artifacts below.
 
 ## Download a development build
 

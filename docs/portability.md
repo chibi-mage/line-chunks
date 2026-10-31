@@ -56,3 +56,5 @@ The organization adapter accepts optional getEditorSnapshot/restoreEditorSnapsho
 ## Line Chunks branding
 
 The 0.50.0 rebrand retains internal mdpf module/DOM/CSS identifiers, `mdpf-editor` installation/manifest identity, and `mdpf-draft` v1 serialization. These are compatibility identifiers, not missed UI labels. The visible product is Line Chunks Editor; no classification, ordering or scope change accompanies the rename.
+
+The URL-installed checkout is named `line-chunks`. Forge entry/import/style paths are relative and need no legacy directory name. Archived ZIP packages retain their original layout; keeping one active installation prevents duplicate mounts.
